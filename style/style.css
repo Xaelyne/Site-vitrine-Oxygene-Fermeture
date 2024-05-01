@@ -31,6 +31,12 @@ background-attachment: fixed;
     color: white;
     background-color: var(--bleu);
 }
+   .dropdown-menu {
+    display: none;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
 
 .dropdown-item{
     color: var(--bleu);
@@ -45,4 +51,27 @@ background-attachment: fixed;
     border-color: white;
 
 } 
-  
+.contenu{
+    background-color: rgb(255, 255, 255);
+    width: 70%;
+}
+.petiteCarte{
+    border: solid 3px var(--bleu);
+    border-radius: 10px;
+}
+.grandeCarte{
+    background-color: var(--bleu);
+    
+}
+.grandeCarte:hover{
+    transform: scale(1.05);
+    transition-timing-function: ease-in-out;
+    transition-duration: .5s;
+}
+.texte{
+    color: var(--bleu);
+}  
+.lienCarte{
+   text-decoration: none;
+   color: white;
+}
