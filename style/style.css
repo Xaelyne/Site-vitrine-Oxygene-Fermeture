@@ -1,0 +1,47 @@
+@font-face {
+
+    font-family: "MerriweatherSans";
+    src: url(../polices/MerriweatherSans-Regular.ttf),
+         url(../polices/MerriweatherSans-Bold.ttf);
+}
+
+body {
+--bleu : #002273;
+--fond : rgba(0, 0, 0, 0.21);
+font-family: 'MerriweatherSans', sans-serif;
+background-image: url("../images/background.png");
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+.maNav{
+    background-color: var(--fond);
+    color: white;
+}
+.aNav{
+    border-color: 5px solid white;
+}
+.bouton{
+    color: var(--bleu);
+    background-color: white;
+}
+.bouton:hover{
+    color: white;
+    background-color: var(--bleu);
+}
+
+.dropdown-item{
+    color: var(--bleu);
+}
+.dropdown-item:hover{
+    background-color: var(--bleu);
+    color: white;
+
+}
+.navbar-toggler:focus{
+    box-shadow: none;
+    border-color: white;
+
+} 
+  
