@@ -18,6 +18,7 @@ background-attachment: fixed;
 .maNav{
     background-color: var(--fond);
     color: white;
+    font-size: 10px;
 }
 .aNav{
     border-color: 5px solid white;
