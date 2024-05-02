@@ -1,3 +1,5 @@
+/* BODY */
+
 @font-face {
 
     font-family: "MerriweatherSans";
@@ -6,19 +8,21 @@
 }
 
 body {
---bleu : #002273;
---fond : rgba(0, 0, 0, 0.21);
-font-family: 'MerriweatherSans', sans-serif;
-background-image: url("../images/background.png");
-background-size: cover;
-background-repeat: no-repeat;
-background-attachment: fixed;
+    --bleu : #002273;
+    --fond : rgba(0, 0, 0, 0.21);
+    font-family: 'MerriweatherSans', sans-serif;
+    background-image: url("../images/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
+
+/* BARRE DE NAVIGATION */
 
 .maNav{
     background-color: var(--fond);
     color: white;
-    font-size: 10px;
 }
 .aNav{
     border-color: 5px solid white;
@@ -51,6 +55,8 @@ background-attachment: fixed;
     border-color: white;
 
 } 
+
+/* CONTENU */
 .contenu{
     background-color: rgb(255, 255, 255);
     width: 70%;
@@ -74,4 +80,11 @@ background-attachment: fixed;
 .lienCarte{
    text-decoration: none;
    color: white;
+}
+
+/* FOOTER */
+
+.monFooter {
+    background-color: var(--fond);   
+    color: white;
 }
