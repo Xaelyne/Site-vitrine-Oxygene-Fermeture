@@ -31,6 +31,10 @@ body {
     color: var(--bleu);
     background-color: white;
 }
+.bouton{
+    color: var(--bleu);
+    background-color: white;
+}
 .bouton:hover{
     color: white;
     background-color: var(--bleu);
@@ -62,13 +66,22 @@ body {
     width: 70%;
 }
 .petiteCarte{
-    border: solid 3px var(--bleu);
+    border: solid 5px var(--bleu);
     border-radius: 10px;
 }
-.grandeCarte{
-    background-color: var(--bleu);
-    
+.moyenneCarte{
+    border: solid 2px var(--bleu);
+    border-radius: 10px;
 }
+.moyenneCarte:hover{
+    transform: scale(1.05);
+    transition-timing-function: ease-in-out;
+    transition-duration: .5s;
+}
+.grandeCarte{
+    background-color: var(--bleu);   
+}
+
 .grandeCarte:hover{
     transform: scale(1.05);
     transition-timing-function: ease-in-out;
@@ -80,6 +93,11 @@ body {
 .lienCarte{
    text-decoration: none;
    color: white;
+}
+.divFormulaireContact{
+    background-color: var(--bleu);
+    border-radius: 10px;
+    width: 70%;
 }
 
 /* FOOTER */
