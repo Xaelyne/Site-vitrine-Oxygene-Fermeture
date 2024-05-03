@@ -88,3 +88,10 @@ body {
     background-color: var(--fond);   
     color: white;
 }
+
+footer div.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
