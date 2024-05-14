@@ -31,10 +31,6 @@ body {
     color: var(--bleu);
     background-color: white;
 }
-.bouton{
-    color: var(--bleu);
-    background-color: white;
-}
 .bouton:hover{
     color: white;
     background-color: var(--bleu);
