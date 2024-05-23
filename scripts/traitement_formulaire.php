@@ -15,27 +15,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sujet = $_POST['sujetFormulaireContact'];
     $message = $_POST['messageFormulaireContact'];
 
+    // Charger les variables d'environnement depuis le fichier env.ini pour sécuriser les données
+    $iniFilePath = dirname(__DIR__) . '/env.ini';  // Mise à jour du chemin pour pointer vers le répertoire parent
+    if (file_exists($iniFilePath)) {
+        $config = parse_ini_file($iniFilePath);
+        if ($config === false) {
+            die('Erreur lors du chargement du fichier env.ini');
+        }
+    } else {
+        die('Le fichier env.ini est introuvable.');
+    }
+
+    // Vérifier si toutes les clés nécessaires sont présentes
+    $requiredKeys = ['SMTP_HOST', 'SMTP_USERNAME', 'SMTP_PASSWORD', 'SMTP_PORT'];
+    foreach ($requiredKeys as $key) {
+        if (!isset($config[$key])) {
+            die("Clé manquante dans le fichier env.ini: $key");
+        }
+    }
+
     // Instancier PHPMailer
-    $mail = new PHPMailer(true); // true active les exceptions
+    $mail = new PHPMailer(true);
 
     try {
         // Paramètres du serveur SMTP
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; // Adresse du serveur SMTP // smtp.orange.fr
+        $mail->Host = $config['SMTP_HOST']; // Adresse du serveur SMTP // smtp.orange.fr
         $mail->SMTPAuth = true;
-        $mail->Username = 'mulett90hh@gmail.com'; // Votre adresse e-mail SMTP
-        $mail->Password = 'ldpxycgnnlsnlhfn'; // Votre mot de passe SMTP
+        $mail->Username = $config['SMTP_USERNAME']; // adresse e-mail SMTP
+        $mail->Password = $config['SMTP_PASSWORD']; //  mot de passe SMTP
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587; // Port SMTP // Port orange 465
+        $mail->Port = $config['SMTP_PORT']; // Port SMTP // Port orange 465
 
         // Destinataire
-        $mail->setFrom($email,$nom); // Votre adresse e-mail et votre nom
-        $mail->addAddress('mulett90hh@gmail.com'); // Adresse e-mail du destinataire
+        $mail->setFrom($email,$nom); // Votre adresse e-mail et nom recupéré dans le formulaire
+        $mail->addAddress($config['SMTP_USERNAME']); // Adresse e-mail du destinataire
         $mail->addReplyTo($email, $nom);
         // Contenu du message
         $mail->isHTML(true); // Paramétrer le format du message en HTML
         $mail->Subject = $sujet;
-        $mail->Body    = "Nom: $nom <br> Téléphone: $telephone <br> Email: $email <br> Message: $message";
+        $mail->Body    = "Nom: $nom <br> Téléphone: $telephone <br> Email: $email <br> Sujet: $sujet <br> Message: $message";
 
         // Envoyer l'e-mail
         $mail->send();

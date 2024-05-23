@@ -23,14 +23,14 @@
     <!-- Barre de navigation -->
     <nav class="navbar navbar-expand-xxl maNav">
         <div class="container-fluid my-3">
-          <a class="navbar-brand text-white fw-bold" href="#">Oxygène Fermeture</a>
+          <a class="navbar-brand text-white fw-bold" href="index.php">Oxygène Fermeture</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" data-bs-theme="dark">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav mx-auto">
                 <li class="navbar-brand">
-                    <a class="nav-link text-center text-white fs-6" aria-current="page" href="#">Accueil</a>
+                    <a class="nav-link text-center text-white fs-6" aria-current="page" href="index.php">Accueil</a>
                 </li>
                 <li class="navbar-brand dropdown">
                     <a class="nav-link dropdown-toggle text-center text-white fs-6" href="nosServices.html" role="button"  aria-expanded="false">
@@ -53,7 +53,7 @@
                     </ul>
                 </li>
                 <li class="navbar-brand">
-                    <a class="nav-link active text-center text-white fs-6" aria-current="page" href="#">Nous contacter</a>
+                    <a class="nav-link active text-center text-white fs-6" aria-current="page" href="index.php?action=nousContacter">Nous contacter</a>
                 </li>
                 <li class="navbar-brand text-center mt-1">
                     <a href="#" class="btn bouton" role="button" data-bs-toggle="button" aria-pressed="true">Votre devis gratuit en ligne</a>
