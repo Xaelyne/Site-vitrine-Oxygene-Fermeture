@@ -43,5 +43,7 @@
           </div>
         </div>
       </footer>
+    <script src="./scripts/regex.js"></script>
+    <script src="./scripts/script.js"></script>
 </body>
 </html>
