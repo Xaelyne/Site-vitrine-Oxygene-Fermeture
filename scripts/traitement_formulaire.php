@@ -58,9 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Envoyer l'e-mail
         $mail->send();
-        echo 'Message envoyé avec succès!';
     } catch (Exception $e) {
-        echo "Erreur lors de l'envoi du message: {$mail->ErrorInfo}";
     }
 }
 ?>
