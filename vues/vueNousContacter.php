@@ -1,5 +1,5 @@
 <div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
-    <div class="text-center mt-5">
+    <div class="text-center mt-5 pt-4">
         <p class="fs-5 texte">
             Vous avez une question, une demande d’information, n’hésitez pas à nous contacter.   
         </p>
@@ -25,9 +25,14 @@
     <!-- Formulaire de contact -->
     <div class="divFormulaireContact my-5">
         <form method="POST" action="index.php" class="formulaire my-5" id="contactForm">
-            <input type="hidden" name="action" value="traitement_formulaire">
+            <input type="hidden" name="action" value="traitement_formulaire_contact">
             <div class="container">
                 <div class="row">
+                    <div class="my-4 text-center">
+                        <span class="text-white fs-1">
+                            Contactez-nous
+                        </span>
+                    </div>
                     <div class="mb-5 text-center">
                         <span class="text-danger" id="messageErreurEmail"></span>
                         <span class="text-danger" id="messageErreurNom"></span>
@@ -59,8 +64,8 @@
                 <div class="row">
                     <div class="mb-3 col-md-12">
                         <label for="messageFormulaireContact" class="form-label text-white">Votre message <span class="text-danger">(Obligatoire)</span></label>
-                        <textarea class="form-control" id="messageFormulaireContact" name="messageFormulaireContact" rows="4" placeholder="Écrivez votre message ici" required="required" maxlength="500"></textarea>
-                        <span class="text-white" id="counter"></span>
+                        <textarea class="form-control messageFormulaire" id="messageFormulaireContact" name="messageFormulaireContact" rows="4" placeholder="Écrivez votre message ici" required="required" maxlength="500"></textarea>
+                        <span class="text-white counter"></span>
                     </div>
                 </div>
                 <div class="row">

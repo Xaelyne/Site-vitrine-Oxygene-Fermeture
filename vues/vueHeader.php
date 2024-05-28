@@ -56,15 +56,15 @@
                     <a class="nav-link active text-center text-white fs-6" aria-current="page" href="index.php?action=nousContacter">Nous contacter</a>
                 </li>
                 <li class="navbar-brand text-center mt-1">
-                    <a href="#" class="btn bouton" role="button" data-bs-toggle="button" aria-pressed="true">Votre devis gratuit en ligne</a>
+                    <a href="index.php?action=devis" class="btn bouton" role="button" aria-pressed="true">Votre devis gratuit en ligne</a>
                 </li>
                 <li class="navbar-brand text-center mt-1">
-                    <a href="#" class="btn bouton" role="button" data-bs-toggle="button" aria-pressed="true">Avis clients</a>
+                    <a href="#" class="btn bouton" role="button" aria-pressed="true">Avis clients</a>
                 </li>
-                <a class="navbar-brand text-center mt-1" href="#">
+                <a class="navbar-brand text-center mt-1" title="Retrouver notre facebook en cliquant ici" href="https://www.facebook.com/Oxygenefermeture60/?locale=fr_FR" target="_blank">
                     <img src="./images/Facebook.png" alt="Facebook">
                 </a>
-                <a class="navbar-brand text-center mt-1" href="#">
+                <a class="navbar-brand text-center mt-1" title="Vous pouvez nous envoyez un mail directement en cliquant ici" href="mailto:mulett90hh@gmail.com">
                     <img src="./images/Mail.png" alt="Mail">
                 </a>
                 <a class="navbar-brand text-white text-center mt-1">
