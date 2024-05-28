@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Contenu du message
         $mail->isHTML(true); // Paramétrer le format du message en HTML
         $mail->Subject = $sujet;
-        $mail->Body = "<h2>Cet email provient du formulaire de contact</h2<br><br> <h3>Information du client :</h3><br> Nom: $nom <br> Téléphone: $telephone <br> Email: $email <br><br> Sujet: $sujet <br> Message: $message";
+        $mail->Body = "<h2>Cet email provient du formulaire de contact</h2<br><br> <h3>Informations du client :</h3><br> Nom: $nom <br> Téléphone: $telephone <br> Email: $email <br><br> Sujet: $sujet <br> Message: $message";
 
         // Envoyer l'e-mail
         $mail->send();

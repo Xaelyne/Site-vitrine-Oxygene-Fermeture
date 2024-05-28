@@ -1,15 +1,21 @@
 <div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
     <div class="text-center mt-5 pt-4">
-        <p class="fs-5 texte">
-            Vous avez une question, une demande d’information, n’hésitez pas à nous contacter.   
+        <p class="fs-3 texte mb-5">
+            Bienvenue sur notre formulaire de contact !  
         </p>
-        <p class="fs-5 texte pb-4">
-            Nous vous répondrons dans les plus brefs delais.  
+        <p class="fs-5 texte">
+            Nous sommes ici pour répondre à toutes vos questions et écouter vos suggestions. 
+        </p>
+        <p class="fs-5 texte pb-5">
+            Veuillez remplir les champs ci-dessous et nous reviendrons vers vous dans les plus brefs délais.  
+        </p>
+        <p class="fs-5 texte">
+            Vous pouvez également nous contacter directement 
         </p>
         <p class="fs-5 texte">
             Par email :
         </p>
-        <p class="fs-5 texte pb-4">
+        <p class="fs-5 texte">
             OxygèneFermeture60@orange.fr
         </p>
         <p class="fs-5 texte">
@@ -17,9 +23,6 @@
         </p>
         <p class="fs-5 texte">
             03.44.04.31.13
-        </p>
-        <p class="fs-5 texte pt-4">
-            Ou bien en remplissant le formulaire ci-dessous :
         </p>
     </div>
     <!-- Formulaire de contact -->

@@ -81,14 +81,14 @@ function regexSujet(e){
 //Regex Message
 
 function regexMessageForm(e){
-    var regex = /^(?=.{4,40}$)[a-zA-Z0-9À-ÿ\s\-']+$/;
-    var MessageForm = document.getElementById("messageFormulaireContact").value;
+    var regex = /^(?=.{4,500}$)[a-zA-Z0-9À-ÿ\s\-']+$/;
+    var messageForm = document.getElementById("messageFormulaireContact").value;
     var message = document.getElementById("messageErreurMessage")
 
-    if (MessageForm.length < 4) {
+    if (messageForm.length < 4) {
         message.innerHTML = "Votre message doit contenir au moins 4 caractères.";
         e.preventDefault(); // Empêche l'envoi du formulaire
-    } else if (!regex.test(MessageForm)) {
+    } else if (!regex.test(messageForm)) {
         message.innerHTML = "Veuillez entrer un message valide. <br> Il ne doit pas contenir de caractère spéciaux";
         e.preventDefault(); // Empêche l'envoi du formulaire
     } else {

@@ -34,6 +34,16 @@ body {
 .bouton:hover{
     color: white;
     background-color: var(--bleu);
+    border-color: white;
+}
+.boutonInverser{
+    color: white;
+    background-color: var(--bleu);
+}
+.boutonInverser:hover{
+    color: var(--bleu);
+    background-color: white;
+    border-color: var(--bleu);
 }
    .dropdown-menu {
     display: none;
