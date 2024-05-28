@@ -48,5 +48,47 @@
             require "./vues/vueDevis.php";
             require "./vues/vueFooter.php";
             break;
+        case "listeServices":
+            session_start();
+            $titre ="Tout nos services";
+            require "./vues/vueHeader.php";
+            require "./vues/vueListeService.php";
+            require "./vues/vueFooter.php";
+            break;
+        case "detailFenetre":
+            session_start();
+            $titre ="Fenêtres";
+            require "./vues/vueHeader.php";
+            require "./vues/vueDetailService.php";
+            require "./vues/vueFooter.php";
+            break;
+        case "detailVelux":
+            session_start();
+            $titre ="Velux";
+            require "./vues/vueHeader.php";
+            require "./vues/vueDetailService.php";
+            require "./vues/vueFooter.php";
+            break;
+        case "toutesNosRealisations":
+            session_start();
+            $titre ="Toutes nos réalisations";
+            require "./vues/vueHeader.php";
+            require "./vues/vueToutesNosRealisations.php";
+            require "./vues/vueFooter.php";
+            break;
+        case "realisationVelux":
+            session_start();
+            $titre ="Nos réalisation de pose de velux";
+            require "./vues/vueHeader.php";
+            require "./vues/vueDetailRealisation.php";
+            require "./vues/vueFooter.php";
+            break;
+        case "realisationFenetre":
+            session_start();
+            $titre ="Nos réalisation de pose de Fenêtre";
+            require "./vues/vueHeader.php";
+            require "./vues/vueDetailRealisation.php";
+            require "./vues/vueFooter.php";
+            break;    
         }
         

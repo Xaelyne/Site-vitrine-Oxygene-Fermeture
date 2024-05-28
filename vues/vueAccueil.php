@@ -12,8 +12,8 @@
     </div>
 <!-- Cartes liste de services -->
     <div class="d-flex row row-cols-1 row-cols-md- g-4 d-flex justify-content-center align-items-center">
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
+        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;" >
+            <a href="index.php?action=detailVelux" class="lienCarte" id="velux">
                 <img src="./images/Velux.png" class="card-img-top" alt="Service">
                     <div class="card-body">
                         <p class="card-text ">Velux</p>
@@ -21,10 +21,10 @@
             </a>
         </div>
         <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
+            <a href="index.php?action=detailFenetre" class="lienCarte" id="fenetre">
                 <img src="./images/Velux.png" class="card-img-top" alt="Service">
                     <div class="card-body">
-                        <p class="card-text ">Velux</p>
+                        <p class="card-text ">Fenêtre</p>
                     </div>
             </a>
         </div>
@@ -162,15 +162,18 @@
     </div>
     <div class="text-center">
         <p class="fs-5 texte">
-            Vous avez une question, une demande d’information, n’hésitez pas à nous contacter.   
+            Nous sommes ici pour répondre à toutes vos questions et écouter vos suggestions. 
         </p>
-        <p class="fs-5 texte pb-4">
-            Nous vous répondrons dans les plus brefs delais.  
+        <p class="fs-5 texte pb-5">
+            Veuillez remplir les champs ci-dessous et nous reviendrons vers vous dans les plus brefs délais.  
+        </p>
+        <p class="fs-5 texte">
+            Vous pouvez également nous contacter directement 
         </p>
         <p class="fs-5 texte">
             Par email :
         </p>
-        <p class="fs-5 texte pb-4">
+        <p class="fs-5 texte">
             OxygèneFermeture60@orange.fr
         </p>
         <p class="fs-5 texte">
@@ -178,9 +181,6 @@
         </p>
         <p class="fs-5 texte">
             03.44.04.31.13
-        </p>
-        <p class="fs-5 texte pt-4">
-            Ou bien en remplissant le formulaire ci-dessous :
         </p>
     </div>
     <!-- Formulaire de contact -->

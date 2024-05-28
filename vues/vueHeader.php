@@ -33,22 +33,22 @@
                     <a class="nav-link text-center text-white fs-6" aria-current="page" href="index.php">Accueil</a>
                 </li>
                 <li class="navbar-brand dropdown">
-                    <a class="nav-link dropdown-toggle text-center text-white fs-6" href="nosServices.html" role="button"  aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-center text-white fs-6" href="index.php?action=listeServices" role="button"  aria-expanded="false">
                     Nos services
                     </a>
                     <ul class="dropdown-menu">
-                    <li><a class="dropdown-item text-center" href="serviceUn.html">Nom service 1</a></li>
-                    <li><a class="dropdown-item text-center" href="#">Nom service 2</a></li>
+                    <li><a class="dropdown-item text-center" href="index.php?action=detailVelux">Velux</a></li>
+                    <li><a class="dropdown-item text-center" href="index.php?action=detailFenetre">Fenêtre</a></li>
                     <li><a class="dropdown-item text-center" href="#">Nom service 3</a></li>
                     </ul>
                 </li>
                 <li class="navbar-brand dropdown">
-                    <a class="nav-link dropdown-toggle text-center text-white fs-6" href="#" role="button" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-center text-white fs-6" href="index.php?action=toutesNosRealisations" role="button" aria-expanded="false">
                     Nos réalisations
                     </a>
                     <ul class="dropdown-menu">
-                    <li><a class="dropdown-item text-center" href="#">Nom réalisation 1</a></li>
-                    <li><a class="dropdown-item text-center" href="#">Nom réalisation 2</a></li>
+                    <li><a class="dropdown-item text-center" href="index.php?action=realisationVelux">Velux</a></li>
+                    <li><a class="dropdown-item text-center" href="index.php?action=realisationFenetre">Fenêtre</a></li>
                     <li><a class="dropdown-item text-center" href="#">Nom réalisation 3</a></li>
                     </ul>
                 </li>
