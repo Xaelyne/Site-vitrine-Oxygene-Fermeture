@@ -31,11 +31,11 @@
             </div>
             <div class="col">
                 <h6 class="fs-6 fw-bold">
-                    <a class="text-decoration-none text-white" href="">Nous contacter</a>
+                    <a class="text-decoration-none text-white" href="index.php?action=nousContacter">Nous contacter</a>
                 </h6>
             </div>
             <div class="col">
-                <a href="#" class="btn bouton" role="button" data-bs-toggle="button" aria-pressed="true">Votre devis gratuit en ligne</a>
+                <a href="index.php?action=devis" class="btn bouton" role="button" aria-pressed="true">Votre devis gratuit en ligne</a>
             </div>
             <div class="col">
                 <a href="#" class="btn bouton" role="button" data-bs-toggle="button" aria-pressed="true">Avis clients</a>
