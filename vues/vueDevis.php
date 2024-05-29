@@ -25,11 +25,11 @@
                         </span>
                     </div>
                     <div class="mb-5 text-center">
-                        <span class="text-danger" id="messageErreurEmail"></span>
-                        <span class="text-danger" id="messageErreurNom"></span>
-                        <span class="text-danger" id="messageErreurTelephone"></span>
-                        <span class="text-danger" id="messageErreurSujet"></span>
-                        <span class="text-danger" id="messageErreurMessage"></span>
+                        <span class="text-danger" id="messageErreurEmailFormulaireDevis"></span>
+                        <span class="text-danger" id="messageErreurNomFormulaireDevis"></span>
+                        <span class="text-danger" id="messageErreurTelephoneFormulaireDevis"></span>
+                        <span class="text-danger" id="messageErreurSujetFormulaireDevis"></span>
+                        <span class="text-danger" id="messageErreurMessageFormulaireDevis"></span>
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="nomFormulaireDevis" class="form-label text-white">Votre nom <span class="text-danger">(Obligatoire)</span></label>
@@ -73,13 +73,13 @@
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-12 form-check mx-3">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required="required">
-                        <label class="form-check-label text-white" for="exampleCheck1">J’accepte la politique de confidentialité</label>
+                        <input type="checkbox" class="form-check-input" id="checkboxFormulaireDevis" required="required">
+                        <label class="form-check-label text-white" for="checkboxFormulaireDevis">J’accepte la politique de confidentialité</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center">
-                        <button type="submit" class="btn bouton" name="envoyer" id="boutonSubmitForm">Envoyer</button>
+                        <button type="submit" class="btn bouton" name="envoyer" id="boutonSubmitFormulaireDevis">Envoyer</button>
                     </div>
                 </div>
             </div>

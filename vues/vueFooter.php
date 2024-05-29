@@ -43,7 +43,9 @@
           </div>
         </div>
       </footer>
-    <script src="./scripts/regex.js"></script>
+    <script src="./scripts/regexFormulaireContactAccueil.js"></script>
+    <script src="./scripts/regexFormulaireContact.js"></script>
+    <script src="./scripts/regexFormulaireDevis.js"></script>
     <script src="./scripts/script.js"></script>
 </body>
 </html>
