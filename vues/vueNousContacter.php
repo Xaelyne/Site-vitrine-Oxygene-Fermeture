@@ -37,11 +37,11 @@
                         </span>
                     </div>
                     <div class="mb-5 text-center">
-                        <span class="text-danger" id="messageErreurEmail"></span>
-                        <span class="text-danger" id="messageErreurNom"></span>
-                        <span class="text-danger" id="messageErreurTelephone"></span>
-                        <span class="text-danger" id="messageErreurSujet"></span>
-                        <span class="text-danger" id="messageErreurMessage"></span>
+                        <span class="text-danger" id="messageErreurEmailContact"></span>
+                        <span class="text-danger" id="messageErreurNomContact"></span>
+                        <span class="text-danger" id="messageErreurTelephoneContact"></span>
+                        <span class="text-danger" id="messageErreurSujetContact"></span>
+                        <span class="text-danger" id="messageErreurMessageContact"></span>
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="nomFormulaireContact" class="form-label text-white">Votre nom <span class="text-danger">(Obligatoire)</span></label>

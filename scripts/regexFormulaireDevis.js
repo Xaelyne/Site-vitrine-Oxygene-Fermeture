@@ -1,18 +1,18 @@
-var btn = document.getElementById('boutonSubmitForm');
+var btnFormulaireDevis = document.getElementById('boutonSubmitFormulaireDevis');
 
-btn.addEventListener("click",regexEmail);
-btn.addEventListener("click",regexNom);
-btn.addEventListener("click",regexTelephone);
-btn.addEventListener("click",regexSujet);
-btn.addEventListener("click",regexMessageForm);
+btnFormulaireDevis.addEventListener("click",regexEmailFormulaireDevis);
+btnFormulaireDevis.addEventListener("click",regexNomFormulaireDevis);
+btnFormulaireDevis.addEventListener("click",regexTelephoneFormulaireDevis);
+btnFormulaireDevis.addEventListener("click",regexSujetFormulaireDevis);
+btnFormulaireDevis.addEventListener("click",regexMessageFormulaireDevis);
 
 
 //Regex Email
 
-function regexEmail(e){
+function regexEmailFormulaireDevis(e){
     var regex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+.([a-zA-Z]{2,3})$/;
-    var email = document.getElementById("emailFormulaireContact").value;
-    var message = document.getElementById("messageErreurEmail")
+    var email = document.getElementById("emailFormulaireDevis").value;
+    var message = document.getElementById("messageErreurEmailFormulaireDevis")
 
     if (!regex.test(email)) {
         message.innerHTML = "Veuillez entrer une adresse email valide. <br> Par exemple : Abc123@exemple.com <br> <br>";
@@ -25,10 +25,10 @@ function regexEmail(e){
 
 //Regex Nom
 
-function regexNom(e){
+function regexNomFormulaireDevis(e){
     var regex = /^[A-Za-zÀ-ÿà-ÿ]{2,}(?:[-\s][A-Za-zÀ-ÿà-ÿ]{2,})*$/;
-    var nom = document.getElementById("nomFormulaireContact").value;
-    var message = document.getElementById("messageErreurNom")
+    var nom = document.getElementById("nomFormulaireDevis").value;
+    var message = document.getElementById("messageErreurNomFormulaireDevis")
 
     if (!regex.test(nom)) {
         message.innerHTML = "Veuillez entrer un nom valide.<br>2 caractères minimum.<br><br>";
@@ -41,10 +41,10 @@ function regexNom(e){
 
 //Regex Téléphone
 
-function regexTelephone(e){
+function regexTelephoneFormulaireDevis(e){
     var regex = /^(?:0|\+33)[1-9](?:[\s.-]*\d{2}){4}$/;
-    var tel= document.getElementById("telephoneFormulaireContact").value;
-    var message = document.getElementById("messageErreurTelephone")
+    var tel= document.getElementById("telephoneFormulaireDevis").value;
+    var message = document.getElementById("messageErreurTelephoneFormulaireDevis")
 
     if (!regex.test(tel)) {
         message.innerHTML = "Veuillez entrer un numéro de téléphone valide. <br><br>";
@@ -57,10 +57,10 @@ function regexTelephone(e){
 
 //Regex sujet
 
-function regexSujet(e){
+function regexSujetFormulaireDevis(e){
     var regex = /^(?=.{4,40}$)[a-zA-Z0-9À-ÿ\s\-']+$/;
-    var sujet = document.getElementById("sujetFormulaireContact").value;
-    var message = document.getElementById("messageErreurSujet")
+    var sujet = document.getElementById("sujetFormulaireDevis").value;
+    var message = document.getElementById("messageErreurSujetFormulaireDevis")
 
     if (sujet.length < 4) {
         message.innerHTML = "Votre sujet doit contenir au moins 4 caractères.<br><br>";
@@ -80,10 +80,10 @@ function regexSujet(e){
 
 //Regex Message
 
-function regexMessageForm(e){
+function regexMessageFormulaireDevis(e){
     var regex = /^(?=.{4,500}$)[a-zA-Z0-9À-ÿ\s\-']+$/;
-    var messageForm = document.getElementById("messageFormulaireContact").value;
-    var message = document.getElementById("messageErreurMessage")
+    var messageForm = document.getElementById("messageFormulaireDevis").value;
+    var message = document.getElementById("messageErreurMessageFormulaireDevis")
 
     if (messageForm.length < 4) {
         message.innerHTML = "Votre message doit contenir au moins 4 caractères.";
@@ -96,5 +96,3 @@ function regexMessageForm(e){
     }
 
 }
-
-

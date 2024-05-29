@@ -26,6 +26,14 @@
             require "./vues/vueConfirmationEnvois.php";
             require "./vues/vueFooter.php";
             break;
+        case "traitement_formulaire_contact_accueil":
+            session_start();
+            $titre = "Confirmation d'envois";
+            require "./vues/vueHeader.php";
+            require "./scripts/traitement_formulaire_contact_accueil.php";
+            require "./vues/vueConfirmationEnvois.php";
+            require "./vues/vueFooter.php";
+            break;
         case "traitement_formulaire_devis":
             session_start();
             $titre = "Confirmation d'envois";

@@ -186,7 +186,7 @@
     <!-- Formulaire de contact -->
     <div class="divFormulaireContact mt-5">
         <form method="POST" action="index.php" class="formulaire my-5" id="contactForm">
-            <input type="hidden" name="action" value="traitement_formulaire_contact">
+            <input type="hidden" name="action" value="traitement_formulaire_contact_accueil">
             <div class="container">
                 <div class="row">
                     <div class="my-4 text-center">
@@ -195,49 +195,49 @@
                         </span>
                     </div>
                     <div class="mb-5 text-center">
-                        <span class="text-danger" id="messageErreurEmail"></span>
-                        <span class="text-danger" id="messageErreurNom"></span>
-                        <span class="text-danger" id="messageErreurTelephone"></span>
-                        <span class="text-danger" id="messageErreurSujet"></span>
-                        <span class="text-danger" id="messageErreurMessage"></span>
+                        <span class="text-danger" id="messageErreurEmailContactAccueil"></span>
+                        <span class="text-danger" id="messageErreurNomContactAccueil"></span>
+                        <span class="text-danger" id="messageErreurTelephoneContactAccueil"></span>
+                        <span class="text-danger" id="messageErreurSujetContactAccueil"></span>
+                        <span class="text-danger" id="messageErreurMessageContactAccueil"></span>
                     </div>
                     <div class="mb-3 col-md-6">
-                        <label for="nomFormulaireContact" class="form-label text-white">Votre nom <span class="text-danger">(Obligatoire)</span></label>
-                        <input type="text" class="form-control" id="nomFormulaireContact" name="nomFormulaireContact" required="required">
+                        <label for="nomFormulaireContactAccueil" class="form-label text-white">Votre nom <span class="text-danger">(Obligatoire)</span></label>
+                        <input type="text" class="form-control" id="nomFormulaireContactAccueil" name="nomFormulaireContactAccueil" required="required">
                     </div>
                     <div class="mb-3 col-md-6">
-                        <label for="telephoneFormulaireContact" class="form-label text-white">Votre numéro de téléphone <span class="text-danger">(Obligatoire)</span></label>
-                        <input type="tel" class="form-control" id="telephoneFormulaireContact" name="telephoneFormulaireContact" required="required">
+                        <label for="telephoneFormulaireContactAccueil" class="form-label text-white">Votre numéro de téléphone <span class="text-danger">(Obligatoire)</span></label>
+                        <input type="tel" class="form-control" id="telephoneFormulaireContactAccueil" name="telephoneFormulaireContactAccueil" required="required">
                     </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-12">
-                        <label for="emailFormulaireContact" class="form-label text-white">Votre adresse email <span class="text-danger">(Obligatoire)</span></label>
-                        <input type="email" class="form-control" id="emailFormulaireContact" name="emailFormulaireContact" required="required">
+                        <label for="emailFormulaireContactAccueil" class="form-label text-white">Votre adresse email <span class="text-danger">(Obligatoire)</span></label>
+                        <input type="email" class="form-control" id="emailFormulaireContactAccueil" name="emailFormulaireContactAccueil" required="required">
                     </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-12">
-                        <label for="sujetFormulaireContact" class="form-label text-white">Sujet de votre message <span class="text-danger">(Obligatoire)</span></label>
-                        <input type="text" class="form-control" id="sujetFormulaireContact" name="sujetFormulaireContact" required="required">
+                        <label for="sujetFormulaireContactAccueil" class="form-label text-white">Sujet de votre message <span class="text-danger">(Obligatoire)</span></label>
+                        <input type="text" class="form-control" id="sujetFormulaireContactAccueil" name="sujetFormulaireContactAccueil" required="required">
                     </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-12">
                         <label for="messageFormulaireContactAccueil" class="form-label text-white">Votre message <span class="text-danger">(Obligatoire)</span></label>
-                        <textarea class="form-control messageFormulaire" id="messageFormulaireContactAccueil" name="messageFormulaireContact" rows="4" placeholder="Écrivez votre message ici" required="required" maxlength="500"></textarea>
+                        <textarea class="form-control messageFormulaire" id="messageFormulaireContactAccueil" name="messageFormulaireContactAccueil" rows="4" placeholder="Écrivez votre message ici" required="required" maxlength="500"></textarea>
                         <span class="text-white counter" ></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-12 form-check mx-3">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required="required">
-                        <label class="form-check-label text-white" for="exampleCheck1">J’accepte la politique de confidentialité</label>
+                        <input type="checkbox" class="form-check-input" id="checkboxFormulaireContactAccueil" required="required">
+                        <label class="form-check-label text-white" for="checkboxFormulaireContactAccueil">J’accepte la politique de confidentialité</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center">
-                        <button type="submit" class="btn bouton" name="envoyer" id="boutonSubmitForm">Envoyer</button>
+                        <button type="submit" class="btn bouton" name="envoyer" id="boutonSubmitFormulaireContactAccueil">Envoyer</button>
                     </div>
                 </div>
             </div>
