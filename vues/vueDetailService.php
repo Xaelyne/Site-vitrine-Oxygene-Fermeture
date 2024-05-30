@@ -28,25 +28,25 @@ if ($action === "detailVelux") {
         <div class="mb-5">
             <ul >
                 <li class="texte fs-5">
-                    Arrachement de mla toiture
+                    Détail 1 pour une pose de vélux
                 </li>
                 <li class="texte fs-5">
-                    Pose de velux
+                    Détail 2 pour une pose de vélux
                 </li>
                 <li class="texte fs-5">
-                    Blabla blablabla
+                    Détail 3 pour une pose de vélux
                 </li>
                 <li class="texte fs-5">
-                    bloblebee=le
+                    Détail 4 pour une pose de vélux
                 </li>
                 <li class="texte fs-5">
-                    bloblebee=le
+                    Détail 5 pour une pose de vélux
                 </li>
                 <li class="texte fs-5">
-                    bloblebee=le
+                    Détail 6 pour une pose de vélux
                 </li>
                 <li class="texte fs-5">
-                    bloblebee=le
+                    Détail 7 pour une pose de vélux
                 </li>
             </ul>
         </div>
@@ -90,25 +90,25 @@ if ($action === "detailFenetre") {
         <div class="mb-5">
             <ul >
                 <li class="texte fs-5">
-                    Arrachement de mla toiture
+                    Détail 1 pour une pose de fenêtre
                 </li>
                 <li class="texte fs-5">
-                    Pose de Fenêtre
+                    Détail 2 pour une pose de fenêtre
                 </li>
                 <li class="texte fs-5">
-                    Blabla blablabla
+                    Détail 3 pour une pose de fenêtre
                 </li>
                 <li class="texte fs-5">
-                    bloblebee=le
+                    Détail 4 pour une pose de fenêtre
                 </li>
                 <li class="texte fs-5">
-                    bloblebee=le
+                    Détail 5 pour une pose de fenêtre
                 </li>
                 <li class="texte fs-5">
-                    bloblebee=le
+                    Détail 6 pour une pose de fenêtre
                 </li>
                 <li class="texte fs-5">
-                    bloblebee=le
+                    Détail 7 pour une pose de fenêtre
                 </li>
             </ul>
         </div>

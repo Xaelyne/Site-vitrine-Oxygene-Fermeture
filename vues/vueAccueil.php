@@ -1,10 +1,18 @@
 <!-- Texte srur l'entreprise -->
 <div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
-    <div class="my-5">
-        <span class="fs-3 texte">Texte de bienvenue</span>
-    </div>
-    <div class="my-5">
-        <span class="fs-5 texte">Quelques mots sur l'entreprise</span>
+    <div class="text-center mt-5 pt-4" style="width: 60%;">
+        <p class="fs-3 texte mb-5">
+            Bienvenue chez Oxygene fermeture, votre spécialiste en solutions d'amélioration de l'habitat !
+        </p>
+        <p class="fs-5 texte">
+            Nous sommes ravis de vous accueillir sur notre site internet.
+        </p>
+        <p class="fs-5 texte">
+            Découvrez notre expertise en installation de fenêtres, velux, pergolas, et bien plus encore.
+        </p>
+        <p class="fs-5 texte">
+            Explorez nos services variés et nos réalisations pour trouver l'inspiration et les solutions adaptées à vos projets d'aménagement.
+        </p>
     </div>
 <!-- Carte "Nos services" -->
     <div class=" text-center my-5" style="width: 13rem;">
@@ -174,7 +182,7 @@
             Par email :
         </p>
         <p class="fs-5 texte">
-            OxygèneFermeture60@orange.fr
+            OxygeneFermeture60@orange.fr
         </p>
         <p class="fs-5 texte">
             Par téléphone :

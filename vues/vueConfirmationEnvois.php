@@ -30,7 +30,7 @@
                 Cordialement,
             </p>
             <p class="fs-3 texte mb-5">
-                Oxygène Fermeture
+                Oxygene Fermeture
             </p>
         </div>
     </div>
