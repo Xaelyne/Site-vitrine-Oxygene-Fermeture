@@ -116,6 +116,11 @@ body {
     bottom: auto;
     z-index: 1000;
 }
+.formulaireConnexion{
+    background-color: var(--bleu);
+    border-radius: 10px;
+    color: white;
+}
 
 /* FOOTER */
 
