@@ -22,6 +22,20 @@
     <div class="col-lg-12 alert alert-warning d-none d-lg-block d-xl-none text-center" role="alert">Screen Large ≥992px</div>
     <div class="col-xl-12 alert alert-dark d-none d-xl-block d-xxl-none text-center" role="alert">Screen X-Large ≥1200px</div>
     <div class="col-xxl-12 alert alert-secondary d-none d-xxl-block text-center" role="alert">Screen XX-Large ≥1400px</div> -->
+    <?php
+if ($action === "connexion") {
+?>
+    <nav class="navbar navbar-expand-xxl maNav">
+        <div class="container-fluid my-3">
+          <a class="navbar-brand text-white fw-bold" href="index.php">Oxygene Fermeture</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" data-bs-theme="dark">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+<?php
+} else {
+?>
 
     <!-- Barre de navigation -->
     <nav class="navbar navbar-expand-xxl maNav">
@@ -74,7 +88,19 @@
                     <img src="./images/Telephone.png" alt="Téléphone"class="d-inline-block align-text-top ">
                     03.44.04.31.13
                 </a>
+
                 </ul>
             </div>
+<?php if (isset($_SESSION['idUtilisateur'])) { ?>
+            <div>
+            <form action="index.php" method="POST">
+                <input type="hidden" name="action" value="deconnexion">
+                <button type="submit" class="btn boutonDeconnexion petitBoutonDeconnexion d-flex align-items-center">
+                    <img src="./images/Deconnexion.png" alt="Cadenas" class="me-2">
+                </button>
+            </form>
+            </div>
+<?php } ?>
         </div>
     </nav>
+<?php } ?>
