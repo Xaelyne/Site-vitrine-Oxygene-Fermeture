@@ -57,6 +57,27 @@ session_start();
             session_destroy();
             header("Location: index.php");
             break;
+        case "gestion":
+            
+            $id = $_SESSION['idUtilisateur'];
+
+            $utilisateur = getUtilisateur($id);
+            $utilisateurs = getUtilisateurs();
+
+            $nom = $utilisateur['nomUtilisateur'];
+            $prenom = $utilisateur['prenomUtilisateur'];
+
+            $titre = "Gestion";
+            $bienvenue = "Bienvenue <br> $prenom $nom";
+            require "./vues/vueHeader.php";
+            require "./vues/vueGestion.php";
+
+           
+
+
+            
+            
+            break;
         case "traitement_formulaire_contact":
 
             $titre = "Confirmation d'envois";
