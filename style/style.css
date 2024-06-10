@@ -70,6 +70,7 @@ body {
 .contenu{
     background-color: rgb(255, 255, 255);
     width: 70%;
+    
 }
 .petiteCarte{
     border: solid 5px var(--bleu);
@@ -106,6 +107,105 @@ body {
     width: 70%;
 }
 
+
+/* TABLEAU BOOTSTRAP */
+
+.pagination-info, .page-list, .pagination {
+    color: white; 
+}
+
+/* Couleur de fond du tableau */
+th.success,td.success {
+    background: none;
+    color: white;
+}
+
+/* Bordure du tableau */
+.monTableau{
+    background-color: var(--bleu);
+    border-radius: 10px;
+}
+.tableau {
+    border: 2px solid white;
+}
+
+ /* Couleur de survol des lignes du tableau */
+.tableau tbody tr:hover {
+    background-color: var(--fond);
+}
+
+/* Couleur de pagination Precedent 1 2 ... Suivant */
+.pagination .page-link {
+    background: none; 
+    border: none;
+    color: #ffffff; 
+}
+
+.pagination .page-link:hover {
+    background-color: white; 
+    border: none; 
+    color: var(--bleu); 
+}
+
+/* Couleur de la page active sur la pagination */
+.pagination .page-item.active .page-link {
+    color: var(--bleu);
+    background-color: white;
+}
+
+/* Bouton de la barre d'outil */
+.bootstrap-table .fixed-table-toolbar .btn-secondary {
+    background-color: white;
+    border-color: white; 
+    color: var(--bleu); 
+}
+
+.bootstrap-table .fixed-table-toolbar .btn-secondary:hover {
+    background-color: var(--bleu);
+    color: #ffffff; 
+}
+/* Bouton d'affichage par */
+.page-list .btn-secondary{
+    background-color: white;
+    border-color:var white;
+    color: var(--bleu); 
+}
+.page-list .btn-secondary:hover{
+    background-color:var(--bleu);
+    border-color:white; 
+    color: #ffffff;
+}
+
+/* ONGLETS */
+
+.tabcontent {
+    display: none;
+}
+
+.tablinks {
+    background-color: var(--bleu);
+    width: 100%;
+    color: white;
+    padding: 14px 20px;
+    border: 5px solid var(--bleu);
+    border-top-left-radius: 10px;
+    border-top-right-radius:10px ;
+    cursor: pointer;
+}
+
+.tablinks:hover {
+    background-color:#001953;
+    transition-timing-function: ease-in-out;
+    transition-duration: .5s;
+}
+
+.tablinks.active {
+    background-color:white;
+    color: var(--bleu);
+}
+
+
+
 /* PHOTO */
 
 .lightbox .lb-close {
@@ -128,6 +228,7 @@ body {
     background-color: var(--fond);   
     color: white;
 }
+
 
 footer div.col {
     display: flex;

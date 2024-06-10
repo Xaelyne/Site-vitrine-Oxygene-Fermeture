@@ -5,15 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN' crossorigin='anonymous'>
+    <!-- Bootstrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- LightBox Photo -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <!-- Bootstrap table -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table.min.css">
+    <!-- Bootstrap -->
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL' crossorigin='anonymous'></script>
     <!-- LightBox Photo -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <!-- Bootstrape table -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table.min.js"></script>
+    <!-- Bootstrape table -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table-locale-all.min.js"></script>
+    
     <!-- css -->
     <link rel="stylesheet" href="./style/style.css">
     <title><?= $titre ?></title>
 </head>
-<body> 
+<body>
 
     <!-- Les alerts -->
     <!-- <div class="col-12 alert alert-danger d-block d-sm-none text-center" role="alert">Screen X-Small</div>
@@ -22,7 +33,7 @@
     <div class="col-lg-12 alert alert-warning d-none d-lg-block d-xl-none text-center" role="alert">Screen Large ≥992px</div>
     <div class="col-xl-12 alert alert-dark d-none d-xl-block d-xxl-none text-center" role="alert">Screen X-Large ≥1200px</div>
     <div class="col-xxl-12 alert alert-secondary d-none d-xxl-block text-center" role="alert">Screen XX-Large ≥1400px</div> -->
-    <?php
+<?php
 if ($action === "connexion") {
 ?>
     <nav class="navbar navbar-expand-xxl maNav">
@@ -91,16 +102,25 @@ if ($action === "connexion") {
 
                 </ul>
             </div>
-<?php if (isset($_SESSION['idUtilisateur'])) { ?>
-            <div>
-            <form action="index.php" method="POST">
-                <input type="hidden" name="action" value="deconnexion">
-                <button type="submit" class="btn boutonDeconnexion petitBoutonDeconnexion d-flex align-items-center">
-                    <img src="./images/Deconnexion.png" alt="Cadenas" class="me-2">
-                </button>
-            </form>
+<?php 
+    if (isset($_SESSION['idUtilisateur'])) { 
+?>
+            <div class="d-flex align-items-center">
+                <a href="index.php?action=gestion">
+                        <img src="./images/PanneauUtilisateur2.png" alt="Gestion des utilisateurs" style="width: 3rem;">
+                </a>
+                <form action="index.php" method="POST">
+                    <input type="hidden" name="action" value="deconnexion">
+                    <button type="submit" class="btn boutonDeconnexion petitBoutonDeconnexion d-flex align-items-center">
+                        <img src="./images/Deconnexion.png" alt="Déconnexion" class="me-2">
+                    </button>
+                </form>
             </div>
-<?php } ?>
+<?php 
+    } 
+?>
         </div>
     </nav>
-<?php } ?>
+<?php 
+} 
+?>
