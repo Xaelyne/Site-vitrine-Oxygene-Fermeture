@@ -39,7 +39,7 @@ if(isset($_SESSION['idUtilisateur'])) {
                                 <th class="success">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="userTableBody">
                             <?php foreach ($utilisateurs as $utilisateur) { ?>
                                 <tr data-id="<?= $utilisateur['identifiantUtilisateur']; ?>"> 
                                     <td><?= $utilisateur['nomUtilisateur']; ?></td>
@@ -47,6 +47,7 @@ if(isset($_SESSION['idUtilisateur'])) {
                                     <td><?= $utilisateur['emailUtilisateur']; ?></td>
                                     <td>
                                         <button class="btn bouton" onclick="modifierUtilisateur(<?= $utilisateur['identifiantUtilisateur']; ?>)">Modifier</button>
+                                        <button class="btn bouton" onclick="supprimerUtilisateur(<?= $utilisateur['identifiantUtilisateur']; ?>)">Supprimer</button>
                                     </td>
                                 </tr>    
                             <?php } ?>
