@@ -1,7 +1,3 @@
-<?php 
-if(isset($_SESSION['idUtilisateur'])) {
-?>
-
 <div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
     <div class="container bordure">
         <h1 class="py-5 text-center texte "><?= $bienvenue ?></h1>
@@ -46,17 +42,17 @@ if(isset($_SESSION['idUtilisateur'])) {
                                     <td><?= $utilisateur['prenomUtilisateur']; ?></td>
                                     <td><?= $utilisateur['emailUtilisateur']; ?></td>
                                     <td>
-                                        <button class="btn bouton" onclick="modifierUtilisateur(<?= $utilisateur['identifiantUtilisateur']; ?>)">Modifier</button>
-                                        <button class="btn bouton" onclick="supprimerUtilisateur(<?= $utilisateur['identifiantUtilisateur']; ?>)">Supprimer</button>
+                                        <div class="d-flex justify-content-around">
+                                            <button class="btn bouton" style="width: 30%;" onclick="modifierUtilisateur(<?= $utilisateur['identifiantUtilisateur']; ?>)">Modifier</button>
+                                            <button class="btn bouton" style="width: 30%;" onclick="supprimerUtilisateur(<?= $utilisateur['identifiantUtilisateur']; ?>)">Supprimer</button>
+                                        </div>
                                     </td>
                                 </tr>    
                             <?php } ?>
                         </tbody>
                     </table>
                     <div class="text-center pt-3 pb-5">
-                        <button type="button" class="btn bouton">
-                            Ajouter un nouvel utilisateur
-                        </button>
+                    <button type="button" class="btn bouton" onclick="ajouterUtilisateur()">Ajouter un nouvel utilisateur</button>
                     </div>
                 </div>
             </div>
@@ -86,17 +82,3 @@ if(isset($_SESSION['idUtilisateur'])) {
         </div>
     </div>
 </div>
-
-<?php 
-} else {
-?>
-    
-<h1 class="text-center text-white py-5 my-5">Vous n'êtes pas autorisé sur cette page.</h1>
-
-<!-- Bouton permettant de revenir à l'accueil  -->
-
-<div class="text-center">
-    <a href="index.php"><button class="btn bouton">Retour à l'accueil</button></a>
-</div>
-
-<?php } ?>

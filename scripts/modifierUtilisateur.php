@@ -1,5 +1,5 @@
 <script>
-    function modifierUtilisateur(id) {
+   function modifierUtilisateur(id) {
         // Obtenir les informations de l'utilisateur à partir du tableau HTML en utilisant l'ID de l'utilisateur
         const utilisateur = {
             id: id,
@@ -58,70 +58,74 @@
                     return null; // Aucune modification n'a été faite
                 }
 
+                // Capitaliser la première lettre des noms et prénoms
+                const capitalizedNom = capitalizeFirstLetter(nom);
+                const capitalizedPrenom = capitalizeFirstLetter(prenom);
+
                 // Retourner les données de l'utilisateur si toutes les validations sont réussies
-                return { id, nom, prenom, email, mdp };
+                return { id, nom: capitalizedNom, prenom: capitalizedPrenom, email, mdp };
             }
         }).then((result) => { // Fonction exécutée après la confirmation
-                // Si aucune modification n'a été faite
-                if (result.value === null) {
+            // Si aucune modification n'a été faite
+            if (result.value === null) {
+                Swal.fire({
+                    title: 'Pas de modification',
+                    text: 'Aucune modification n\'a été effectuée',
+                    icon: 'info',
+                    customClass: {
+                        confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
+                    }
+                });
+            } else if (result.isConfirmed) { // Si l'utilisateur a confirmé
+                // Envoyer les données au contrôleur via AJAX
+                const data = result.value;
+                fetch('index.php?action=modifierUtilisateur', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json' // Spécifier que les données envoyées sont en JSON
+                    },
+                    body: JSON.stringify(data) // Convertir les données en chaîne JSON
+                }).then(response => response.text()) // Lire la réponse brute du serveur
+                .then(responseText => {
+                    console.log(responseText); // Afficher la réponse brute dans la console pour débogage
+                    return JSON.parse(responseText); // Convertir la réponse en objet JSON
+                })
+                .then(data => {
+                    if (data.success) { // Si la modification a réussi
+                        Swal.fire({
+                            title: 'Modifié!',
+                            text: 'Utilisateur modifié avec succès',
+                            icon: 'success',
+                            customClass: {
+                                confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
+                            }
+                        }).then(() => {
+                            location.reload(); // Recharger la page pour voir les modifications
+                        });
+                    } else { // Si la modification a échoué
+                        Swal.fire({
+                            title: 'Erreur!',
+                            text: data.message || 'Une erreur est survenue',
+                            icon: 'error',
+                            customClass: {
+                                confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
+                            }
+                        });
+                    }
+                })
+                .catch(error => { // Gérer les erreurs de réseau ou de serveur
+                    console.error('Error:', error);
                     Swal.fire({
-                        title: 'Pas de modification',
-                        text: 'Aucune modification n\'a été effectuée',
-                        icon: 'info',
+                        title: 'Erreur!',
+                        text: 'Une erreur est survenue lors du traitement de la réponse',
+                        icon: 'error',
                         customClass: {
                             confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
                         }
                     });
-                }else if (result.isConfirmed) { // Si l'utilisateur a confirmé
-                    // Envoyer les données au contrôleur via AJAX
-                    const data = result.value;
-                    fetch('index.php?action=modifierUtilisateur', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json' // Spécifier que les données envoyées sont en JSON
-                        },
-                        body: JSON.stringify(data) // Convertir les données en chaîne JSON
-                    }).then(response => response.text()) // Lire la réponse brute du serveur
-                    .then(responseText => {
-                        console.log(responseText); // Afficher la réponse brute dans la console pour débogage
-                        return JSON.parse(responseText); // Convertir la réponse en objet JSON
-                    })
-                    .then(data => {
-                        if (data.success) { // Si la modification a réussi
-                            Swal.fire({
-                                title: 'Modifié!',
-                                text: 'Utilisateur modifié avec succès',
-                                icon: 'success',
-                                customClass: {
-                                    confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
-                                }  
-                            }).then(() => {
-                                location.reload(); // Recharger la page pour voir les modifications
-                            });
-                        } else { // Si la modification a échoué
-                            Swal.fire({
-                                title: 'Erreur!',
-                                text: data.message || 'Une erreur est survenue',
-                                icon: 'error',
-                                customClass: {
-                                    confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
-                                }  
-                            });
-                        }
-                    })
-                    .catch(error => { // Gérer les erreurs de réseau ou de serveur
-                        console.error('Error:', error);
-                        Swal.fire({
-                            title: 'Erreur!',
-                            text: 'Une erreur est survenue lors du traitement de la réponse',
-                            icon: 'error',
-                            customClass: {
-                                confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
-                            }  
-                        });
-                    });
-                }
-            });
+                });
+            }
+        });
     }
 
     // Fonction pour valider les noms et prénoms
@@ -134,5 +138,10 @@
     function emailValide(email) {
         const regex = /^[a-zA-Z0-9](\w\.?)*[a-zA-Z0-9]@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$/; // Expression régulière pour vérifier la validité de l'email
         return regex.test(email); // Retourne vrai si l'email est valide, faux sinon
+    }
+
+    // Fonction pour capitaliser la première lettre d'une chaîne de caractères
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase(); // Met la première lettre en majuscule et le reste en minuscule
     }
 </script>
