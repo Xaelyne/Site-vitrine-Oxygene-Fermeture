@@ -91,3 +91,27 @@
         
         return $requete->execute();
     }
+    function ajouterUtilisateur($nom, $prenom, $email, $mdp) {
+        $connexion = getConnexion();
+        $sql = "INSERT INTO utilisateurs (nomUtilisateur, prenomUtilisateur, emailUtilisateur, MDPUtilisateur) VALUES (:nom, :prenom, :email, :mdp)";
+    
+        $requete = $connexion->prepare($sql);
+    
+        $requete->bindParam(':nom', $nom);
+        $requete->bindParam(':prenom', $prenom);
+        $requete->bindParam(':email', $email);
+        $requete->bindParam(':mdp', $mdp);
+    
+        return $requete->execute();
+    }
+
+    function emailExiste($email) {
+        $connexion = getConnexion();
+        $sql = "SELECT COUNT(*) FROM utilisateurs WHERE emailUtilisateur = :email";
+    
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':email', $email);
+        $requete->execute();
+    
+        return $requete->fetchColumn() > 0;
+    }

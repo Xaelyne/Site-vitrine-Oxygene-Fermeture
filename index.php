@@ -58,21 +58,27 @@ session_start();
             header("Location: index.php");
             break;
         case "gestion":
-            
-            $id = $_SESSION['idUtilisateur'];
+            if (isset($_SESSION['idUtilisateur'])) {
+                $id = $_SESSION['idUtilisateur'];
 
-            $utilisateur = getUtilisateur($id);
-            $utilisateurs = getUtilisateurs();
+                $utilisateur = getUtilisateur($id);
+                $utilisateurs = getUtilisateurs();
 
-            $nom = $utilisateur['nomUtilisateur'];
-            $prenom = $utilisateur['prenomUtilisateur'];
+                $nom = $utilisateur['nomUtilisateur'];
+                $prenom = $utilisateur['prenomUtilisateur'];
 
-            $titre = "Gestion";
-            $bienvenue = "Bienvenue <br> $prenom $nom";
-            require "./vues/vueHeader.php";
-            require "./vues/vueGestion.php";
-            require "./scripts/modifierUtilisateur.php";
-            require"./scripts/supprimerUtilisateur.php";
+                $titre = "Gestion";
+                $bienvenue = "Bienvenue <br> $prenom $nom";
+                require "./vues/vueHeader.php";
+                require "./vues/vueGestion.php";
+                require "./scripts/modifierUtilisateur.php";
+                require "./scripts/supprimerUtilisateur.php";
+                require "./scripts/ajouterUtilisateur.php";
+            } else {
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+            }
             break;
         case "modifierUtilisateur":
             ob_clean();
@@ -127,6 +133,38 @@ session_start();
             } else {
                 // Si l'ID n'est pas fourni, renvoie un message d'erreur
                 echo json_encode(['success' => false]);
+            }
+            exit();
+        case "ajouterUtilisateur":
+            ob_clean();
+            header('Content-Type: application/json');
+        
+            // Récupère les données JSON envoyées dans la requête HTTP et les décode en tableau associatif
+            $data = json_decode(file_get_contents('php://input'), true);
+        
+            // Vérifie que les données nécessaires sont présentes
+            if (!empty($data['nom']) && !empty($data['prenom']) && !empty($data['email']) && !empty($data['mdp'])) {
+                // Récupère les valeurs des données
+                $nom = $data['nom'];
+                $prenom = $data['prenom'];
+                $email = $data['email'];
+                // Hachage du mot de passe pour le stockage sécurisé
+                $mdp = password_hash($data['mdp'], PASSWORD_DEFAULT);
+        
+                // Vérifie si l'email existe déjà dans la base de données
+                if (emailExiste($email)) {
+                    // Renvoie un message d'erreur si l'email est déjà utilisé
+                    echo json_encode(['success' => false, 'message' => 'Cet email est déjà utilisé']);
+                } else {
+                    // Appel de la fonction pour ajouter l'utilisateur dans la base de données
+                    $success = ajouterUtilisateur($nom, $prenom, $email, $mdp);
+        
+                    // Renvoie un message de succès si l'ajout a réussi
+                    echo json_encode(['success' => $success]);
+                }
+            } else {
+                // Renvoie un message d'erreur si des données sont manquantes
+                echo json_encode(['success' => false, 'message' => 'Données manquantes']);
             }
             exit();
         case "traitement_formulaire_contact":
