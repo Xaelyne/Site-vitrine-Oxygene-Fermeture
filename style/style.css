@@ -206,7 +206,7 @@ th.success,td.success {
 
 /* FORMULAIRE SWEETALERT */
 
-.swal2-styled.modifier-btn {
+.swal2-styled.popup-btn {
     background-color: var(--bleu);
     color: white;
     border: 2px solid var(--bleu);
@@ -217,7 +217,25 @@ th.success,td.success {
     cursor: pointer;
     border-radius: 10px;
 }
-.swal2-styled.modifier-btn:hover {
+.swal2-styled.popup-btn:hover {
+    background-color: white;
+    color: var(--bleu);
+    border: 2px solid var(--bleu);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.swal2-styled.popup-annuler{
+    background-color: grey;
+    color: white;
+    border: 2px solid gray;
+    padding: 10px 24px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.swal2-styled.popup-annuler:hover {
     background-color: white;
     color: var(--bleu);
     border: 2px solid var(--bleu);

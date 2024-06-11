@@ -21,7 +21,7 @@
             `,
             confirmButtonText: 'Modifier', // Texte du bouton de confirmation
             customClass: {
-                confirmButton: 'modifier-btn' // Classe CSS personnalisée pour le bouton de confirmation
+                confirmButton: 'popup-btn' // Classe CSS personnalisée pour le bouton de confirmation
             },
             focusConfirm: false, // Ne pas focus automatiquement sur le bouton de confirmation
             preConfirm: () => { // Fonction exécutée avant la confirmation
@@ -69,7 +69,7 @@
                         text: 'Aucune modification n\'a été effectuée',
                         icon: 'info',
                         customClass: {
-                            confirmButton: 'modifier-btn' // Applique la classe CSS personnalisée au bouton de confirmation
+                            confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
                         }
                     });
                 }else if (result.isConfirmed) { // Si l'utilisateur a confirmé
@@ -93,7 +93,7 @@
                                 text: 'Utilisateur modifié avec succès',
                                 icon: 'success',
                                 customClass: {
-                                    confirmButton: 'modifier-btn' // Applique la classe CSS personnalisée au bouton de confirmation
+                                    confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
                                 }  
                             }).then(() => {
                                 location.reload(); // Recharger la page pour voir les modifications
@@ -104,7 +104,7 @@
                                 text: data.message || 'Une erreur est survenue',
                                 icon: 'error',
                                 customClass: {
-                                    confirmButton: 'modifier-btn' // Applique la classe CSS personnalisée au bouton de confirmation
+                                    confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
                                 }  
                             });
                         }
@@ -116,7 +116,7 @@
                             text: 'Une erreur est survenue lors du traitement de la réponse',
                             icon: 'error',
                             customClass: {
-                                confirmButton: 'modifier-btn' // Applique la classe CSS personnalisée au bouton de confirmation
+                                confirmButton: 'popup-btn' // Applique la classe CSS personnalisée au bouton de confirmation
                             }  
                         });
                     });

@@ -50,7 +50,7 @@
 
         foreach($utilisateurs as $utilisateur){
             if ($utilisateur['emailUtilisateur'] == $emailUtilisateur){
-                if($utilisateur['MDPUtilisateur'] == $MDPUtilisateur){ // if(password_verify($MDPUtilisateur,$utilisateur['MDPUtilisateur'])){
+                if(password_verify($MDPUtilisateur,$utilisateur['MDPUtilisateur'])){
                     $idUtilisateur = $utilisateur['identifiantUtilisateur'];
                     return $idUtilisateur;
                 }else{
@@ -77,5 +77,17 @@
         $requete->bindParam(':email', $email);
         $requete->bindParam(':mdp', $mdp);
     
+        return $requete->execute();
+    }
+
+    function supprimerUtilisateur($id) {
+        $connexion = getConnexion();
+    
+        $sql = "DELETE 
+                FROM utilisateurs 
+                WHERE identifiantUtilisateur = :id";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':id', $id);
+        
         return $requete->execute();
     }

@@ -72,12 +72,13 @@ session_start();
             require "./vues/vueHeader.php";
             require "./vues/vueGestion.php";
             require "./scripts/modifierUtilisateur.php";
+            require"./scripts/supprimerUtilisateur.php";
             break;
         case "modifierUtilisateur":
-            ob_clean(); // Nettoie le buffer de sortie
-            header('Content-Type: application/json'); // Assurez-vous que le type de contenu est JSON
+            ob_clean();
+            header('Content-Type: application/json'); 
         
-            // Récupérer et décoder les données JSON
+            // Récupère les données JSON envoyées dans la requête HTTP et les décode en tableau associatif
             $data = json_decode(file_get_contents('php://input'), true);
         
             // Vérifier si l'ID utilisateur est présent
@@ -98,6 +99,34 @@ session_start();
                 echo json_encode(['success' => $success]);
             } else {
                 echo json_encode(['success' => false, 'message' => 'ID utilisateur manquant']);
+            }
+            exit();
+        case "supprimerUtilisateur":
+            ob_clean();
+            header('Content-Type: application/json'); 
+        
+            // Récupère les données JSON envoyées dans la requête HTTP et les décode en tableau associatif
+            $data = json_decode(file_get_contents('php://input'), true);
+            
+            // Récupère tous les utilisateurs de la base de données
+            $utilisateurs = getUtilisateurs();
+        
+            // Vérifie s'il y a un seul utilisateur restant
+            if (count($utilisateurs) <= 1) {
+                // Renvoie un message d'erreur si c'est le dernier utilisateur
+                echo json_encode(['success' => false, 'message' => 'Vous ne pouvez pas supprimer le dernier utilisateur restant.']);
+            } else if (!empty($data['id'])) {
+                // Si l'ID de l'utilisateur à supprimer est fourni
+                $id = $data['id'];
+        
+                // Appelle la fonction pour supprimer l'utilisateur avec l'ID spécifié
+                $success = supprimerUtilisateur($id);
+        
+                // Renvoie un message de succès ou d'échec en fonction du résultat de la suppression
+                echo json_encode(['success' => $success]);
+            } else {
+                // Si l'ID n'est pas fourni, renvoie un message d'erreur
+                echo json_encode(['success' => false]);
             }
             exit();
         case "traitement_formulaire_contact":
