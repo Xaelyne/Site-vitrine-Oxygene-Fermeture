@@ -61,3 +61,21 @@
         }
         return $idUtilisateur;
     }
+
+    function modifierUtilisateur($id, $nom, $prenom, $email, $mdp) {
+        $connexion = getConnexion();
+    
+        $sql = "UPDATE utilisateurs
+                SET nomUtilisateur = :nom, prenomUtilisateur = :prenom, emailUtilisateur = :email, MDPUtilisateur = :mdp
+                WHERE identifiantUtilisateur = :id";
+        
+        $requete = $connexion->prepare($sql);
+    
+        $requete->bindParam(':id', $id);
+        $requete->bindParam(':nom', $nom);
+        $requete->bindParam(':prenom', $prenom);
+        $requete->bindParam(':email', $email);
+        $requete->bindParam(':mdp', $mdp);
+    
+        return $requete->execute();
+    }

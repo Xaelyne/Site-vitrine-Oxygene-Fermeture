@@ -41,10 +41,13 @@ if(isset($_SESSION['idUtilisateur'])) {
                         </thead>
                         <tbody>
                             <?php foreach ($utilisateurs as $utilisateur) { ?>
-                                <tr> 
+                                <tr data-id="<?= $utilisateur['identifiantUtilisateur']; ?>"> 
                                     <td><?= $utilisateur['nomUtilisateur']; ?></td>
                                     <td><?= $utilisateur['prenomUtilisateur']; ?></td>
                                     <td><?= $utilisateur['emailUtilisateur']; ?></td>
+                                    <td>
+                                        <button class="btn bouton" onclick="modifierUtilisateur(<?= $utilisateur['identifiantUtilisateur']; ?>)">Modifier</button>
+                                    </td>
                                 </tr>    
                             <?php } ?>
                         </tbody>

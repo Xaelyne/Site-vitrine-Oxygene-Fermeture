@@ -71,13 +71,35 @@ session_start();
             $bienvenue = "Bienvenue <br> $prenom $nom";
             require "./vues/vueHeader.php";
             require "./vues/vueGestion.php";
-
-           
-
-
-            
-            
+            require "./scripts/modifierUtilisateur.php";
             break;
+        case "modifierUtilisateur":
+            ob_clean(); // Nettoie le buffer de sortie
+            header('Content-Type: application/json'); // Assurez-vous que le type de contenu est JSON
+        
+            // Récupérer et décoder les données JSON
+            $data = json_decode(file_get_contents('php://input'), true);
+        
+            // Vérifier si l'ID utilisateur est présent
+            if (!empty($data['id'])) {
+                $id = $data['id'];
+                $utilisateur = getUtilisateur($id);
+        
+                // Mettre à jour les champs utilisateur
+                $nom = !empty($data['nom']) ? $data['nom'] : $utilisateur['nomUtilisateur'];
+                $prenom = !empty($data['prenom']) ? $data['prenom'] : $utilisateur['prenomUtilisateur'];
+                $email = !empty($data['email']) ? $data['email'] : $utilisateur['emailUtilisateur'];
+                $mdp = !empty($data['mdp']) ? password_hash($data['mdp'], PASSWORD_DEFAULT) : $utilisateur['MDPUtilisateur'];  // Hacher le mot de passe uniquement si modifié
+        
+                // Mettre à jour l'utilisateur
+                $success = modifierUtilisateur($id, $nom, $prenom, $email, $mdp);
+        
+                // Renvoyer la réponse JSON
+                echo json_encode(['success' => $success]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID utilisateur manquant']);
+            }
+            exit();
         case "traitement_formulaire_contact":
 
             $titre = "Confirmation d'envois";

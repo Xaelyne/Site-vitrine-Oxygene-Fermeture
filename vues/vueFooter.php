@@ -55,10 +55,16 @@ if ($action === "connexion") {
 </footer>
 <?php 
 } 
-?>      
-    <script src="./scripts/regexFormulaireContactAccueil.js"></script>
+?> 
+     
+<?php if ($action === "nousContacter") { ?>
     <script src="./scripts/regexFormulaireContact.js"></script>
+<?php } else if ($action === "devis") { ?>
     <script src="./scripts/regexFormulaireDevis.js"></script>
+<?php } else if ($action === "accueil") { ?>
+    <script src="./scripts/regexFormulaireContactAccueil.js"></script>
+<?php } ?>
+
     <script src="./scripts/switch.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
