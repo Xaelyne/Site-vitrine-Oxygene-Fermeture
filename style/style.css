@@ -94,6 +94,17 @@ body {
     transition-timing-function: ease-in-out;
     transition-duration: .5s;
 }
+.grandeCarteInverser{
+    background-color: white;
+    color: var(--bleu);  
+    border: solid 5px var(--bleu);
+}
+
+.grandeCarteInverser:hover{
+    transform: scale(1.05);
+    transition-timing-function: ease-in-out;
+    transition-duration: .5s;
+}
 .texte{
     color: var(--bleu);
 }  
@@ -101,6 +112,10 @@ body {
    text-decoration: none;
    color: white;
 }
+.lienCarteInverser{
+    text-decoration: none;
+    color: var(--bleu);
+ }
 .divFormulaireContact{
     background-color: var(--bleu);
     border-radius: 10px;
