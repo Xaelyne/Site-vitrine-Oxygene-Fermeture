@@ -115,3 +115,60 @@
     
         return $requete->fetchColumn() > 0;
     }
+    function getServices() {
+        $connexion = getConnexion();
+        $sql = "SELECT identifiantService as id, nomService as nom, imageService as image FROM services";
+        $resultat = $connexion->query($sql);
+        return $resultat->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    function getServiceAvecDetails($serviceId) {
+        $connexion = getConnexion();
+        $sql = "SELECT s.identifiantService AS id, s.nomService AS nom, s.imageService AS image, d.descriptionDetail AS detail
+                FROM services s
+                LEFT JOIN detailservice d ON s.identifiantService = d.identifiantService
+                WHERE s.identifiantService = :serviceId";
+        
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':serviceId', $serviceId);
+        $requete->execute();
+    
+        $serviceAvecDetails = [
+            'id' => $serviceId,
+            'nom' => '',
+            'image' => '',
+            'details' => []
+        ];
+    
+        while ($row = $requete->fetch(PDO::FETCH_ASSOC)) {
+            if (empty($serviceAvecDetails['nom'])) {
+                $serviceAvecDetails['nom'] = $row['nom'];
+                $serviceAvecDetails['image'] = $row['image'];
+            }
+            if ($row['detail'] !== null) {
+                $serviceAvecDetails['details'][] = $row['detail'];
+            }
+        }
+    
+        return $serviceAvecDetails;
+    }
+    
+    function ajouterServiceAvecDetails($nom, $image, $details) {
+        $connexion = getConnexion();
+        $sql = "INSERT INTO services (nomService, imageService) VALUES (:nom, :image)";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':nom', $nom);
+        $requete->bindParam(':image', $image);
+        $requete->execute();
+        $serviceId = $connexion->lastInsertId();
+    
+        foreach ($details as $detail) {
+            $sqlDetail = "INSERT INTO detailservice (identifiantService, descriptionDetail) VALUES (:serviceId, :detail)";
+            $requeteDetail = $connexion->prepare($sqlDetail);
+            $requeteDetail->bindParam(':serviceId', $serviceId);
+            $requeteDetail->bindParam(':detail', $detail);
+            $requeteDetail->execute();
+        }
+    
+        return $serviceId;
+    }

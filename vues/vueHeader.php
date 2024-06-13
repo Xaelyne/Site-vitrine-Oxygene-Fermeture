@@ -21,23 +21,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table-locale-all.min.js"></script>
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <!-- css -->
     <link rel="stylesheet" href="./style/style.css">
     <title><?= $titre ?></title>
 </head>
 <body>
 
-    <!-- Les alerts -->
-    <!-- <div class="col-12 alert alert-danger d-block d-sm-none text-center" role="alert">Screen X-Small</div>
-    <div class="col-sm-12 alert alert-info d-none d-sm-block d-md-none text-center" role="alert">Screen Small ≥576px</div>
-    <div class="col-md-12 alert alert-success d-none d-md-block d-lg-none text-center" role="alert">Screen Medium ≥768px</div>
-    <div class="col-lg-12 alert alert-warning d-none d-lg-block d-xl-none text-center" role="alert">Screen Large ≥992px</div>
-    <div class="col-xl-12 alert alert-dark d-none d-xl-block d-xxl-none text-center" role="alert">Screen X-Large ≥1200px</div>
-    <div class="col-xxl-12 alert alert-secondary d-none d-xxl-block text-center" role="alert">Screen XX-Large ≥1400px</div> -->
-<?php
-if ($action === "connexion") {
-?>
+<?php if ($action === "connexion") { ?>
     <nav class="navbar navbar-expand-xxl maNav">
         <div class="container-fluid my-3">
           <a class="navbar-brand text-white fw-bold" href="index.php">Oxygene Fermeture</a>
@@ -46,11 +36,7 @@ if ($action === "connexion") {
             </button>
         </div>
     </nav>
-<?php
-} else {
-?>
-
-    <!-- Barre de navigation -->
+<?php } else { ?>
     <nav class="navbar navbar-expand-xxl maNav">
         <div class="container-fluid my-3">
           <a class="navbar-brand text-white fw-bold" href="index.php">Oxygene Fermeture</a>
@@ -59,17 +45,17 @@ if ($action === "connexion") {
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav mx-auto">
-                <li class="navbar-brand">
-                    <a class="nav-link text-center text-white fs-6" aria-current="page" href="index.php">Accueil</a>
-                </li>
+                    <li class="navbar-brand">
+                        <a class="nav-link text-center text-white fs-6" aria-current="page" href="index.php">Accueil</a>
+                    </li>
                 <li class="navbar-brand dropdown">
-                    <a class="nav-link dropdown-toggle text-center text-white fs-6" href="index.php?action=listeServices" role="button"  aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-center text-white fs-6" href="index.php?action=listeServices" role="button" aria-expanded="false">
                     Nos services
                     </a>
                     <ul class="dropdown-menu">
-                    <li><a class="dropdown-item text-center" href="index.php?action=detailVelux">Velux</a></li>
-                    <li><a class="dropdown-item text-center" href="index.php?action=detailFenetre">Fenêtre</a></li>
-                    <li><a class="dropdown-item text-center" href="#">Nom service 3</a></li>
+                         <?php foreach ($services as $serviceItem) { ?>
+                            <li><a class="dropdown-item" href="index.php?action=detailService&id=<?= htmlspecialchars($serviceItem['id']); ?>"><?= htmlspecialchars($serviceItem['nom']); ?></a></li>
+                        <?php } ?>
                     </ul>
                 </li>
                 <li class="navbar-brand dropdown">
@@ -77,9 +63,9 @@ if ($action === "connexion") {
                     Nos réalisations
                     </a>
                     <ul class="dropdown-menu">
-                    <li><a class="dropdown-item text-center" href="index.php?action=realisationVelux">Velux</a></li>
-                    <li><a class="dropdown-item text-center" href="index.php?action=realisationFenetre">Fenêtre</a></li>
-                    <li><a class="dropdown-item text-center" href="#">Nom réalisation 3</a></li>
+                        <li><a class="dropdown-item text-center" href="index.php?action=realisationVelux">Velux</a></li>
+                        <li><a class="dropdown-item text-center" href="index.php?action=realisationFenetre">Fenêtre</a></li>
+                        <li><a class="dropdown-item text-center" href="#">Nom réalisation 3</a></li>
                     </ul>
                 </li>
                 <li class="navbar-brand">
@@ -101,12 +87,9 @@ if ($action === "connexion") {
                     <img src="./images/Telephone.png" alt="Téléphone"class="d-inline-block align-text-top ">
                     03.44.04.31.13
                 </a>
-
                 </ul>
             </div>
-<?php 
-    if (isset($_SESSION['idUtilisateur'])) { 
-?>
+<?php if (isset($_SESSION['idUtilisateur'])) { ?>
             <div class="d-flex align-items-center">
                 <a href="index.php?action=gestion">
                         <img src="./images/PanneauUtilisateur2.png" alt="Gestion des utilisateurs" style="width: 3rem;">
@@ -118,11 +101,7 @@ if ($action === "connexion") {
                     </button>
                 </form>
             </div>
-<?php 
-    } 
-?>
+<?php } ?>
         </div>
     </nav>
-<?php 
-} 
-?>
+<?php } ?>
