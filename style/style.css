@@ -67,62 +67,105 @@ body {
 } 
 
 /* CONTENU */
-.contenu{
+.contenu {
     background-color: rgb(255, 255, 255);
     width: 70%;
-    
 }
-.petiteCarte{
+
+.petiteCarte {
     border: solid 5px var(--bleu);
     border-radius: 10px;
 }
-.moyenneCarte{
+
+.moyenneCarte {
     border: solid 2px var(--bleu);
     border-radius: 10px;
 }
-.moyenneCarte:hover{
+
+.moyenneCarte:hover {
     transform: scale(1.05);
     transition-timing-function: ease-in-out;
     transition-duration: .5s;
-}
-.grandeCarte{
-    background-color: var(--bleu);   
 }
 
-.grandeCarte:hover{
+.grandeCarte {
+    background-color: var(--bleu);
+    position: relative;
+}
+
+.grandeCarte:hover {
     transform: scale(1.05);
     transition-timing-function: ease-in-out;
     transition-duration: .5s;
 }
-.grandeCarteInverser{
+
+.grandeCarteAccueil {
+    position: relative;
+}
+
+.grandeCarteAccueil:hover .btn-supprimer-container {
+    opacity: 1;
+}
+
+.grandeCarteAccueil:hover .card-body,
+.grandeCarteAccueil:hover img {
+    opacity: 0.5;
+}
+
+.btn-supprimer-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; /* Assure que le bouton est au-dessus de la carte */
+    opacity: 0; /* Caché par défaut, visible au survol */
+}
+
+.btn-supprimer {
+    color: var(--bleu);
     background-color: white;
-    color: var(--bleu);  
+    border: solid 2px var(--bleu);
+    border-radius: 10px;
+    padding: 10px 20px;
+    
+}
+.btn-supprimer:hover {
+    color: white;
+    background-color: var(--bleu);
+    border-color: white;
+}
+
+.grandeCarteInverser {
+    background-color: white;
+    color: var(--bleu);
     border: solid 5px var(--bleu);
 }
 
-.grandeCarteInverser:hover{
+.grandeCarteInverser:hover {
     transform: scale(1.05);
     transition-timing-function: ease-in-out;
     transition-duration: .5s;
 }
-.texte{
+
+.texte {
     color: var(--bleu);
-}  
-.lienCarte{
-   text-decoration: none;
-   color: white;
 }
-.lienCarteInverser{
+
+.lienCarte {
+    text-decoration: none;
+    color: white;
+}
+
+.lienCarteInverser {
     text-decoration: none;
     color: var(--bleu);
- }
-.divFormulaireContact{
+}
+
+.divFormulaireContact {
     background-color: var(--bleu);
     border-radius: 10px;
     width: 70%;
 }
-
-
 /* TABLEAU BOOTSTRAP */
 
 .pagination-info, .page-list, .pagination {

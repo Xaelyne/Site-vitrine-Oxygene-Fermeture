@@ -126,7 +126,7 @@
         $connexion = getConnexion();
         $sql = "SELECT s.identifiantService AS id, s.nomService AS nom, s.imageService AS image, d.descriptionDetail AS detail
                 FROM services s
-                LEFT JOIN detailservice d ON s.identifiantService = d.identifiantService
+                INNER JOIN detailservice d ON s.identifiantService = d.identifiantService
                 WHERE s.identifiantService = :serviceId";
         
         $requete = $connexion->prepare($sql);
@@ -172,3 +172,20 @@
     
         return $serviceId;
     }
+
+    function supprimerService($serviceId) {
+        $connexion = getConnexion();
+        
+        // Supprimez d'abord les détails du service
+        $sql = "DELETE FROM detailservice WHERE identifiantService = :serviceId";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':serviceId', $serviceId);
+        $requete->execute();
+        
+        // Ensuite, supprimez le service
+        $sql = "DELETE FROM services WHERE identifiantService = :serviceId";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':serviceId', $serviceId);
+        return $requete->execute();
+    }
+    

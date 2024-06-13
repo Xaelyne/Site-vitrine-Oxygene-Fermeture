@@ -14,93 +14,20 @@
         </p>
     </div>
     <div class="d-flex row row-cols-1 row-cols-md- g-4 d-flex justify-content-center align-items-center my-5">
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;" >
-            <a href="index.php?action=detailVelux" class="lienCarte" id="velux">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
+        <?php foreach ($services as $service) { ?>
+            <!-- Carte pour chaque service -->
+            <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem; height: 15rem;">
+                <!-- Lien autour de toute la carte qui dirige vers la page de détail du service -->
+                <a href="index.php?action=detailService&id=<?= htmlspecialchars($service['id']); ?>" class="lienCarte stretched-link">
+                    <!-- Image en haut de la carte -->
+                    <img src="<?= htmlspecialchars($service['image']); ?>" class="card-img-top" alt="Service" style="width: 128px; height: 128px; object-fit: cover;">
+                    <!-- Corps de la carte contenant le texte -->
                     <div class="card-body">
-                        <p class="card-text ">Velux</p>
+                        <!-- Texte du service -->
+                        <p class="card-text"><?= htmlspecialchars($service['nom']); ?></p>
                     </div>
-            </a>
-        </div>
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="index.php?action=detailFenetre" class="lienCarte" id="fenetre">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
-                    <div class="card-body">
-                        <p class="card-text ">Fenêtre</p>
-                    </div>
-            </a>
-        </div>
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
-                    <div class="card-body">
-                        <p class="card-text ">Velux</p>
-                    </div>
-            </a>
-        </div>
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
-                    <div class="card-body">
-                        <p class="card-text ">Velux</p>
-                    </div>
-            </a>
-        </div>
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
-                    <div class="card-body">
-                        <p class="card-text ">Velux</p>
-                    </div>
-            </a>
-        </div>
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
-                    <div class="card-body">
-                        <p class="card-text ">Velux</p>
-                    </div>
-            </a>
-        </div>
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
-                    <div class="card-body">
-                        <p class="card-text ">Velux</p>
-                    </div>
-            </a>
-        </div>
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
-                    <div class="card-body">
-                        <p class="card-text ">Velux</p>
-                    </div>
-            </a>
-        </div>
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
-                    <div class="card-body">
-                        <p class="card-text ">Velux</p>
-                    </div>
-            </a>
-        </div>
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
-                    <div class="card-body">
-                        <p class="card-text ">Velux</p>
-                    </div>
-            </a>
-        </div>
-        <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem;">
-            <a href="#" class="lienCarte">
-                <img src="./images/Velux.png" class="card-img-top" alt="Service">
-                    <div class="card-body">
-                        <p class="card-text ">Velux</p>
-                    </div>
-            </a>
-        </div>
+                </a>
+            </div>
+        <?php } ?>
     </div>
 </div>
