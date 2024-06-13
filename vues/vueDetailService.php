@@ -25,9 +25,9 @@
             </div>
             <!-- Section pour afficher une carte avec l'image et le nom du service -->
             <div class="d-flex row row-cols-1 row-cols-md- g-4 d-flex justify-content-center align-items-center my-5">
-                <div class="card grandeCarte mb-5 text-white text-center my-4" style="width: 10rem;">
+                <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem; height: 15rem;">
                     <a class="lienCarte">
-                        <img src="<?= htmlspecialchars($service['image']); ?>" class="card-img-top" alt="Service">
+                        <img src="<?= htmlspecialchars($service['image']); ?>" class="card-img-top" alt="Service" style="width: 128px; height: 128px; object-fit: cover;">
                         <div class="card-body">
                             <p class="card-text "><?= htmlspecialchars(ucfirst($service['nom'])); ?></p>
                         </div>

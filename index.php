@@ -20,6 +20,7 @@
                 require "./vues/vueHeader.php";
                 require "./vues/vueAccueil.php";
                 require "./scripts/ajouterNouveauServices.php";
+                require "./scripts/supprimerService.php";
                 break;
 
             case "connexion":
@@ -127,7 +128,6 @@
                     echo json_encode(['success' => false, 'message' => 'Données manquantes']);
                 }
                 exit();
-
             case "ajouterService":
                 ob_clean();
                 header('Content-Type: application/json');
@@ -140,7 +140,29 @@
                 $serviceId = ajouterServiceAvecDetails($nom, $targetFile, $details);
                 echo json_encode(['success' => true]);
                 exit();
-
+            case "detailService":
+                if (isset($_GET['id'])) {
+                    $serviceId = $_GET['id'];
+                    $service = getServiceAvecDetails($serviceId);
+                    $titre = "Détails du service";
+                    require "./vues/vueHeader.php";
+                    require "./vues/vueDetailService.php";
+                } else {
+                    $titre = "Erreur";
+                    $message = "Service non spécifié.";
+                    require "./vues/vueHeader.php";
+                    require "./vues/vueErreur.php";
+                }
+                break;
+            case "supprimerService":
+                if (isset($_GET['id'])) {
+                    $serviceId = $_GET['id'];
+                    $success = supprimerService($serviceId);
+                    echo json_encode(['success' => $success]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'ID manquant']);
+                }
+                exit();
             case "traitement_formulaire_contact":
                 $titre = "Confirmation d'envois";
                 require "./vues/vueHeader.php";
@@ -180,22 +202,6 @@
                 require "./vues/vueHeader.php";
                 require "./vues/vueListeService.php";
                 break;
-
-            case "detailService":
-                if (isset($_GET['id'])) {
-                    $serviceId = $_GET['id'];
-                    $service = getServiceAvecDetails($serviceId);
-                    $titre = "Détails du service";
-                    require "./vues/vueHeader.php";
-                    require "./vues/vueDetailService.php";
-                } else {
-                    $titre = "Erreur";
-                    $message = "Service non spécifié.";
-                    require "./vues/vueHeader.php";
-                    require "./vues/vueErreur.php";
-                }
-                break;
-
             case "toutesNosRealisations":
                 $titre = "Toutes nos réalisations";
                 require "./vues/vueHeader.php";

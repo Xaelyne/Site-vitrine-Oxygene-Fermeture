@@ -22,17 +22,27 @@
     <div class="d-flex row row-cols-1 row-cols-md- g-4 d-flex justify-content-center align-items-center">
         <?php foreach ($services as $service) { ?>
             <!-- Carte pour chaque service -->
-            <div class="card grandeCarte mb-5 text-white text-center mx-3" style="width: 10rem; height: 15rem;">
-                <!-- Lien autour de toute la carte qui dirige vers la page de détail du service -->
-                <a href="index.php?action=detailService&id=<?= htmlspecialchars($service['id']); ?>" class="lienCarte stretched-link">
-                    <!-- Image en haut de la carte -->
-                    <img src="<?= htmlspecialchars($service['image']); ?>" class="card-img-top" alt="Service" style="width: 128px; height: 128px; object-fit: cover;">
-                    <!-- Corps de la carte contenant le texte -->
-                    <div class="card-body">
-                        <!-- Texte du service -->
-                        <p class="card-text"><?= htmlspecialchars($service['nom']); ?></p>
+            <div class="card grandeCarte <?= isset($_SESSION['idUtilisateur']) ? 'grandeCarteAccueil' : '' ?> mb-5 text-white text-center mx-3" style="width: 10rem; height: 15rem;">
+                <!-- Conteneur pour le bouton supprimer -->
+                <?php if (isset($_SESSION['idUtilisateur'])): ?>
+                    <div class="btn-supprimer-container">
+                        <button class="btn-supprimer boutonInverser" onclick="supprimerService(event, <?= htmlspecialchars($service['id']); ?>)">Supprimer</button>
                     </div>
-                </a>
+                <?php endif; ?>
+                <!-- Lien autour de toute la carte qui dirige vers la page de détail du service si l'utilisateur n'est pas connecté -->
+                <?php if (!isset($_SESSION['idUtilisateur'])): ?>
+                    <a href="index.php?action=detailService&id=<?= htmlspecialchars($service['id']); ?>" class="lienCarte stretched-link">
+                <?php endif; ?>
+                        <!-- Image en haut de la carte -->
+                        <img src="<?= htmlspecialchars($service['image']); ?>" class="card-img-top" alt="Service" style="width: 128px; height: 128px; object-fit: cover;">
+                        <!-- Corps de la carte contenant le texte -->
+                        <div class="card-body">
+                            <!-- Texte du service -->
+                            <p class="card-text"><?= htmlspecialchars($service['nom']); ?></p>
+                        </div>
+                <?php if (!isset($_SESSION['idUtilisateur'])): ?>
+                    </a>
+                <?php endif; ?>
             </div>
         <?php } ?>
         <?php if (isset($_SESSION['idUtilisateur'])): ?>
