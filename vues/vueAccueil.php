@@ -62,63 +62,39 @@
             </div>
         <?php endif; ?>
     </div>
-    <!-- Carte "Nos partenaire" -->
+<!-- Carte "Nos partenaire" -->
     <div class=" text-center my-5 " style="width: 13rem;">
-            <p class="fs-4 texte petiteCarte py-2">Nos partenaires</p>
+        <p class="fs-4 texte petiteCarte py-2">Nos partenaires</p>
     </div>
+<!-- Liste des partenaires -->
     <div class="d-flex flex-wrap justify-content-around">
-        <div class="card mb-5 text-center" style="width: 17rem;">
-            <a href="https://www.aludoor.fr/" target="_blank">    
-                <div class="card-body moyenneCarte">
-                    <img style ="width: 13rem;" src="./logo partenaire/Aludoor.png" alt="Aludoor">
-                </div>
-            </a>    
-        </div>
-        <div class="card mb-5 text-center" style="width: 17rem;">
-            <a href="https://proferm.net/" target="_blank">
-                <div class="card-body moyenneCarte">
-                    <img style ="width: 13rem;" src="./logo partenaire/Proferm.png" alt="Proferm">
-                </div>
-            </a>
-        </div>
-        <div class="card mb-5 text-center" style="width: 17rem;">
-            <a href="https://www.maugin.fr/" target="_blank">
-                <div class="card-body moyenneCarte">
-                    <img style ="width: 13rem;" src="./logo partenaire/Mauginr.png" alt="Maugin">
-                </div>
-            </a>
-        </div>
-        <div class="card mb-5 text-center" style="width: 17rem;">
-            <a href="https://www.soprofen.fr/" target="_blank">
-                <div class="card-body moyenneCarte">
-                    <img style ="width: 13rem;" src="./logo partenaire/Soprofen.jpg" alt="Soprofen">
-                </div>
-            </a>
-        </div>
-        <div class="card mb-5 text-center" style="width: 17rem;">
-            <a href="https://www.velux.fr/" target="_blank">
-                <div class="card-body moyenneCarte">
-                    <img style ="width: 13rem;" src="./logo partenaire/Velux.png" alt="Velux">
-                </div>
-            </a>
-        </div>
+        <?php foreach ($partenaires as $partenaire) { ?>
+            <div class="card moyenneCarte mb-5 mx-1 text-center position-relative" style="width: 17rem;">
+                <?php if (isset($_SESSION['idUtilisateur'])): ?>
+                    <div class="btn-supprimer-container">
+                        <button class="btn-modifier boutonInverser" onclick="modifierPartenaire(event, <?= htmlspecialchars($partenaire['id']); ?>)">Modifier</button>
+                        <button class="btn-supprimer boutonInverser" onclick="supprimerPartenaire(event, <?= htmlspecialchars($partenaire['id']); ?>)">Supprimer</button>
+                    </div>
+                <?php endif; ?>
+                <a href="<?= !isset($_SESSION['idUtilisateur']) ? htmlspecialchars($partenaire['lien']) : '#' ?>" target="_blank" <?= isset($_SESSION['idUtilisateur']) ? 'style="pointer-events: none;"' : '' ?>>
+                    <div class="card-body">
+                        <img style="width: 230px; height: 70px;" src="<?= htmlspecialchars($partenaire['image']); ?>" alt="<?= htmlspecialchars($partenaire['nom']); ?>">
+                    </div>
+                </a>
+            </div>
+        <?php } ?>
         
-        <div class="card mb-5 text-center" style="width: 17rem;">
-            <a href="https://www.eco-artisan.net/" target="_blank">
-                <div class="card-body moyenneCarte">
-                    <img style ="width: 13rem;" src="./logo partenaire/RGE-eco-artisan.png" alt="RGE-eco-artisan">
-                </div>
-            </a>
-        </div>
-        <div class="card mb-5 text-center" style="width: 17rem;">
-            <a href="https://www.somfy.fr/" target="_blank">
-                <div class="card-body moyenneCarte">
-                    <img style ="width: 13rem;" src="./logo partenaire/Somfy.png" alt="Somfy">
-                </div>
-            </a>
-        </div>
+        <?php if (isset($_SESSION['idUtilisateur'])): ?>
+            <div class="card moyenneCarte mb-5 mx-1 text-center" style="width: 17rem;">
+                <a href="#" class="text-decoration-none" onclick="ajouterPartenaire()">
+                    <div class="card-body">
+                        <p style="width: 230px; height: 55px;" class="texte fw-bold d-flex align-items-center justify-content-center">Ajouter un nouveau partenaire</p>
+                    </div>
+                </a>
+            </div>
+        <?php endif; ?>
     </div>
-    <!-- Carte "Nous contacter" -->
+<!-- Carte "Nous contacter" -->
     <div class=" text-center my-5 " style="width: 13rem;">
             <p class="fs-4 texte petiteCarte py-2">Nous contacter</p>
     </div>
@@ -205,7 +181,7 @@
             </div>
         </form>
     </div>
-    <!-- Carte "Avis des clients" -->
+<!-- Carte "Avis des clients" -->
     <div class=" text-center my-5 " style="width: 13rem;">
             <p class="fs-4 texte petiteCarte py-2">Avis des clients</p>
     </div>
