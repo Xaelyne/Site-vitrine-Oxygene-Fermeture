@@ -188,4 +188,38 @@
         $requete->bindParam(':serviceId', $serviceId);
         return $requete->execute();
     }
+    function modifierService($id, $nom, $image, $details) {
+        $connexion = getConnexion();
+        try {
+            $connexion->beginTransaction();
     
+            // Met à jour le service
+            $sql = "UPDATE services SET nomService = :nom, imageService = :image WHERE identifiantService = :id";
+            $requete = $connexion->prepare($sql);
+            $requete->bindParam(':nom', $nom);
+            $requete->bindParam(':image', $image);
+            $requete->bindParam(':id', $id);
+            $requete->execute();
+    
+            // Supprime les anciens détails
+            $sql = "DELETE FROM detailservice WHERE identifiantService = :id";
+            $requete = $connexion->prepare($sql);
+            $requete->bindParam(':id', $id);
+            $requete->execute();
+    
+            // Ajoute les nouveaux détails
+            foreach ($details as $detail) {
+                $sql = "INSERT INTO detailservice (identifiantService, descriptionDetail) VALUES (:id, :detail)";
+                $requete = $connexion->prepare($sql);
+                $requete->bindParam(':id', $id);
+                $requete->bindParam(':detail', $detail);
+                $requete->execute();
+            }
+    
+            $connexion->commit();
+            return true;
+        } catch (Exception $e) {
+            $connexion->rollBack();
+            return false;
+        }
+    }

@@ -124,12 +124,29 @@ body {
 .btn-supprimer {
     color: var(--bleu);
     background-color: white;
+    width: 100%;
+    margin-top: 5px;
     border: solid 2px var(--bleu);
     border-radius: 10px;
     padding: 10px 20px;
     
 }
 .btn-supprimer:hover {
+    color: white;
+    background-color: var(--bleu);
+    border-color: white;
+}
+.btn-modifier {
+    color: var(--bleu);
+    background-color: white;
+    width: 100%;
+    margin-bottom: 5px;
+    border: solid 2px var(--bleu);
+    border-radius: 10px;
+    padding: 10px 20px;
+    
+}
+.btn-modifier:hover {
     color: white;
     background-color: var(--bleu);
     border-color: white;

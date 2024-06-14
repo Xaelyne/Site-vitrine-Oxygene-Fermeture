@@ -26,6 +26,7 @@
                 <!-- Conteneur pour le bouton supprimer -->
                 <?php if (isset($_SESSION['idUtilisateur'])): ?>
                     <div class="btn-supprimer-container">
+                        <button class="btn-modifier boutonInverser" onclick="modifierService(event, <?= htmlspecialchars($service['id']); ?>)">Modifier</button>
                         <button class="btn-supprimer boutonInverser" onclick="supprimerService(event, <?= htmlspecialchars($service['id']); ?>)">Supprimer</button>
                     </div>
                 <?php endif; ?>
@@ -66,55 +67,56 @@
             <p class="fs-4 texte petiteCarte py-2">Nos partenaires</p>
     </div>
     <div class="d-flex flex-wrap justify-content-around">
-        <a href="https://www.aludoor.fr/" target="_blank">
         <div class="card mb-5 text-center" style="width: 17rem;">
-            <div class="card-body moyenneCarte">
-            <img style ="width: 13rem;" src="./logo partenaire/Aludoor.png" alt="Aludoor">
-            </div>
+            <a href="https://www.aludoor.fr/" target="_blank">    
+                <div class="card-body moyenneCarte">
+                    <img style ="width: 13rem;" src="./logo partenaire/Aludoor.png" alt="Aludoor">
+                </div>
+            </a>    
         </div>
-        </a>
-        <a href="https://proferm.net/" target="_blank">
-            <div class="card mb-5 text-center" style="width: 17rem;">
+        <div class="card mb-5 text-center" style="width: 17rem;">
+            <a href="https://proferm.net/" target="_blank">
                 <div class="card-body moyenneCarte">
-                <img style ="width: 13rem;" src="./logo partenaire/Proferm.png" alt="Proferm">
+                    <img style ="width: 13rem;" src="./logo partenaire/Proferm.png" alt="Proferm">
                 </div>
-            </div>
-        </a>
-        <a href="https://www.maugin.fr/" target="_blank">
-            <div class="card mb-5 text-center" style="width: 17rem;">
+            </a>
+        </div>
+        <div class="card mb-5 text-center" style="width: 17rem;">
+            <a href="https://www.maugin.fr/" target="_blank">
                 <div class="card-body moyenneCarte">
-                <img style ="width: 13rem;" src="./logo partenaire/Mauginr.png" alt="Maugin">
+                    <img style ="width: 13rem;" src="./logo partenaire/Mauginr.png" alt="Maugin">
                 </div>
-            </div>
-        </a>
-        <a href="https://www.soprofen.fr/" target="_blank">
-            <div class="card mb-5 text-center" style="width: 17rem;">
+            </a>
+        </div>
+        <div class="card mb-5 text-center" style="width: 17rem;">
+            <a href="https://www.soprofen.fr/" target="_blank">
                 <div class="card-body moyenneCarte">
-                <img style ="width: 13rem;" src="./logo partenaire/Soprofen.jpg" alt="Soprofen">
+                    <img style ="width: 13rem;" src="./logo partenaire/Soprofen.jpg" alt="Soprofen">
                 </div>
-            </div>
-        </a>
-        <a href="https://www.velux.fr/" target="_blank">
-            <div class="card mb-5 text-center" style="width: 17rem;">
+            </a>
+        </div>
+        <div class="card mb-5 text-center" style="width: 17rem;">
+            <a href="https://www.velux.fr/" target="_blank">
                 <div class="card-body moyenneCarte">
-                <img style ="width: 13rem;" src="./logo partenaire/Velux.png" alt="Velux">
+                    <img style ="width: 13rem;" src="./logo partenaire/Velux.png" alt="Velux">
                 </div>
-            </div>
-        </a>
-        <a href="https://www.eco-artisan.net/" target="_blank">
-            <div class="card mb-5 text-center" style="width: 17rem;">
+            </a>
+        </div>
+        
+        <div class="card mb-5 text-center" style="width: 17rem;">
+            <a href="https://www.eco-artisan.net/" target="_blank">
                 <div class="card-body moyenneCarte">
-                <img style ="width: 13rem;" src="./logo partenaire/RGE-eco-artisan.png" alt="RGE-eco-artisan">
+                    <img style ="width: 13rem;" src="./logo partenaire/RGE-eco-artisan.png" alt="RGE-eco-artisan">
                 </div>
-            </div>
-        </a>
-        <a href="https://www.somfy.fr/" target="_blank">
-            <div class="card mb-5 text-center" style="width: 17rem;">
+            </a>
+        </div>
+        <div class="card mb-5 text-center" style="width: 17rem;">
+            <a href="https://www.somfy.fr/" target="_blank">
                 <div class="card-body moyenneCarte">
-                <img style ="width: 13rem;" src="./logo partenaire/Somfy.png" alt="Somfy">
+                    <img style ="width: 13rem;" src="./logo partenaire/Somfy.png" alt="Somfy">
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
     <!-- Carte "Nous contacter" -->
     <div class=" text-center my-5 " style="width: 13rem;">
