@@ -87,6 +87,14 @@ body {
     transition-timing-function: ease-in-out;
     transition-duration: .5s;
 }
+.moyenneCarte:hover .btn-supprimer-container {
+    opacity: 1;
+}
+
+.moyenneCarte:hover .card-body,
+.moyenneCarte:hover img {
+    opacity: 0.5;
+}
 
 .grandeCarte {
     background-color: var(--bleu);

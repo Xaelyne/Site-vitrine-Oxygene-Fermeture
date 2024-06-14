@@ -223,3 +223,49 @@
             return false;
         }
     }
+    function getPartenaires() {
+        $connexion = getConnexion();
+        $sql = "SELECT identifiantPartenaire as id, nomPartenaire as nom, imagePartenaire as image, lienPartenaire as lien FROM partenaires";
+        $resultat = $connexion->query($sql);
+        return $resultat->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getPartenaire($id) {
+        $connexion = getConnexion();
+        $sql = "SELECT identifiantPartenaire as id, nomPartenaire as nom, imagePartenaire as image, lienPartenaire as lien FROM partenaires WHERE identifiantPartenaire = :id";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':id', $id);
+        $requete->execute();
+        return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    function ajouterPartenaire($nom, $image, $lien) {
+        $connexion = getConnexion();
+        $sql = "INSERT INTO partenaires (nomPartenaire, imagePartenaire, lienPartenaire) VALUES (:nom, :image, :lien)";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':nom', $nom);
+        $requete->bindParam(':image', $image);
+        $requete->bindParam(':lien', $lien);
+        return $requete->execute();
+    }
+    function supprimerPartenaire($id) {
+        try {
+            $connexion = getConnexion();
+            $sql = "DELETE FROM partenaires WHERE identifiantPartenaire = :id";
+            $requete = $connexion->prepare($sql);
+            $requete->bindParam(':id', $id, PDO::PARAM_INT);
+            return $requete->execute();
+        } catch (PDOException $e) {
+            error_log("Erreur lors de la suppression du partenaire: " . $e->getMessage());
+            return false;
+        }
+    }
+    function modifierPartenaire($id, $nom, $image, $lien) {
+        $connexion = getConnexion();
+        $sql = "UPDATE partenaires SET nomPartenaire = :nom, imagePartenaire = :image, lienPartenaire = :lien WHERE identifiantPartenaire = :id";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':id', $id);
+        $requete->bindParam(':nom', $nom);
+        $requete->bindParam(':image', $image);
+        $requete->bindParam(':lien', $lien);
+        return $requete->execute();
+    }

@@ -18,11 +18,15 @@
        case "accueil":
            $titre = "Accueil";
            $services = getServices();
+           $partenaires = getPartenaires();
            require "./vues/vueHeader.php";
            require "./vues/vueAccueil.php";
            require "./scripts/ajouterNouveauServices.php";
            require "./scripts/supprimerService.php";
            require "./scripts/modifierService.php";
+           require "./scripts/ajouterPatenaires.php";
+           require "./scripts/supprimerPartenaire.php";
+           require "./scripts/modifierPartenaires.php";
            break;
    
        case "connexion":
@@ -205,6 +209,71 @@
                echo json_encode(['success' => false, 'message' => 'ID manquant']);
            }
            exit();
+        case "getPartenaire":
+            if (isset($_GET['id'])) {
+                $partenaireId = $_GET['id'];
+                $partenaire = getPartenaire($partenaireId);
+        
+                if ($partenaire) {
+                    echo json_encode(['success' => true, 'partenaire' => $partenaire]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Partenaire non trouvé']);
+                }
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+            }
+            exit();
+        case "ajouterPartenaire":
+            ob_clean();
+            header('Content-Type: application/json');
+            try {
+                $nom = $_POST['nom'];
+                $lien = $_POST['lien'];
+                $image = $_FILES['image'];
+                $targetDir = "images/";
+                $targetFile = $targetDir . basename($image["name"]);
+                move_uploaded_file($image["tmp_name"], $targetFile);
+                $success = ajouterPartenaire($nom, $targetFile, $lien);
+                $response = ['success' => $success];
+            } catch (Exception $e) {
+                $response = ['success' => false, 'message' => $e->getMessage()];
+            }
+            echo json_encode($response);
+            exit();
+        case "modifierPartenaire":
+            ob_clean();
+            header('Content-Type: application/json');
+            try {
+                $id = $_POST['id'];
+                $nom = $_POST['nom'];
+                $lien = $_POST['lien'];
+                $image = $_FILES['image'];
+        
+                if ($image['size'] > 0) {
+                    $targetDir = "images/";
+                    $targetFile = $targetDir . basename($image["name"]);
+                    move_uploaded_file($image["tmp_name"], $targetFile);
+                } else {
+                    $targetFile = $_POST['image'];
+                }
+        
+                $success = modifierPartenaire($id, $nom, $targetFile, $lien);
+                $response = ['success' => $success];
+            } catch (Exception $e) {
+                $response = ['success' => false, 'message' => $e->getMessage()];
+            }
+            ob_end_clean();
+            echo json_encode($response);
+            exit();
+        case "supprimerPartenaire":
+            if (isset($_GET['id'])) {
+                $partenaireId = $_GET['id'];
+                $success = supprimerPartenaire($partenaireId);
+                echo json_encode(['success' => $success]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+            }
+            exit();
        case "traitement_formulaire_contact":
            $titre = "Confirmation d'envois";
            require "./vues/vueHeader.php";
