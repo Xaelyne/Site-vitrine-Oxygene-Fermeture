@@ -12,37 +12,32 @@
         <p class="fs-5 texte">
             Laissez-vous inspirer par nos réalisations et imaginez les possibilités pour embellir votre espace.
         </p>
+        <?php if (isset($_SESSION['idUtilisateur'])) { ?>
+            <div class="d-flex justify-content-center align-items-center mt-5">
+                <div class="card grandeCartePhoto text-white text-center mt-5 py-2 px-2 mx-3" style="width: 370px; cursor: pointer; margin-bottom: 20px;" onclick="ajouterRealisation()">
+                    <div class="card-body d-flex align-items-center justify-content-center" style="height: 300px;">
+                        <span class="fs-3">Ajouter une nouvelle photo</span>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
-    <div class="gallery d-flex row row-cols-1 row-cols-md- g-4 d-flex justify-content-center align-items-center my-5"> 
-        <div class="card grandeCarte my-5 text-white text-center py-2 px-2 mx-3" style="width: 20rem;" >
-            <a href="./images/Photo.jpg" class="photoCarte" id="velux1" data-lightbox="mygallery">
-                <img src="./images/Photo.jpg" class="card-img" alt="Service">
-            </a>
-        </div>
-        <div class="card grandeCarte my-5 text-white text-center py-2 px-2 mx-3" style="width: 20rem;" >
-            <a href="./images/Photo.jpg" class="photoCarte" id="velux2" data-lightbox="mygallery">
-                <img src="./images/Photo.jpg" class="card-img" alt="Service">
-            </a>
-        </div>
-        <div class="card grandeCarte my-5 text-white text-center py-2 px-2 mx-3" style="width: 20rem;" >
-            <a href="./images/Photo.jpg" class="photoCarte" id="velux3" data-lightbox="mygallery">
-                <img src="./images/Photo.jpg" class="card-img" alt="Service">
-            </a>
-        </div>
-        <div class="card grandeCarte my-5 text-white text-center py-2 px-2 mx-3" style="width: 20rem;" >
-            <a href="./images/Photo.jpg" class="photoCarte" id="velux1" data-lightbox="mygallery">
-                <img src="./images/Photo.jpg" class="card-img" alt="Service">
-            </a>
-        </div>
-        <div class="card grandeCarte my-5 text-white text-center py-2 px-2 mx-3" style="width: 20rem;" >
-            <a href="./images/Photo.jpg" class="photoCarte" id="velux2" data-lightbox="mygallery">
-                <img src="./images/Photo.jpg" class="card-img" alt="Service">
-            </a>
-        </div>
-        <div class="card grandeCarte my-5 text-white text-center py-2 px-2 mx-3" style="width: 20rem;" >
-            <a href="./images/Photo.jpg" class="photoCarte" id="velux3" data-lightbox="mygallery">
-                <img src="./images/Photo.jpg" class="card-img" alt="Service">
-            </a>
-        </div>
+    <div class="gallery d-flex row row-cols-1 row-cols-md- g-4 d-flex justify-content-center align-items-center my-5">
+        <?php foreach ($toutesRealisations as $realisation) { ?>
+            <div class="card grandeCartePhoto my-5 text-white text-center py-2 px-2 mx-3 position-relative <?php if (isset($_SESSION['idUtilisateur'])) echo 'logged-in'; ?>" style="width: 370px;">
+                <?php if (isset($_SESSION['idUtilisateur'])) { ?>
+                    <div class="btn-supprimer-container">
+                        <button class="btn-modifier" onclick="modifierRealisation(<?= $realisation['identifiantRealisation'] ?>)">Modifier</button>
+                        <button class="btn-supprimer" onclick="supprimerRealisation(<?= $realisation['identifiantRealisation'] ?>)">Supprimer</button>
+                    </div>
+                <?php } ?>
+                <a href="<?= htmlspecialchars($realisation['imageRealisation']); ?>" class="photoCarte" data-lightbox="mygallery" <?php if (isset($_SESSION['idUtilisateur'])) echo 'onclick="event.preventDefault()"'; ?>>
+                    <img src="<?= htmlspecialchars($realisation['imageRealisation']); ?>" class="card-img" style="width: 350px; height: 300px;" alt="<?= htmlspecialchars($realisation['nomRealisation']); ?>">
+                </a>
+            </div>
+        <?php } ?>
     </div>
+    <?php if (count($toutesRealisations) >= 10) { ?>
+        <button id="voirPlusBtn" class="btn boutonInverser mb-5" onclick="voirPlus()">Voir plus</button>
+    <?php } ?>
 </div>

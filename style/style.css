@@ -80,6 +80,8 @@ body {
 .moyenneCarte {
     border: solid 2px var(--bleu);
     border-radius: 10px;
+    position: relative;
+    overflow: hidden; /* Assure que l'effet de survol est contenu à l'intérieur de la carte */
 }
 
 .moyenneCarte:hover {
@@ -87,13 +89,54 @@ body {
     transition-timing-function: ease-in-out;
     transition-duration: .5s;
 }
+
+.moyenneCarte:hover .overlay {
+    opacity: 0.5; /* Ajoute un effet d'opacité bleue */
+}
+
 .moyenneCarte:hover .btn-supprimer-container {
     opacity: 1;
 }
 
-.moyenneCarte:hover .card-body,
-.moyenneCarte:hover img {
-    opacity: 0.5;
+.overlay {
+    background-color: var(--bleu); /* Couleur de l'arrière-plan au survol */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Caché par défaut, visible au survol */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.btn-supprimer-container, .btn-modifier-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0; /* Caché par défaut, visible au survol */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-supprimer, .btn-modifier {
+    color: var(--bleu);
+    background-color: white;
+    width: 100%;
+    margin-top: 5px;
+    border: solid 2px var(--bleu);
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.btn-supprimer:hover, .btn-modifier:hover {
+    color: white;
+    background-color: var(--bleu);
+    border-color: white;
 }
 
 .grandeCarte {
@@ -107,6 +150,40 @@ body {
     transition-duration: .5s;
 }
 
+.grandeCartePhotoDetail {
+    background-color: var(--bleu);
+    position: relative;
+}
+
+.grandeCartePhotoDetail:hover {
+    transform: scale(1.05);
+    transition-timing-function: ease-in-out;
+    transition-duration: .5s;
+}
+
+.grandeCartePhoto {
+    background-color: var(--bleu);
+    position: relative;
+}
+
+.grandeCartePhoto:hover {
+    transform: scale(1.05);
+    transition-timing-function: ease-in-out;
+    transition-duration: .5s;
+}
+
+.grandeCartePhoto.logged-in:hover .btn-supprimer-container {
+    opacity: 1;
+}
+
+.grandeCartePhoto.logged-in:hover .btn-modifier-container {
+    opacity: 1;
+}
+
+.grandeCartePhoto.logged-in:hover img {
+    opacity: 0.5;
+}
+
 .grandeCarteAccueil {
     position: relative;
 }
@@ -118,46 +195,6 @@ body {
 .grandeCarteAccueil:hover .card-body,
 .grandeCarteAccueil:hover img {
     opacity: 0.5;
-}
-
-.btn-supprimer-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10; /* Assure que le bouton est au-dessus de la carte */
-    opacity: 0; /* Caché par défaut, visible au survol */
-}
-
-.btn-supprimer {
-    color: var(--bleu);
-    background-color: white;
-    width: 100%;
-    margin-top: 5px;
-    border: solid 2px var(--bleu);
-    border-radius: 10px;
-    padding: 10px 20px;
-    
-}
-.btn-supprimer:hover {
-    color: white;
-    background-color: var(--bleu);
-    border-color: white;
-}
-.btn-modifier {
-    color: var(--bleu);
-    background-color: white;
-    width: 100%;
-    margin-bottom: 5px;
-    border: solid 2px var(--bleu);
-    border-radius: 10px;
-    padding: 10px 20px;
-    
-}
-.btn-modifier:hover {
-    color: white;
-    background-color: var(--bleu);
-    border-color: white;
 }
 
 .grandeCarteInverser {

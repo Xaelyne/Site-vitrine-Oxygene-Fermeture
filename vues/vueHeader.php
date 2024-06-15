@@ -63,9 +63,9 @@
                     Nos réalisations
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item text-center" href="index.php?action=realisationVelux">Velux</a></li>
-                        <li><a class="dropdown-item text-center" href="index.php?action=realisationFenetre">Fenêtre</a></li>
-                        <li><a class="dropdown-item text-center" href="#">Nom réalisation 3</a></li>
+                        <?php foreach ($services as $serviceItem) { ?>
+                            <li><a class="dropdown-item" href="index.php?action=realisationService&id=<?= htmlspecialchars($serviceItem['id']); ?>"><?= htmlspecialchars($serviceItem['nom']); ?></a></li>
+                        <?php } ?>
                     </ul>
                 </li>
                 <li class="navbar-brand">

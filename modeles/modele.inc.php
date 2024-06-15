@@ -269,3 +269,130 @@
         $requete->bindParam(':lien', $lien);
         return $requete->execute();
     }
+    function getToutesRealisations() {
+        $connexion = getConnexion();
+        $sql = "SELECT r.*, s.nomService FROM realisations r INNER JOIN services s ON r.identifiantService = s.identifiantService";
+        $requete = $connexion->query($sql);
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getRealisations($offset = 0, $limit = 10) {
+        $connexion = getConnexion();
+    
+        $sql = "SELECT realisations.*, services.nomService 
+                FROM realisations 
+                INNER JOIN services ON realisations.identifiantService = services.identifiantService
+                LIMIT :offset, :limit";
+    
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $requete->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $requete->execute();
+    
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function getRealisationsParService($serviceId, $offset = 0, $limit = 10) {
+        $connexion = getConnexion();
+        $sql = "SELECT r.*, s.nomService 
+                FROM realisations r 
+                INNER JOIN services s ON r.identifiantService = s.identifiantService 
+                WHERE r.identifiantService = :serviceId 
+                LIMIT :offset, :limit";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
+        $requete->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $requete->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getNombreTotalRealisations() {
+        $connexion = getConnexion();
+        $sql = "SELECT COUNT(*) as total FROM realisations";
+        $requete = $connexion->query($sql);
+        return $requete->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+    function getNombreTotalRealisationsParService($serviceId) {
+        $connexion = getConnexion();
+        $sql = "SELECT COUNT(*) as total FROM realisations WHERE identifiantService = :serviceId";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
+        $requete->execute();
+        return $requete->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+    
+    function ajouterRealisation($nom, $image, $serviceId) {
+        $connexion = getConnexion();
+        $sql = "INSERT INTO realisations (nomRealisation, imageRealisation, identifiantService) VALUES (:nom, :image, :serviceId)";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':nom', $nom);
+        $requete->bindParam(':image', $image);
+        $requete->bindParam(':serviceId', $serviceId);
+        return $requete->execute();
+    }
+    function supprimerRealisation($id) {
+        $connexion = getConnexion();
+        $sql = "DELETE FROM realisations WHERE identifiantRealisation = :id";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':id', $id, PDO::PARAM_INT);
+        return $requete->execute();
+    }
+    function getRealisation($id) {
+        $connexion = getConnexion();
+        $sql = "SELECT * FROM realisations WHERE identifiantRealisation = :id";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':id', $id, PDO::PARAM_INT);
+        $requete->execute();
+        return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+    function getImageRealisation($id) {
+        $connexion = getConnexion();
+        $sql = "SELECT imageRealisation FROM realisations WHERE identifiantRealisation = :id";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':id', $id, PDO::PARAM_INT);
+        $requete->execute();
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['imageRealisation'] : null;
+    }
+    function modifierRealisation($id, $nom, $image, $serviceId) {
+        $connexion = getConnexion();
+        $sql = "UPDATE realisations 
+                SET nomRealisation = :nom, imageRealisation = :image, identifiantService = :serviceId 
+                WHERE identifiantRealisation = :id";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':id', $id, PDO::PARAM_INT);
+        $requete->bindParam(':nom', $nom);
+        $requete->bindParam(':image', $image);
+        $requete->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
+        return $requete->execute();
+    }
+    
+    // function getRealisation($id) {
+    //     $connexion = getConnexion();
+    //     $sql = "SELECT identifiantRealisation as id, nomRealisation as nom, imageRealisation as image, identifiantService as serviceId FROM realisations WHERE identifiantRealisation = :id";
+    //     $requete = $connexion->prepare($sql);
+    //     $requete->bindParam(':id', $id);
+    //     $requete->execute();
+    //     return $requete->fetch(PDO::FETCH_ASSOC);
+    // }
+    
+    // function ajouterRealisation($nom, $image, $serviceId) {
+    //     $connexion = getConnexion();
+    //     $sql = "INSERT INTO realisations (nomRealisation, imageRealisation, identifiantService) VALUES (:nom, :image, :serviceId)";
+    //     $requete = $connexion->prepare($sql);
+    //     $requete->bindParam(':nom', $nom);
+    //     $requete->bindParam(':image', $image);
+    //     $requete->bindParam(':serviceId', $serviceId);
+    //     return $requete->execute();
+    // }
+    
+    // function modifierRealisation($id, $nom, $image, $serviceId) {
+    //     $connexion = getConnexion();
+    //     $sql = "UPDATE realisations SET nomRealisation = :nom, imageRealisation = :image, identifiantService = :serviceId WHERE identifiantRealisation = :id";
+    //     $requete = $connexion->prepare($sql);
+    //     $requete->bindParam(':id', $id);
+    //     $requete->bindParam(':nom', $nom);
+    //     $requete->bindParam(':image', $image);
+    //     $requete->bindParam(':serviceId', $serviceId);
+    //     return $requete->execute();
+    // }
+    

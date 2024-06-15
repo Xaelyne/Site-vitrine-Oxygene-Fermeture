@@ -69,7 +69,8 @@
 <!-- Liste des partenaires -->
     <div class="d-flex flex-wrap justify-content-around">
         <?php foreach ($partenaires as $partenaire) { ?>
-            <div class="card moyenneCarte mb-5 mx-1 text-center position-relative" style="width: 17rem;">
+            <div class="card moyenneCarte mb-5 mx-1 text-center position-relative d-flex justify-content-center align-items-center" style="width: 17rem; height: 8rem;">
+                <div class="overlay"></div>
                 <?php if (isset($_SESSION['idUtilisateur'])): ?>
                     <div class="btn-supprimer-container">
                         <button class="btn-modifier boutonInverser" onclick="modifierPartenaire(event, <?= htmlspecialchars($partenaire['id']); ?>)">Modifier</button>
@@ -78,17 +79,17 @@
                 <?php endif; ?>
                 <a href="<?= !isset($_SESSION['idUtilisateur']) ? htmlspecialchars($partenaire['lien']) : '#' ?>" target="_blank" <?= isset($_SESSION['idUtilisateur']) ? 'style="pointer-events: none;"' : '' ?>>
                     <div class="card-body">
-                        <img style="width: 230px; height: 70px;" src="<?= htmlspecialchars($partenaire['image']); ?>" alt="<?= htmlspecialchars($partenaire['nom']); ?>">
+                        <img style="width: 250px; height: 100px;" src="<?= htmlspecialchars($partenaire['image']); ?>" alt="<?= htmlspecialchars($partenaire['nom']); ?>">
                     </div>
                 </a>
             </div>
         <?php } ?>
         
         <?php if (isset($_SESSION['idUtilisateur'])): ?>
-            <div class="card moyenneCarte mb-5 mx-1 text-center" style="width: 17rem;">
+            <div class="card moyenneCarte mb-5 mx-1 text-center d-flex justify-content-center align-items-center" style="width: 17rem;">
                 <a href="#" class="text-decoration-none" onclick="ajouterPartenaire()">
                     <div class="card-body">
-                        <p style="width: 230px; height: 55px;" class="texte fw-bold d-flex align-items-center justify-content-center">Ajouter un nouveau partenaire</p>
+                        <p class="texte fw-bold d-flex align-items-center justify-content-center">Ajouter un nouveau partenaire</p>
                     </div>
                 </a>
             </div>
