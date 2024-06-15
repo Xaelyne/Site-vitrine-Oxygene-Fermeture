@@ -223,6 +223,21 @@
                 echo json_encode(['success' => false, 'message' => 'ID manquant']);
             }
             exit();
+        case "getRealisation":
+            if (isset($_GET['id'])) {
+                $realisationId = $_GET['id'];
+                $realisation = getRealisation($realisationId);
+    
+                if ($realisation) {
+                    echo json_encode(['success' => true, 'realisation' => $realisation]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Réalisation non trouvée']);
+                }
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+            }
+            exit();
+        
         case "ajouterPartenaire":
             ob_clean();
             header('Content-Type: application/json');
@@ -313,23 +328,81 @@
            require "./vues/vueHeader.php";
            require "./vues/vueListeService.php";
            break;
-       case "toutesNosRealisations":
-           $titre = "Toutes nos réalisations";
-           require "./vues/vueHeader.php";
-           require "./vues/vueToutesNosRealisations.php";
-           break;
-   
-       case "realisationVelux":
-           $titre = "Nos réalisation de pose de velux";
-           require "./vues/vueHeader.php";
-           require "./vues/vueDetailRealisation.php";
-           break;
-   
-       case "realisationFenetre":
-           $titre = "Nos réalisation de pose de fenêtre";
-           require "./vues/vueHeader.php";
-           require "./vues/vueDetailRealisation.php";
-           break;
+
+        case "realisationService":
+            $serviceId = $_GET['id'];
+            $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
+            $limit = 10;
+            $realisations = getRealisationsParService($serviceId, $offset, $limit);
+            $service = getServiceAvecDetails($serviceId);
+            $totalRealisations = getNombreTotalRealisationsParService($serviceId); // Ajoutez cette fonction dans le modèle
+            $titre = "Réalisations de " . htmlspecialchars($service['nom']);
+            require "./vues/vueHeader.php";
+            require "./vues/vueDetailRealisation.php";
+            require "./scripts/ajouterRealisation.php";
+            break;
+        case "ajouterRealisation":
+            ob_clean();
+            header('Content-Type: application/json');
+            try {
+                $nom = $_POST['nom'];
+                $serviceId = $_POST['serviceId'];
+                $image = $_FILES['image'];
+                $targetDir = "images/";
+                $targetFile = $targetDir . basename($image["name"]);
+                move_uploaded_file($image["tmp_name"], $targetFile);
+                $success = ajouterRealisation($nom, $targetFile, $serviceId);
+                $response = ['success' => $success];
+            } catch (Exception $e) {
+                $response = ['success' => false, 'message' => $e->getMessage()];
+            }
+            echo json_encode($response);
+            exit(); 
+        case "toutesNosRealisations":
+            $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
+            $limit = 10;
+            $toutesRealisations = getRealisations($offset, $limit);
+            $totalRealisations = getNombreTotalRealisations(); // Ajoutez cette fonction dans le modèle pour obtenir le nombre total de réalisations
+            $titre = "Toutes nos réalisations";
+            require "./vues/vueHeader.php";
+            require "./vues/vueToutesNosRealisations.php";
+            require "./scripts/ajouterRealisation.php";
+            require "./scripts/supprimerRealisation.php";
+            require "./scripts/modifierRealisation.php";
+            break;
+        case "modifierRealisation":
+            ob_clean();
+            header('Content-Type: application/json');
+            try {
+                $id = $_POST['id'];
+                $nom = $_POST['nom'];
+                $serviceId = $_POST['serviceId'];
+                $image = isset($_FILES['image']) ? $_FILES['image'] : null;
+                
+                if ($image && $image['size'] > 0) {
+                    $targetDir = "images/";
+                    $targetFile = $targetDir . basename($image["name"]);
+                    move_uploaded_file($image["tmp_name"], $targetFile);
+                } else {
+                    $targetFile = getImageRealisation($id);
+                }
+    
+                $success = modifierRealisation($id, $nom, $targetFile, $serviceId);
+                $response = ['success' => $success];
+            } catch (Exception $e) {
+                $response = ['success' => false, 'message' => $e->getMessage()];
+            }
+            echo json_encode($response);
+            exit();
+        case "supprimerRealisation":
+            if (isset($_GET['id'])) {
+                $realisationId = $_GET['id'];
+                $success = supprimerRealisation($realisationId);
+                echo json_encode(['success' => $success]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+            }
+            exit();
    }
    
    require "./vues/vueFooter.php";
