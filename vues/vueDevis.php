@@ -1,4 +1,4 @@
-<div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
+<div class="container d-flex justify-content-center flex-column align-items-center">
     <div class="text-center mt-5 pt-4">
         <p class="fs-3 texte mb-5">
             Bienvenue sur notre page de demande de devis !  

@@ -1,6 +1,6 @@
 <?php if(!isset($_SESSION['idUtilisateur'])) {?>
 
-<div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
+<div class="container d-flex justify-content-center flex-column align-items-center">
     <div>
         <div class="container formulaireConnexion d-flex justify-content-center my-5">
             <form method="POST" action="index.php" class="container-fluid p-5 formConnexion">

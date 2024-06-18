@@ -1,7 +1,10 @@
+</main> 
+ 
  <!-- Footer -->
  <?php
 if ($action === "connexion") {
 ?>
+
 <footer>
 
 
@@ -30,8 +33,6 @@ if ($action === "connexion") {
             <p>
                 <span><?= htmlspecialchars($infoEntreprise['telephoneEntreprise']); ?></span>
             </p>
-        </div>
-        <div class="col">
             <h6 class="fs-6 fw-bold">
                 Mail
             </h6>
@@ -42,6 +43,11 @@ if ($action === "connexion") {
         <div class="col">
             <h6 class="fs-6 fw-bold">
                 <a class="text-decoration-none text-white" href="index.php?action=nousContacter">Nous contacter</a>
+            </h6>
+        </div>
+        <div class="col">
+            <h6 class="fs-6 fw-bold">
+                <a class="text-decoration-none text-white" href="index.php?action=mentionsLegales">Mentions légale</a>
             </h6>
         </div>
         <div class="col">

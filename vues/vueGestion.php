@@ -1,4 +1,4 @@
-<div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
+<div class="container d-flex justify-content-center flex-column align-items-center">
     <div class="container bordure">
         <h1 class="py-5 text-center texte "><?= $bienvenue ?></h1>
         <div class="monTableau">

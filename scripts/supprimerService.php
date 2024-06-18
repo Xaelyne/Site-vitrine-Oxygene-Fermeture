@@ -1,5 +1,6 @@
 <script>
-    function supprimerService(event, serviceId) {
+   function supprimerService(event, serviceId) {
+        event.stopPropagation();
 
         Swal.fire({
             title: 'Êtes-vous sûr?',
@@ -56,4 +57,4 @@
             }
         });
     }
-</script>
+    </script>

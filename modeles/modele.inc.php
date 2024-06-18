@@ -126,24 +126,23 @@
         $connexion = getConnexion();
         $sql = "SELECT s.identifiantService AS id, s.nomService AS nom, s.imageService AS image, d.descriptionDetail AS detail
                 FROM services s
-                INNER JOIN detailservice d ON s.identifiantService = d.identifiantService
+                LEFT JOIN detailservice d ON s.identifiantService = d.identifiantService
                 WHERE s.identifiantService = :serviceId";
         
         $requete = $connexion->prepare($sql);
         $requete->bindParam(':serviceId', $serviceId);
         $requete->execute();
     
-        $serviceAvecDetails = [
-            'id' => $serviceId,
-            'nom' => '',
-            'image' => '',
-            'details' => []
-        ];
+        $serviceAvecDetails = null;
     
         while ($row = $requete->fetch(PDO::FETCH_ASSOC)) {
-            if (empty($serviceAvecDetails['nom'])) {
-                $serviceAvecDetails['nom'] = $row['nom'];
-                $serviceAvecDetails['image'] = $row['image'];
+            if ($serviceAvecDetails === null) {
+                $serviceAvecDetails = [
+                    'id' => $serviceId,
+                    'nom' => $row['nom'],
+                    'image' => $row['image'],
+                    'details' => []
+                ];
             }
             if ($row['detail'] !== null) {
                 $serviceAvecDetails['details'][] = $row['detail'];
@@ -175,6 +174,12 @@
 
     function supprimerService($serviceId) {
         $connexion = getConnexion();
+
+        // Supprimez d'abord les réalisations liées au service
+        $sql = "DELETE FROM realisations WHERE identifiantService = :serviceId";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
+        $requete->execute();
         
         // Supprimez d'abord les détails du service
         $sql = "DELETE FROM detailservice WHERE identifiantService = :serviceId";
@@ -281,6 +286,7 @@
         $sql = "SELECT realisations.*, services.nomService 
                 FROM realisations 
                 INNER JOIN services ON realisations.identifiantService = services.identifiantService
+                ORDER BY realisations.identifiantRealisation DESC
                 LIMIT :offset, :limit";
     
         $requete = $connexion->prepare($sql);
@@ -296,7 +302,8 @@
         $sql = "SELECT r.*, s.nomService 
                 FROM realisations r 
                 INNER JOIN services s ON r.identifiantService = s.identifiantService 
-                WHERE r.identifiantService = :serviceId 
+                WHERE r.identifiantService = :serviceId
+                ORDER BY r.identifiantRealisation DESC 
                 LIMIT :offset, :limit";
         $requete = $connexion->prepare($sql);
         $requete->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
