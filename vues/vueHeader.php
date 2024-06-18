@@ -75,7 +75,7 @@
                     <a href="index.php?action=devis" class="btn bouton" role="button" aria-pressed="true">Votre devis gratuit en ligne</a>
                 </li>
                 <li class="navbar-brand text-center mt-1">
-                    <a href="#" class="btn bouton" role="button" aria-pressed="true">Avis clients</a>
+                    <a href="index.php?action=avis" class="btn bouton" role="button" aria-pressed="true">Avis clients</a>
                 </li>
                 <a class="navbar-brand text-center mt-1" title="Retrouver notre facebook en cliquant ici" href="https://www.facebook.com/Oxygenefermeture60/?locale=fr_FR" target="_blank">
                     <img src="./images/Facebook.png" alt="Facebook">
@@ -85,7 +85,7 @@
                 </a>
                 <a class="navbar-brand text-white text-center mt-1">
                     <img src="./images/Telephone.png" alt="Téléphone"class="d-inline-block align-text-top ">
-                    03.44.04.31.13
+                    <span><?= htmlspecialchars($infoEntreprise['telephoneEntreprise']); ?></span>
                 </a>
                 </ul>
             </div>

@@ -13,12 +13,14 @@
    require("./modeles/modele.inc.php");
    
    $services = getServices();
+   $infoEntreprise = getInformationEntreprise();
 
    switch ($action) {
        case "accueil":
            $titre = "Accueil";
            $services = getServices();
            $partenaires = getPartenaires();
+           $avis = getAvis();
            require "./vues/vueHeader.php";
            require "./vues/vueAccueil.php";
            require "./scripts/ajouterNouveauServices.php";
@@ -27,6 +29,7 @@
            require "./scripts/ajouterPatenaires.php";
            require "./scripts/supprimerPartenaire.php";
            require "./scripts/modifierPartenaires.php";
+           require "./scripts/ajouterNouvelAvis.php";
            break;
    
        case "connexion":
@@ -72,6 +75,7 @@
                require "./scripts/modifierUtilisateur.php";
                require "./scripts/supprimerUtilisateur.php";
                require "./scripts/ajouterUtilisateur.php";
+               require "./scripts/modifierInformation.php";
            } else {
                $titre = "Erreur";
                require "./vues/vueHeader.php";
@@ -309,6 +313,12 @@
            require "./scripts/traitement_formulaire_devis.php";
            require "./vues/vueConfirmationEnvois.php";
            break;
+        case "traitement_formulaire_avis":
+            $titre = "Confirmation d'envois";
+            require "./vues/vueHeader.php";
+            require "./scripts/traitement_formulaire_avis.php";
+            require "./vues/vueConfirmationEnvois.php";
+            break;
    
        case "nousContacter":
            $titre = "Nous contacter";
@@ -403,6 +413,69 @@
                 echo json_encode(['success' => false, 'message' => 'ID manquant']);
             }
             exit();
+        case "avis":
+            $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
+            $limit = 10;
+            $avis = getAvis($offset, $limit);
+            $totalAvis = getNombreTotalAvis();
+            $titre = "Avis";
+            require "./vues/vueHeader.php";
+            require "./vues/vueAvis.php";
+            require "./scripts/ajouterNouvelAvis.php";
+            require "./scripts/supprimerAvis.php";
+            require "./scripts/modifierAvis.php";
+            break;
+        case "ajouterAvis":
+            $prenomClientAvis = $_POST['ajoutNomFormulaireAvis'];
+            $etoileAvis = isset($_POST['ajoutNoteFormulaireAvis']) ? (int)$_POST['ajoutNoteFormulaireAvis'] : 0;
+            $commentaireAvis = $_POST['ajoutCommentaireFormulaireAvis'];
+        
+            if (!empty($prenomClientAvis) && !empty($commentaireAvis)) {
+                $success = ajouterAvis($prenomClientAvis, $etoileAvis, $commentaireAvis);
+                echo json_encode(['success' => $success]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Veuillez remplir tous les champs obligatoires.']);
+            }
+            exit();
+        case "supprimerAvis":
+            if (isset($_GET['id'])) {
+                $idAvis = $_GET['id'];
+                $success = supprimerAvis($idAvis);
+                echo json_encode(['success' => $success]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+            }
+            exit();
+        case "modifierAvis":
+            $idAvis = $_POST['idAvis'];
+            $prenomClientAvis = $_POST['prenom'];
+            $etoileAvis = isset($_POST['note']) ? (int)$_POST['note'] : 0;
+            $commentaireAvis = $_POST['commentaire'];
+        
+            if (!empty($prenomClientAvis) && !empty($commentaireAvis)) {
+                $success = modifierAvis($idAvis, $prenomClientAvis, $etoileAvis, $commentaireAvis);
+                echo json_encode(['success' => $success]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Veuillez remplir tous les champs obligatoires.']);
+            }
+            exit();
+        case "modifierInformationsEntreprise":
+            ob_clean();
+            header('Content-Type: application/json');
+            $data = json_decode(file_get_contents('php://input'), true);
+        
+            // Récupérer les informations actuelles de l'entreprise
+            $infoEntreprise = getInformationEntreprise();
+            
+            $telephone = !empty($data['telephone']) ? $data['telephone'] : $infoEntreprise['telephoneEntreprise'];
+            $adresse = !empty($data['adresse']) ? $data['adresse'] : $infoEntreprise['adresseEntreprise'];
+            $codePostal = !empty($data['codePostal']) ? $data['codePostal'] : $infoEntreprise['codePostalEntreprise'];
+            $ville = !empty($data['ville']) ? $data['ville'] : $infoEntreprise['villeEntreprise'];
+        
+            $success = modifierInformationsEntreprise($telephone, $adresse, $codePostal, $ville);
+            echo json_encode(['success' => $success]);
+            exit();
+        
    }
    
    require "./vues/vueFooter.php";

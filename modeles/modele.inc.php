@@ -365,34 +365,74 @@
         $requete->bindParam(':serviceId', $serviceId, PDO::PARAM_INT);
         return $requete->execute();
     }
+    function getAvis($offset = 0, $limit = 10) {
+        $connexion = getConnexion();
+        
+        $sql = "SELECT * FROM avis LIMIT :offset, :limit";
+        
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $requete->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $requete->execute();
+        
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
     
-    // function getRealisation($id) {
-    //     $connexion = getConnexion();
-    //     $sql = "SELECT identifiantRealisation as id, nomRealisation as nom, imageRealisation as image, identifiantService as serviceId FROM realisations WHERE identifiantRealisation = :id";
-    //     $requete = $connexion->prepare($sql);
-    //     $requete->bindParam(':id', $id);
-    //     $requete->execute();
-    //     return $requete->fetch(PDO::FETCH_ASSOC);
-    // }
+    function getNombreTotalAvis() {
+        $connexion = getConnexion();
+        $sql = "SELECT COUNT(*) as total FROM avis";
+        $requete = $connexion->query($sql);
+        return $requete->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+    function ajouterAvis($prenomClientAvis, $etoileAvis, $commentaireAvis) {
+        $connexion = getConnexion();
     
-    // function ajouterRealisation($nom, $image, $serviceId) {
-    //     $connexion = getConnexion();
-    //     $sql = "INSERT INTO realisations (nomRealisation, imageRealisation, identifiantService) VALUES (:nom, :image, :serviceId)";
-    //     $requete = $connexion->prepare($sql);
-    //     $requete->bindParam(':nom', $nom);
-    //     $requete->bindParam(':image', $image);
-    //     $requete->bindParam(':serviceId', $serviceId);
-    //     return $requete->execute();
-    // }
+        $sql = "INSERT INTO avis (prenomClientAvis, etoileAvis, commentaireAvis) VALUES (:prenom, :etoile, :commentaire)";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':prenom', $prenomClientAvis);
+        $requete->bindParam(':etoile', $etoileAvis, PDO::PARAM_INT);
+        $requete->bindParam(':commentaire', $commentaireAvis);
+        $result = $requete->execute();
     
-    // function modifierRealisation($id, $nom, $image, $serviceId) {
-    //     $connexion = getConnexion();
-    //     $sql = "UPDATE realisations SET nomRealisation = :nom, imageRealisation = :image, identifiantService = :serviceId WHERE identifiantRealisation = :id";
-    //     $requete = $connexion->prepare($sql);
-    //     $requete->bindParam(':id', $id);
-    //     $requete->bindParam(':nom', $nom);
-    //     $requete->bindParam(':image', $image);
-    //     $requete->bindParam(':serviceId', $serviceId);
-    //     return $requete->execute();
-    // }
-    
+        return $result;
+    }
+
+    function supprimerAvis($idAvis) {
+        $connexion = getConnexion();
+        $sql = "DELETE FROM avis WHERE identifiantAvis = :id";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':id', $idAvis, PDO::PARAM_INT);
+        return $requete->execute();
+    }
+    function modifierAvis($idAvis, $prenomClientAvis, $etoileAvis, $commentaireAvis) {
+        $connexion = getConnexion();
+        $sql = "UPDATE avis SET prenomClientAvis = :prenom, etoileAvis = :etoile, commentaireAvis = :commentaire WHERE identifiantAvis = :id";
+        $requete = $connexion->prepare($sql);
+        $requete->bindParam(':prenom', $prenomClientAvis);
+        $requete->bindParam(':etoile', $etoileAvis, PDO::PARAM_INT);
+        $requete->bindParam(':commentaire', $commentaireAvis);
+        $requete->bindParam(':id', $idAvis, PDO::PARAM_INT);
+        return $requete->execute();
+    }
+    function modifierInformationsEntreprise($telephone, $adresse, $codePostal, $ville) {
+        $connexion = getConnexion();
+        
+        $sql = "UPDATE information_entreprise
+                SET telephoneEntreprise = :telephone, adresseEntreprise = :adresse, codePostalEntreprise = :codePostal, villeEntreprise = :ville
+                WHERE identifiantEntreprise = 1";
+        
+        $requete = $connexion->prepare($sql);
+        
+        $requete->bindParam(':telephone', $telephone);
+        $requete->bindParam(':adresse', $adresse);
+        $requete->bindParam(':codePostal', $codePostal);
+        $requete->bindParam(':ville', $ville);
+        
+        return $requete->execute();
+    }
+    function getInformationEntreprise() {
+        $connexion = getConnexion();
+        $sql = "SELECT * FROM information_entreprise WHERE identifiantEntreprise = 1"; 
+        $requete = $connexion->query($sql);
+        return $requete->fetch(PDO::FETCH_ASSOC);
+    }

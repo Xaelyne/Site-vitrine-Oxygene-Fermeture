@@ -1,6 +1,6 @@
 <!-- Texte srur l'entreprise -->
 <div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
-    <div class="text-center mt-5 pt-4" style="width: 60%;">
+    <div class="text-center my-5 pt-4" style="width: 60%;">
         <p class="fs-3 texte mb-5">
             Bienvenue chez Oxygene fermeture, votre spécialiste en solutions d'amélioration de l'habitat !
         </p>
@@ -19,7 +19,7 @@
         <p class="fs-4 texte petiteCarte py-2">Nos services</p>
     </div>
 <!-- Cartes liste de services -->
-    <div class="d-flex row row-cols-1 row-cols-md- g-4 d-flex justify-content-center align-items-center">
+    <div class="d-flex row row-cols-1 row-cols-md- g-4 d-flex justify-content-center align-items-center my-5">
         <?php foreach ($services as $service) { ?>
             <!-- Carte pour chaque service -->
             <div class="card grandeCarte <?= isset($_SESSION['idUtilisateur']) ? 'grandeCarteAccueil' : '' ?> mb-5 text-white text-center mx-3" style="width: 10rem; height: 15rem;">
@@ -67,21 +67,27 @@
         <p class="fs-4 texte petiteCarte py-2">Nos partenaires</p>
     </div>
 <!-- Liste des partenaires -->
-    <div class="d-flex flex-wrap justify-content-around">
+    <div class="d-flex flex-wrap justify-content-around my-5">
         <?php foreach ($partenaires as $partenaire) { ?>
             <div class="card moyenneCarte mb-5 mx-1 text-center position-relative d-flex justify-content-center align-items-center" style="width: 17rem; height: 8rem;">
-                <div class="overlay"></div>
                 <?php if (isset($_SESSION['idUtilisateur'])): ?>
+                    <div class="overlay"></div>
                     <div class="btn-supprimer-container">
                         <button class="btn-modifier boutonInverser" onclick="modifierPartenaire(event, <?= htmlspecialchars($partenaire['id']); ?>)">Modifier</button>
                         <button class="btn-supprimer boutonInverser" onclick="supprimerPartenaire(event, <?= htmlspecialchars($partenaire['id']); ?>)">Supprimer</button>
                     </div>
+                    <a href="#" style="pointer-events: none;">
+                        <div class="card-body">
+                            <img style="width: 250px; height: 100px;" src="<?= htmlspecialchars($partenaire['image']); ?>" alt="<?= htmlspecialchars($partenaire['nom']); ?>">
+                        </div>
+                    </a>
+                <?php else: ?>
+                    <a href="<?= htmlspecialchars($partenaire['lien']) ?>" target="_blank">
+                        <div class="card-body">
+                            <img style="width: 250px; height: 100px;" src="<?= htmlspecialchars($partenaire['image']); ?>" alt="<?= htmlspecialchars($partenaire['nom']); ?>">
+                        </div>
+                    </a>
                 <?php endif; ?>
-                <a href="<?= !isset($_SESSION['idUtilisateur']) ? htmlspecialchars($partenaire['lien']) : '#' ?>" target="_blank" <?= isset($_SESSION['idUtilisateur']) ? 'style="pointer-events: none;"' : '' ?>>
-                    <div class="card-body">
-                        <img style="width: 250px; height: 100px;" src="<?= htmlspecialchars($partenaire['image']); ?>" alt="<?= htmlspecialchars($partenaire['nom']); ?>">
-                    </div>
-                </a>
             </div>
         <?php } ?>
         
@@ -99,7 +105,7 @@
     <div class=" text-center my-5 " style="width: 13rem;">
             <p class="fs-4 texte petiteCarte py-2">Nous contacter</p>
     </div>
-    <div class="text-center">
+    <div class="text-center my-5">
         <p class="fs-5 texte">
             Nous sommes ici pour répondre à toutes vos questions et écouter vos suggestions. 
         </p>
@@ -123,7 +129,7 @@
         </p>
     </div>
     <!-- Formulaire de contact -->
-    <div class="divFormulaireContact mt-5">
+    <div class="divFormulaireContact my-5">
         <form method="POST" action="index.php" class="formulaire my-5" id="contactForm">
             <input type="hidden" name="action" value="traitement_formulaire_contact_accueil">
             <div class="container">
@@ -183,7 +189,34 @@
         </form>
     </div>
 <!-- Carte "Avis des clients" -->
-    <div class=" text-center my-5 " style="width: 13rem;">
+    <div class=" text-center my-5" style="width: 13rem;">
             <p class="fs-4 texte petiteCarte py-2">Avis des clients</p>
     </div>
+    <div class="row justify-content-center my-5">
+            <?php foreach ($avis as $avi) { ?>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card carteAvis p-3 text-center">
+                        <div class="d-flex flex-column align-items-center mb-2">
+                            <h5 class="me-2"><?= htmlspecialchars($avi['prenomClientAvis']); ?></h5>
+                            <div class="stars d-flex">
+                                <?php
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= $avi['etoileAvis']) {
+                                        echo '<img src="images/etoileRemplie.png" alt="Étoile remplie" style="width: 24px;">';
+                                    } else {
+                                        echo '<img src="images/etoileVide.png" alt="Étoile vide" style="width: 24px;">';
+                                    }
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <p><?= nl2br(htmlspecialchars($avi['commentaireAvis'])); ?></p>
+                    </div>
+                    
+                </div>
+            <?php } ?>
+            <div class="d-flex justify-content-center my-5">
+                <a href="index.php?action=avis" class="btn boutonInverser" role="button" aria-pressed="true">Consulter notre page d'avis</a>
+            </div>
+        </div>
 </div>
