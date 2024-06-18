@@ -17,10 +17,10 @@ if ($action === "connexion") {
                 Adresse
             </h6>
             <p>
-                <span>14 ter Rue Martincourt</span>
+                <span><?= htmlspecialchars($infoEntreprise['adresseEntreprise']); ?></span>
             </p>
             <p>
-                <span>60112 Crillon</span>
+                <span><?= htmlspecialchars($infoEntreprise['codePostalEntreprise']); ?> <?= htmlspecialchars($infoEntreprise['villeEntreprise']); ?></span>
             </p>
         </div>
         <div class="col">
@@ -28,7 +28,7 @@ if ($action === "connexion") {
                 Téléphone
             </h6>
             <p>
-                <span>03.44.04.31.13</span>
+                <span><?= htmlspecialchars($infoEntreprise['telephoneEntreprise']); ?></span>
             </p>
         </div>
         <div class="col">
@@ -48,7 +48,7 @@ if ($action === "connexion") {
             <a href="index.php?action=devis" class="btn bouton" role="button" aria-pressed="true">Votre devis gratuit en ligne</a>
         </div>
         <div class="col">
-            <a href="#" class="btn bouton" role="button" data-bs-toggle="button" aria-pressed="true">Avis clients</a>
+            <a href="index.php?action=avis" class="btn bouton" role="button" aria-pressed="true">Avis clients</a>
         </div>
         </div>
     </div>
@@ -67,6 +67,7 @@ if ($action === "connexion") {
 
     <script src="./scripts/switch.js"></script>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/etoile.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 </body>
 </html>

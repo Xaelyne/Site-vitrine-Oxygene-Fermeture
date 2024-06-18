@@ -58,24 +58,32 @@
             </div>
             <div id="ModifInfoEntreprise" class="tabcontent" style="display:none">
                 <div class="monTableau my-5 py-5 px-5">
-                    <form>
+                    <div class="mb-5 text-center d-flex justify-content-center flex-column">
+                        <span class="text-danger my-1" id="messageErreurTelInfosEntreprise"></span>
+                        <span class="text-danger my-1" id="messageErreurAdresseInfosEntreprise"></span>
+                        <span class="text-danger my-1" id="messageErreurCodePostalInfosEntreprise"></span>
+                        <span class="text-danger my-1" id="messageErreurVilleInfosEntreprise"></span>
+                    </div>
+                    <form id="formModifierInformationsEntreprise">
                         <div class="form-group">
-                            <label for="telephone">Numéro de téléphone:</label>
-                            <input type="text" class="form-control" id="telephone">
+                            <label for="telephone" class="text-white my-1">Numéro de téléphone:</label>
+                            <input type="text" class="form-control" id="telephone" name="telephone" placeholder="<?= htmlspecialchars($infoEntreprise['telephoneEntreprise']); ?>">
                         </div>
                         <div class="form-group">
-                            <label for="adresse">Adresse:</label>
-                            <input type="text" class="form-control" id="adresse">
+                            <label for="adresse" class="text-white my-1">Adresse:</label>
+                            <input type="text" class="form-control" id="adresse" name="adresse" placeholder="<?= htmlspecialchars($infoEntreprise['adresseEntreprise']); ?>">
                         </div>
                         <div class="form-group">
-                            <label for="codePostal">Code postal:</label>
-                            <input type="text" class="form-control" id="codePostal">
+                            <label for="codePostal" class="text-white my-1">Code postal:</label>
+                            <input type="text" class="form-control" id="codePostal" name="codePostal" placeholder="<?= htmlspecialchars($infoEntreprise['codePostalEntreprise']); ?>">
                         </div>
                         <div class="form-group">
-                            <label for="ville">Ville:</label>
-                            <input type="text" class="form-control" id="ville">
+                            <label for="ville" class="text-white my-1">Ville:</label>
+                            <input type="text" class="form-control" id="ville" name="ville" placeholder="<?= htmlspecialchars($infoEntreprise['villeEntreprise']); ?>">
                         </div>
-                        <button type="submit" class="btn bouton">Valider les modifications</button>
+                        <div class="d-flex justify-content-center my-5">
+                            <button type="submit" class="btn bouton">Valider les modifications</button>
+                        </div>
                     </form>
                 </div>
             </div>

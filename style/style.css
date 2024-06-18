@@ -71,6 +71,26 @@ body {
     background-color: rgb(255, 255, 255);
     width: 70%;
 }
+.carteAvis{
+    background-color: var(--bleu);
+    color: white;
+    border-radius: 10px;
+}
+.carteAvis:hover {
+    transform: scale(1.05);
+    transition-timing-function: ease-in-out;
+    transition-duration: .5s;
+}
+.star {
+    width: 24px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.star:hover {
+    transform: scale(1.2);
+}
+
 
 .petiteCarte {
     border: solid 5px var(--bleu);
