@@ -105,3 +105,4 @@
         </div>
     </nav>
 <?php } ?>
+    <main class="container contenu d-flex justify-content-center flex-column align-items-center flex-grow-1">

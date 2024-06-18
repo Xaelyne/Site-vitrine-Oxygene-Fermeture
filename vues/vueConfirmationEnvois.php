@@ -1,4 +1,4 @@
-<div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
+<div class="container d-flex justify-content-center flex-column align-items-center">
     <div class="my-5 text-center">
         <div>
             <p class="fs-4 texte mt-5">

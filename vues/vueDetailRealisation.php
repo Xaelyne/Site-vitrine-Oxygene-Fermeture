@@ -1,4 +1,4 @@
-<div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
+<div class="container d-flex justify-content-center flex-column align-items-center">
     <div class="text-center mt-5 pt-4" style="width: 60%;">
         <p class="fs-3 texte mb-5">
             Découvrez nos réalisations de <?= htmlspecialchars($service['nom']); ?> !

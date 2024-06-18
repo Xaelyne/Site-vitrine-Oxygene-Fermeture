@@ -1,4 +1,4 @@
-<div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
+<div class="container-fluid d-flex justify-content-center flex-column align-items-center">
     <div class="container d-flex justify-content-center align-items-center flex-column">
         <div class="text-center my-5 pt-4" style="width: 60%;">
             <p class="fs-3 texte mb-5">
@@ -82,11 +82,11 @@
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="nomFormulaireAvis" class="form-label text-white">Votre prénom</label>
-                            <input type="text" class="form-control" id="nomFormulaireAvis" name="nomFormulaireAvis" placeholder="Votre prénom (Obligatoire)" required="required">
+                            <input type="text" class="form-control" id="nomFormulaireAvis" name="nomFormulaireAvis" placeholder="Votre prénom" required="required">
                         </div>
                         <div class="mb-3 col-md-12">
                             <label for="emailFormulaireAvis" class="form-label text-white">Votre adresse email</label>
-                            <input type="email" class="form-control" id="emailFormulaireAvis" name="emailFormulaireAvis" placeholder="Votre adresse email (Obligatoire)" required="required">
+                            <input type="email" class="form-control" id="emailFormulaireAvis" name="emailFormulaireAvis" placeholder="Votre adresse email" required="required">
                         </div>
                     </div>
                     <div class="row">
@@ -105,7 +105,7 @@
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label for="commentaireFormulaireAvis" class="form-label text-white">Votre commentaire</label>
-                            <textarea class="form-control commentaireFormulaireAvis" id="commentaireFormulaireAvis" name="commentaireFormulaireAvis" rows="4" placeholder="Votre commentaire (Obligatoire)" required="required" maxlength="300"></textarea>
+                            <textarea class="form-control commentaireFormulaireAvis" id="commentaireFormulaireAvis" name="commentaireFormulaireAvis" rows="4" placeholder="Votre commentaire" required="required" maxlength="300"></textarea>
                             <span class="text-white counter" ></span>
                         </div>
                     </div>

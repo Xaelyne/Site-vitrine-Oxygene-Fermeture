@@ -150,20 +150,28 @@
            $serviceId = ajouterServiceAvecDetails($nom, $targetFile, $details);
            echo json_encode(['success' => true]);
            exit();
-       case "detailService":
-           if (isset($_GET['id'])) {
-               $serviceId = $_GET['id'];
-               $service = getServiceAvecDetails($serviceId);
-               $titre = "Détails du service";
-               require "./vues/vueHeader.php";
-               require "./vues/vueDetailService.php";
-           } else {
-               $titre = "Erreur";
-               $message = "Service non spécifié.";
-               require "./vues/vueHeader.php";
-               require "./vues/vueErreur.php";
-           }
-           break;
+        case "detailService":
+        if (isset($_GET['id'])) {
+            $serviceId = $_GET['id'];
+            $service = getServiceAvecDetails($serviceId);
+            
+            if ($service) {
+                $titre = "Détails du service";
+                require "./vues/vueHeader.php";
+                require "./vues/vueDetailService.php";
+            } else {
+                $titre = "Erreur";
+                $message = "Service non trouvé.";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+            }
+        } else {
+            $titre = "Erreur";
+            $message = "Service non spécifié.";
+            require "./vues/vueHeader.php";
+            require "./vues/vueErreur.php";
+        }
+        break;
        case "modifierService":
             ob_start(); // Démarre la capture de sortie
             header('Content-Type: application/json');
@@ -190,15 +198,18 @@
             echo json_encode($response);
             exit();
            
-       case "supprimerService":
-           if (isset($_GET['id'])) {
-               $serviceId = $_GET['id'];
-               $success = supprimerService($serviceId);
-               echo json_encode(['success' => $success]);
-           } else {
-               echo json_encode(['success' => false, 'message' => 'ID manquant']);
-           }
-           exit();
+        case "supprimerService":
+            error_log("Requête de suppression de service reçue avec ID: " . $_GET['id']);
+            if (isset($_GET['id'])) {
+                $serviceId = $_GET['id'];
+                $success = supprimerService($serviceId);
+                error_log("Résultat de la suppression du service avec ID $serviceId: " . json_encode(['success' => $success]));
+                echo json_encode(['success' => $success]);
+            } else {
+                error_log("ID manquant pour la suppression du service.");
+                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+            }
+            exit();
        case "getService":
            if (isset($_GET['id'])) {
                $serviceId = $_GET['id'];
@@ -325,6 +336,11 @@
            require "./vues/vueHeader.php";
            require "./vues/vueNousContacter.php";
            break;
+        case "mentionsLegales":
+        $titre = "Mentions légales";
+        require "./vues/vueHeader.php";
+        require "./vues/vueMentionsLegales.php";
+        break;
    
        case "devis":
            $titre = "Votre devis gratuit en ligne";
@@ -340,16 +356,31 @@
            break;
 
         case "realisationService":
-            $serviceId = $_GET['id'];
-            $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
-            $limit = 10;
-            $realisations = getRealisationsParService($serviceId, $offset, $limit);
-            $service = getServiceAvecDetails($serviceId);
-            $totalRealisations = getNombreTotalRealisationsParService($serviceId); // Ajoutez cette fonction dans le modèle
-            $titre = "Réalisations de " . htmlspecialchars($service['nom']);
-            require "./vues/vueHeader.php";
-            require "./vues/vueDetailRealisation.php";
-            require "./scripts/ajouterRealisation.php";
+            if (isset($_GET['id'])) {
+                $serviceId = $_GET['id'];
+                $service = getServiceAvecDetails($serviceId);
+        
+                if ($service) {
+                    $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
+                    $limit = 10;
+                    $realisations = getRealisationsParService($serviceId, $offset, $limit);
+                    $totalRealisations = getNombreTotalRealisationsParService($serviceId);
+                    $titre = "Réalisations de " . htmlspecialchars($service['nom']);
+                    require "./vues/vueHeader.php";
+                    require "./vues/vueDetailRealisation.php";
+                    require "./scripts/ajouterRealisation.php";
+                } else {
+                    $titre = "Erreur";
+                    $message = "Service non trouvé.";
+                    require "./vues/vueHeader.php";
+                    require "./vues/vueErreur.php";
+                }
+            } else {
+                $titre = "Erreur";
+                $message = "Service non spécifié.";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+            }
             break;
         case "ajouterRealisation":
             ob_clean();

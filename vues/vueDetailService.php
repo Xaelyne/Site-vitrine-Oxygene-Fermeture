@@ -10,7 +10,7 @@
         // Détermine le préfixe à utiliser ("d'" si le nom du service commence par une voyelle, "de " sinon)
         $prefixe = commenceParVoyelle($service['nom']) ? "d'" : "de ";
         ?>
-        <div class="container-fluid contenu d-flex justify-content-center flex-column align-items-center">
+        <div class="container d-flex justify-content-center flex-column align-items-center">
             <!-- Section de texte principale -->
             <div class="text-center mt-5 pt-4" style="width: 60%;">
                 <p class="fs-3 texte mb-5">
