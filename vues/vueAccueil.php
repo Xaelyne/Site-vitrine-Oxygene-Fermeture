@@ -146,42 +146,42 @@
                         <span class="text-danger" id="messageErreurSujetContactAccueil"></span>
                         <span class="text-danger" id="messageErreurMessageContactAccueil"></span>
                     </div>
-                    <div class="mb-3 col-md-6">
+                    <div class="mb-3 col-xl-6">
                         <label for="nomFormulaireContactAccueil" class="form-label text-white">Votre nom <span class="text-danger">(Obligatoire)</span></label>
                         <input type="text" class="form-control" id="nomFormulaireContactAccueil" name="nomFormulaireContactAccueil" required="required">
                     </div>
-                    <div class="mb-3 col-md-6">
+                    <div class="mb-3 col-xl-6">
                         <label for="telephoneFormulaireContactAccueil" class="form-label text-white">Votre numéro de téléphone <span class="text-danger">(Obligatoire)</span></label>
                         <input type="tel" class="form-control" id="telephoneFormulaireContactAccueil" name="telephoneFormulaireContactAccueil" required="required">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-md-12">
+                    <div class="mb-3 col-xl-12">
                         <label for="emailFormulaireContactAccueil" class="form-label text-white">Votre adresse email <span class="text-danger">(Obligatoire)</span></label>
                         <input type="email" class="form-control" id="emailFormulaireContactAccueil" name="emailFormulaireContactAccueil" required="required">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-md-12">
+                    <div class="mb-3 col-xl-12">
                         <label for="sujetFormulaireContactAccueil" class="form-label text-white">Sujet de votre message <span class="text-danger">(Obligatoire)</span></label>
                         <input type="text" class="form-control" id="sujetFormulaireContactAccueil" name="sujetFormulaireContactAccueil" required="required">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-md-12">
+                    <div class="mb-3 col-xl-12">
                         <label for="messageFormulaireContactAccueil" class="form-label text-white">Votre message <span class="text-danger">(Obligatoire)</span></label>
                         <textarea class="form-control messageFormulaire" id="messageFormulaireContactAccueil" name="messageFormulaireContactAccueil" rows="4" placeholder="Écrivez votre message ici" required="required" maxlength="500"></textarea>
                         <span class="text-white counter" ></span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-md-12 form-check mx-3">
+                    <div class="mb-3 col-xl-12 form-check mx-3">
                         <input type="checkbox" class="form-check-input" id="checkboxFormulaireContactAccueil" required="required">
                         <label class="form-check-label text-white" for="checkboxFormulaireContactAccueil">J’accepte la politique de confidentialité</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 d-flex justify-content-center">
+                    <div class="col-xl-12 d-flex justify-content-center">
                         <button type="submit" class="btn bouton" name="envoyer" id="boutonSubmitFormulaireContactAccueil">Envoyer</button>
                     </div>
                 </div>

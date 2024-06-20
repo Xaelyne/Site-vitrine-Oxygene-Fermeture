@@ -1,0 +1,19 @@
+# Bloquer l'accès aux fichiers de configuration sensibles
+<FilesMatch "\.(ini|json|lock|htaccess|sql)$">
+    Require all denied
+</FilesMatch>
+
+# Bloquer l'accès à tous les fichiers .php par défaut
+<FilesMatch "\.php$">
+    Require all denied
+</FilesMatch>
+
+# Autoriser l'accès uniquement à index.php
+<Files "index.php">
+    Require all granted
+</Files>
+
+# Autoriser l'accès aux fichiers images, scripts, styles, et polices
+<FilesMatch "\.(png|jpg|gif|css|js|ttf|woff|woff2)$">
+    Require all granted
+</FilesMatch>
