@@ -1,5 +1,5 @@
 <script>
-   function ajouterService() {
+    function ajouterService() {
         Swal.fire({
             title: 'Ajouter un service',
             html: `
@@ -92,7 +92,7 @@
                 </style>
                 <form id="formAjouterService">
                     <div class="form-group">
-                        <input type="text" id="nomService" class="swal2-input" placeholder="Nom du service" oninput="validerInputService(this)">
+                        <input type="text" id="nomService" class="swal2-input" placeholder="Nom du service">
                     </div>
                     <div class="form-group custom-file-input-wrapper">
                         <label for="imageService" class="custom-file-label swal2-styled popup-btn">Choisir un fichier</label>
@@ -100,7 +100,7 @@
                     </div>
                     <div id="fileNameDisplayService">Aucun fichier choisi</div>
                     <div id="detailsContainer" class="form-group">
-                        <input type="text" name="details[]" class="swal2-input detail-input" placeholder="Détail 1" oninput="validerInputDetail(this)">
+                        <input type="text" name="details[]" class="swal2-input detail-input" placeholder="Détail 1">
                     </div>
                     <div class="swal2-button-container form-group">
                         <button type="button" class="swal2-styled popup-btn" onclick="ajouterDetail()">Ajouter un autre détail</button>
@@ -120,16 +120,16 @@
                                     .map(input => input.value)
                                     .filter(detail => detail.trim() !== "");
 
-                const regexService = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]+$/;
-                const regexDetail = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s-]+$/;
+                const regexService = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/; 
+                const regexDetail = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s'-]+$/;
 
                 if (!regexService.test(nomService)) {
-                    Swal.showValidationMessage('Le nom du service ne doit contenir que des lettres, des espaces et des tirets');
+                    Swal.showValidationMessage('Le nom du service ne doit contenir que des lettres, des espaces, des tirets et des apostrophes');
                     return false;
                 }
 
                 if (details.some(detail => !regexDetail.test(detail))) {
-                    Swal.showValidationMessage('Les détails ne doivent contenir que des lettres, des chiffres, des espaces et des tirets');
+                    Swal.showValidationMessage('Les détails ne doivent contenir que des lettres, des chiffres, des espaces, des tirets et des apostrophes');
                     return false;
                 }
 
@@ -205,9 +205,6 @@
             newDetailInput.name = 'details[]';
             newDetailInput.className = 'swal2-input detail-input';
             newDetailInput.placeholder = `Détail ${newDetailIndex}`;
-            newDetailInput.oninput = function() {
-                validerInputDetail(this);
-            };
             detailsContainer.appendChild(newDetailInput);
         } else {
             Swal.showValidationMessage('Vous ne pouvez pas ajouter plus de 15 détails.');
@@ -215,38 +212,18 @@
     }
 
     function mettreAJourNomFichierServiceAjouter(input) {
-    const fileNameDisplay = document.getElementById('fileNameDisplayService');
-    const file = input.files[0];
-    const fileName = file ? file.name : 'Aucun fichier choisi';
-    const validFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+        const fileNameDisplay = document.getElementById('fileNameDisplayService');
+        const file = input.files[0];
+        const fileName = file ? file.name : 'Aucun fichier choisi';
+        const validFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
-    if (file && !validFileTypes.includes(file.type)) {
-        fileNameDisplay.textContent = 'Type de fichier non valide. Veuillez choisir un fichier PNG, JPEG ou JPG.';
-        input.value = ''; // Clear the input
-        return;
-    }
-
-    fileNameDisplay.textContent = fileName;
-}
-
-    function validerInputService(input) {
-        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]+$/;
-
-        if (!regex.test(input.value)) {
-            input.setCustomValidity('Les chiffres et les caractères spéciaux ne sont pas autorisés, sauf les tirets');
-        } else {
-            input.setCustomValidity('');
+        if (file && !validFileTypes.includes(file.type)) {
+            fileNameDisplay.textContent = 'Type de fichier non valide. Veuillez choisir un fichier PNG, JPEG ou JPG.';
+            input.value = ''; // Clear the input
+            return;
         }
-    }
 
-    function validerInputDetail(input) {
-        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s-]+$/;
-
-        if (!regex.test(input.value)) {
-            input.setCustomValidity('Les caractères spéciaux ne sont pas autorisés, sauf les tirets');
-        } else {
-            input.setCustomValidity('');
-        }
+        fileNameDisplay.textContent = fileName;
     }
 
     function majPremiereLettre(string) {

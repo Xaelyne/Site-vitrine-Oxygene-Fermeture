@@ -40,26 +40,40 @@
            break;
    
        case "connexionMAJ":
-           $emailUtilisateur = $_POST["emailUtilisateur"];
-           $MDPUtilisateur = $_POST["mdpUtilisateur"];
-           $utilisateurs = getUtilisateurs();
-           $id = verifConnexion($emailUtilisateur, $MDPUtilisateur, $utilisateurs);
-   
-           if ($id <= 0) {
-               $titre = "Connexion";
-               $erreur = "Pseudo ou mot de passe incorrect";
-               require "./vues/vueHeader.php";
-               require "./vues/vueConnexion.php";
-           } else {
-               $_SESSION['idUtilisateur'] = $id;
-               header("Location: index.php");
-           }
+            if (isset($_POST['emailUtilisateur']) && isset($_POST['mdpUtilisateur'])) {
+                $emailUtilisateur = $_POST["emailUtilisateur"];
+                $MDPUtilisateur = $_POST["mdpUtilisateur"];
+                $utilisateurs = getUtilisateurs();
+                $id = verifConnexion($emailUtilisateur, $MDPUtilisateur, $utilisateurs);
+        
+                if ($id <= 0) {
+                    $titre = "Connexion";
+                    $erreur = "Pseudo ou mot de passe incorrect";
+                    require "./vues/vueHeader.php";
+                    require "./vues/vueConnexion.php";
+                } else {
+                    $_SESSION['idUtilisateur'] = $id;
+                    header("Location: index.php");
+                }
+            } else {
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+            }
            break;
    
        case "deconnexion":
-           session_destroy();
-           header("Location: index.php");
-           break;
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'deconnexion') {
+                session_destroy();
+                header("Location: index.php");
+                break;
+            } else {
+
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+            }
+            break;
    
        case "gestion":
            if (isset($_SESSION['idUtilisateur'])) {
@@ -84,25 +98,35 @@
            break;
    
        case "modifierUtilisateur":
-           ob_clean();
-           header('Content-Type: application/json'); 
-           $data = json_decode(file_get_contents('php://input'), true);
-   
-           if (!empty($data['id'])) {
-               $id = $data['id'];
-               $utilisateur = getUtilisateur($id);
-               $nom = !empty($data['nom']) ? $data['nom'] : $utilisateur['nomUtilisateur'];
-               $prenom = !empty($data['prenom']) ? $data['prenom'] : $utilisateur['prenomUtilisateur'];
-               $email = !empty($data['email']) ? $data['email'] : $utilisateur['emailUtilisateur'];
-               $mdp = !empty($data['mdp']) ? password_hash($data['mdp'], PASSWORD_DEFAULT) : $utilisateur['MDPUtilisateur'];
-               $success = modifierUtilisateur($id, $nom, $prenom, $email, $mdp);
-               echo json_encode(['success' => $success]);
-           } else {
-               echo json_encode(['success' => false, 'message' => 'ID utilisateur manquant']);
-           }
-           exit();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
+            ob_clean();
+            header('Content-Type: application/json'); 
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            if (!empty($data['id'])) {
+                $id = $data['id'];
+                $utilisateur = getUtilisateur($id);
+                $nom = !empty($data['nom']) ? $data['nom'] : $utilisateur['nomUtilisateur'];
+                $prenom = !empty($data['prenom']) ? $data['prenom'] : $utilisateur['prenomUtilisateur'];
+                $email = !empty($data['email']) ? $data['email'] : $utilisateur['emailUtilisateur'];
+                $mdp = !empty($data['mdp']) ? password_hash($data['mdp'], PASSWORD_DEFAULT) : $utilisateur['MDPUtilisateur'];
+                $success = modifierUtilisateur($id, $nom, $prenom, $email, $mdp);
+                echo json_encode(['success' => $success]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID utilisateur manquant']);
+            }
+            exit();
+        } else {
+            $titre = "Erreur";
+            require "./vues/vueHeader.php";
+            require "./vues/vueErreur.php";
+            
+        }
+        break;
    
        case "supprimerUtilisateur":
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
+
            ob_clean();
            header('Content-Type: application/json'); 
            $data = json_decode(file_get_contents('php://input'), true);
@@ -117,8 +141,16 @@
                echo json_encode(['success' => false]);
            }
            exit();
+        } else {
+            $titre = "Erreur";
+            require "./vues/vueHeader.php";
+            require "./vues/vueErreur.php";
+            
+        }
+        break;
    
        case "ajouterUtilisateur":
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
            ob_clean();
            header('Content-Type: application/json');
            $data = json_decode(file_get_contents('php://input'), true);
@@ -138,7 +170,15 @@
                echo json_encode(['success' => false, 'message' => 'Données manquantes']);
            }
            exit();
+        } else {
+            $titre = "Erreur";
+            require "./vues/vueHeader.php";
+            require "./vues/vueErreur.php";
+            
+        }
+        break;
        case "ajouterService":
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
            ob_clean();
            header('Content-Type: application/json');
            $nom = $_POST['nom'];
@@ -150,6 +190,12 @@
            $serviceId = ajouterServiceAvecDetails($nom, $targetFile, $details);
            echo json_encode(['success' => true]);
            exit();
+        } else {
+            $titre = "Erreur";
+            require "./vues/vueHeader.php";
+            require "./vues/vueErreur.php";
+            
+        }
         case "detailService":
         if (isset($_GET['id'])) {
             $serviceId = $_GET['id'];
@@ -173,6 +219,7 @@
         }
         break;
        case "modifierService":
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
             ob_start(); // Démarre la capture de sortie
             header('Content-Type: application/json');
             try {
@@ -197,36 +244,48 @@
             ob_end_clean(); // Récupère et nettoie le tampon de sortie
             echo json_encode($response);
             exit();
-           
+        } else {
+            $titre = "Erreur";
+            require "./vues/vueHeader.php";
+            require "./vues/vueErreur.php";
+            
+        }
+        break;
         case "supprimerService":
-            error_log("Requête de suppression de service reçue avec ID: " . $_GET['id']);
-            if (isset($_GET['id'])) {
-                $serviceId = $_GET['id'];
+            if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                $serviceId = (int) $_GET['id'];
+                error_log("Requête de suppression de service reçue avec ID: " . $serviceId);
                 $success = supprimerService($serviceId);
                 error_log("Résultat de la suppression du service avec ID $serviceId: " . json_encode(['success' => $success]));
                 echo json_encode(['success' => $success]);
+                exit();
             } else {
-                error_log("ID manquant pour la suppression du service.");
-                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+
             }
-            exit();
+            break;
        case "getService":
-           if (isset($_GET['id'])) {
-               $serviceId = $_GET['id'];
-               $service = getServiceAvecDetails($serviceId);
-   
-               if ($service) {
-                   echo json_encode(['success' => true, 'service' => $service]);
-               } else {
-                   echo json_encode(['success' => false, 'message' => 'Service non trouvé']);
-               }
-           } else {
-               echo json_encode(['success' => false, 'message' => 'ID manquant']);
-           }
-           exit();
+        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+            $serviceId = (int) $_GET['id'];
+            $service = getServiceAvecDetails($serviceId);
+    
+            if ($service) {
+                echo json_encode(['success' => true, 'service' => $service]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Service non trouvé']);
+            }
+        } else {
+            $titre = "Erreur";
+            require "./vues/vueHeader.php";
+            require "./vues/vueErreur.php";
+            require "./vues/vueFooter.php";
+        }
+        exit();
         case "getPartenaire":
-            if (isset($_GET['id'])) {
-                $partenaireId = $_GET['id'];
+            if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                $partenaireId = (int) $_GET['id'];
                 $partenaire = getPartenaire($partenaireId);
         
                 if ($partenaire) {
@@ -235,100 +294,151 @@
                     echo json_encode(['success' => false, 'message' => 'Partenaire non trouvé']);
                 }
             } else {
-                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+                require "./vues/vueFooter.php";
             }
             exit();
         case "getRealisation":
-            if (isset($_GET['id'])) {
-                $realisationId = $_GET['id'];
+            if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                $realisationId = (int) $_GET['id'];
                 $realisation = getRealisation($realisationId);
-    
+        
                 if ($realisation) {
                     echo json_encode(['success' => true, 'realisation' => $realisation]);
                 } else {
                     echo json_encode(['success' => false, 'message' => 'Réalisation non trouvée']);
                 }
             } else {
-                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+                require "./vues/vueFooter.php";
             }
             exit();
         
         case "ajouterPartenaire":
-            ob_clean();
-            header('Content-Type: application/json');
-            try {
-                $nom = $_POST['nom'];
-                $lien = $_POST['lien'];
-                $image = $_FILES['image'];
-                $targetDir = "images/";
-                $targetFile = $targetDir . basename($image["name"]);
-                move_uploaded_file($image["tmp_name"], $targetFile);
-                $success = ajouterPartenaire($nom, $targetFile, $lien);
-                $response = ['success' => $success];
-            } catch (Exception $e) {
-                $response = ['success' => false, 'message' => $e->getMessage()];
-            }
-            echo json_encode($response);
-            exit();
-        case "modifierPartenaire":
-            ob_clean();
-            header('Content-Type: application/json');
-            try {
-                $id = $_POST['id'];
-                $nom = $_POST['nom'];
-                $lien = $_POST['lien'];
-                $image = $_FILES['image'];
-        
-                if ($image['size'] > 0) {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nom']) && isset($_FILES['image']) && isset($_POST['lien'])) {
+                ob_clean();
+                header('Content-Type: application/json');
+                try {
+                    $nom = $_POST['nom'];
+                    $lien = $_POST['lien'];
+                    $image = $_FILES['image'];
                     $targetDir = "images/";
                     $targetFile = $targetDir . basename($image["name"]);
                     move_uploaded_file($image["tmp_name"], $targetFile);
-                } else {
-                    $targetFile = $_POST['image'];
+                    $success = ajouterPartenaire($nom, $targetFile, $lien);
+                    $response = ['success' => $success];
+                } catch (Exception $e) {
+                    $response = ['success' => false, 'message' => $e->getMessage()];
                 }
-        
-                $success = modifierPartenaire($id, $nom, $targetFile, $lien);
-                $response = ['success' => $success];
-            } catch (Exception $e) {
-                $response = ['success' => false, 'message' => $e->getMessage()];
+                echo json_encode($response);
+            } else {
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+                require "./vues/vueFooter.php";
             }
-            ob_end_clean();
-            echo json_encode($response);
+            exit();
+        case "modifierPartenaire":
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && isset($_POST['nom']) && isset($_POST['lien'])) {
+                ob_clean();
+                header('Content-Type: application/json');
+                try {
+                    $id = $_POST['id'];
+                    $nom = $_POST['nom'];
+                    $lien = $_POST['lien'];
+                    $image = $_FILES['image'];
+        
+                    if ($image['size'] > 0) {
+                        $targetDir = "images/";
+                        $targetFile = $targetDir . basename($image["name"]);
+                        move_uploaded_file($image["tmp_name"], $targetFile);
+                    } else {
+                        $targetFile = $_POST['image'];
+                    }
+        
+                    $success = modifierPartenaire($id, $nom, $targetFile, $lien);
+                    $response = ['success' => $success];
+                } catch (Exception $e) {
+                    $response = ['success' => false, 'message' => $e->getMessage()];
+                }
+                ob_end_clean();
+                echo json_encode($response);
+            } else {
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+                require "./vues/vueFooter.php";
+            }
             exit();
         case "supprimerPartenaire":
-            if (isset($_GET['id'])) {
-                $partenaireId = $_GET['id'];
+            if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                $partenaireId = (int) $_GET['id'];
                 $success = supprimerPartenaire($partenaireId);
                 echo json_encode(['success' => $success]);
             } else {
-                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+                require "./vues/vueFooter.php";
             }
             exit();
        case "traitement_formulaire_contact":
-           $titre = "Confirmation d'envois";
-           require "./vues/vueHeader.php";
-           require "./scripts/traitement_formulaire_contact.php";
-           require "./vues/vueConfirmationEnvois.php";
-           break;
-   
-       case "traitement_formulaire_contact_accueil":
-           $titre = "Confirmation d'envois";
-           require "./vues/vueHeader.php";
-           require "./scripts/traitement_formulaire_contact_accueil.php";
-           require "./vues/vueConfirmationEnvois.php";
-           break;
-   
-       case "traitement_formulaire_devis":
-           $titre = "Confirmation d'envois";
-           require "./vues/vueHeader.php";
-           require "./scripts/traitement_formulaire_devis.php";
-           require "./vues/vueConfirmationEnvois.php";
-           break;
-        case "traitement_formulaire_avis":
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $titre = "Confirmation d'envois";
             require "./vues/vueHeader.php";
-            require "./scripts/traitement_formulaire_avis.php";
+            require "./scripts/traitement_formulaire_contact.php";
             require "./vues/vueConfirmationEnvois.php";
+        } else {
+            $titre = "Erreur";
+            $message = "Accès non autorisé.";
+            require "./vues/vueHeader.php";
+            require "./vues/vueErreur.php";
+        }
+        break;
+   
+       case "traitement_formulaire_contact_accueil":
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $titre = "Confirmation d'envois";
+            require "./vues/vueHeader.php";
+            require "./scripts/traitement_formulaire_contact_accueil.php";
+            require "./vues/vueConfirmationEnvois.php";
+        } else {
+            $titre = "Erreur";
+            $message = "Accès non autorisé.";
+            require "./vues/vueHeader.php";
+            require "./vues/vueErreur.php";
+        }
+        break;
+   
+       case "traitement_formulaire_devis":
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $titre = "Confirmation d'envois";
+            require "./vues/vueHeader.php";
+            require "./scripts/traitement_formulaire_devis.php";
+            require "./vues/vueConfirmationEnvois.php";
+        } else {
+            $titre = "Erreur";
+            $message = "Accès non autorisé.";
+            require "./vues/vueHeader.php";
+            require "./vues/vueErreur.php";
+        }
+        break;
+        case "traitement_formulaire_avis":
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $titre = "Confirmation d'envois";
+                require "./vues/vueHeader.php";
+                require "./scripts/traitement_formulaire_avis.php";
+                require "./vues/vueConfirmationEnvoisAvis.php";
+            } else {
+                $titre = "Erreur";
+                $message = "Accès non autorisé.";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+            }
             break;
    
        case "nousContacter":
@@ -337,11 +447,11 @@
            require "./vues/vueNousContacter.php";
            break;
         case "mentionsLegales":
-        $titre = "Mentions légales";
-        require "./vues/vueHeader.php";
-        require "./vues/vueMentionsLegales.php";
-        break;
-   
+            $titre = "Mentions légales";
+            require "./vues/vueHeader.php";
+            require "./vues/vueMentionsLegales.php";
+            break;
+    
        case "devis":
            $titre = "Votre devis gratuit en ligne";
            require "./vues/vueHeader.php";
@@ -383,22 +493,29 @@
             }
             break;
         case "ajouterRealisation":
-            ob_clean();
-            header('Content-Type: application/json');
-            try {
-                $nom = $_POST['nom'];
-                $serviceId = $_POST['serviceId'];
-                $image = $_FILES['image'];
-                $targetDir = "images/";
-                $targetFile = $targetDir . basename($image["name"]);
-                move_uploaded_file($image["tmp_name"], $targetFile);
-                $success = ajouterRealisation($nom, $targetFile, $serviceId);
-                $response = ['success' => $success];
-            } catch (Exception $e) {
-                $response = ['success' => false, 'message' => $e->getMessage()];
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                ob_clean();
+                header('Content-Type: application/json');
+                try {
+                    $nom = $_POST['nom'];
+                    $serviceId = $_POST['serviceId'];
+                    $image = $_FILES['image'];
+                    $targetDir = "images/";
+                    $targetFile = $targetDir . basename($image["name"]);
+                    move_uploaded_file($image["tmp_name"], $targetFile);
+                    $success = ajouterRealisation($nom, $targetFile, $serviceId);
+                    $response = ['success' => $success];
+                } catch (Exception $e) {
+                    $response = ['success' => false, 'message' => $e->getMessage()];
+                }
+                echo json_encode($response);
+                exit();
+            } else {
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
             }
-            echo json_encode($response);
-            exit(); 
+            break;
         case "toutesNosRealisations":
             $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
             $limit = 10;
@@ -412,36 +529,50 @@
             require "./scripts/modifierRealisation.php";
             break;
         case "modifierRealisation":
-            ob_clean();
-            header('Content-Type: application/json');
-            try {
-                $id = $_POST['id'];
-                $nom = $_POST['nom'];
-                $serviceId = $_POST['serviceId'];
-                $image = isset($_FILES['image']) ? $_FILES['image'] : null;
-                
-                if ($image && $image['size'] > 0) {
-                    $targetDir = "images/";
-                    $targetFile = $targetDir . basename($image["name"]);
-                    move_uploaded_file($image["tmp_name"], $targetFile);
-                } else {
-                    $targetFile = getImageRealisation($id);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                ob_clean();
+                header('Content-Type: application/json');
+                try {
+                    if (isset($_POST['id'], $_POST['nom'], $_POST['serviceId'])) {
+                        $id = $_POST['id'];
+                        $nom = $_POST['nom'];
+                        $serviceId = $_POST['serviceId'];
+                        $image = isset($_FILES['image']) ? $_FILES['image'] : null;
+        
+                        if ($image && $image['size'] > 0) {
+                            $targetDir = "images/";
+                            $targetFile = $targetDir . basename($image["name"]);
+                            move_uploaded_file($image["tmp_name"], $targetFile);
+                        } else {
+                            $targetFile = getImageRealisation($id);
+                        }
+        
+                        $success = modifierRealisation($id, $nom, $targetFile, $serviceId);
+                        $response = ['success' => $success];
+                    } else {
+                        $response = ['success' => false, 'message' => 'Paramètres manquants'];
+                    }
+                } catch (Exception $e) {
+                    $response = ['success' => false, 'message' => $e->getMessage()];
                 }
-    
-                $success = modifierRealisation($id, $nom, $targetFile, $serviceId);
-                $response = ['success' => $success];
-            } catch (Exception $e) {
-                $response = ['success' => false, 'message' => $e->getMessage()];
+                echo json_encode($response);
+                exit();
+            } else {
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
             }
-            echo json_encode($response);
-            exit();
+            break;
         case "supprimerRealisation":
-            if (isset($_GET['id'])) {
-                $realisationId = $_GET['id'];
+            if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                $realisationId = (int) $_GET['id'];
                 $success = supprimerRealisation($realisationId);
                 echo json_encode(['success' => $success]);
             } else {
-                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+                require "./vues/vueFooter.php";
             }
             exit();
         case "avis":
@@ -457,56 +588,80 @@
             require "./scripts/modifierAvis.php";
             break;
         case "ajouterAvis":
-            $prenomClientAvis = $_POST['ajoutNomFormulaireAvis'];
-            $etoileAvis = isset($_POST['ajoutNoteFormulaireAvis']) ? (int)$_POST['ajoutNoteFormulaireAvis'] : 0;
-            $commentaireAvis = $_POST['ajoutCommentaireFormulaireAvis'];
-        
-            if (!empty($prenomClientAvis) && !empty($commentaireAvis)) {
-                $success = ajouterAvis($prenomClientAvis, $etoileAvis, $commentaireAvis);
-                echo json_encode(['success' => $success]);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $prenomClientAvis = $_POST['ajoutNomFormulaireAvis'];
+                $etoileAvis = isset($_POST['ajoutNoteFormulaireAvis']) ? (int)$_POST['ajoutNoteFormulaireAvis'] : 0;
+                $commentaireAvis = $_POST['ajoutCommentaireFormulaireAvis'];
+            
+                if (!empty($prenomClientAvis) && !empty($commentaireAvis)) {
+                    $success = ajouterAvis($prenomClientAvis, $etoileAvis, $commentaireAvis);
+                    echo json_encode(['success' => $success]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Veuillez remplir tous les champs obligatoires.']);
+                }
+                exit();
             } else {
-                echo json_encode(['success' => false, 'message' => 'Veuillez remplir tous les champs obligatoires.']);
+                $titre = "Erreur";
+                $message = "Accès non autorisé.";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
             }
-            exit();
+            break;
         case "supprimerAvis":
-            if (isset($_GET['id'])) {
-                $idAvis = $_GET['id'];
+            if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                $idAvis = (int) $_GET['id'];
                 $success = supprimerAvis($idAvis);
                 echo json_encode(['success' => $success]);
             } else {
-                echo json_encode(['success' => false, 'message' => 'ID manquant']);
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+                require "./vues/vueFooter.php";
             }
             exit();
         case "modifierAvis":
-            $idAvis = $_POST['idAvis'];
-            $prenomClientAvis = $_POST['prenom'];
-            $etoileAvis = isset($_POST['note']) ? (int)$_POST['note'] : 0;
-            $commentaireAvis = $_POST['commentaire'];
-        
-            if (!empty($prenomClientAvis) && !empty($commentaireAvis)) {
-                $success = modifierAvis($idAvis, $prenomClientAvis, $etoileAvis, $commentaireAvis);
-                echo json_encode(['success' => $success]);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Veuillez remplir tous les champs obligatoires.']);
-            }
-            exit();
-        case "modifierInformationsEntreprise":
-            ob_clean();
-            header('Content-Type: application/json');
-            $data = json_decode(file_get_contents('php://input'), true);
-        
-            // Récupérer les informations actuelles de l'entreprise
-            $infoEntreprise = getInformationEntreprise();
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $idAvis = $_POST['idAvis'];
+                $prenomClientAvis = $_POST['prenom'];
+                $etoileAvis = isset($_POST['note']) ? (int)$_POST['note'] : 0;
+                $commentaireAvis = $_POST['commentaire'];
             
-            $telephone = !empty($data['telephone']) ? $data['telephone'] : $infoEntreprise['telephoneEntreprise'];
-            $adresse = !empty($data['adresse']) ? $data['adresse'] : $infoEntreprise['adresseEntreprise'];
-            $codePostal = !empty($data['codePostal']) ? $data['codePostal'] : $infoEntreprise['codePostalEntreprise'];
-            $ville = !empty($data['ville']) ? $data['ville'] : $infoEntreprise['villeEntreprise'];
-        
-            $success = modifierInformationsEntreprise($telephone, $adresse, $codePostal, $ville);
-            echo json_encode(['success' => $success]);
-            exit();
-        
+                if (!empty($prenomClientAvis) && !empty($commentaireAvis)) {
+                    $success = modifierAvis($idAvis, $prenomClientAvis, $etoileAvis, $commentaireAvis);
+                    echo json_encode(['success' => $success]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Veuillez remplir tous les champs obligatoires.']);
+                }
+                exit();
+            } else {
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+            }
+            break;
+        case "modifierInformationsEntreprise":
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                ob_clean();
+                header('Content-Type: application/json');
+                $data = json_decode(file_get_contents('php://input'), true);
+            
+                // Récupérer les informations actuelles de l'entreprise
+                $infoEntreprise = getInformationEntreprise();
+                
+                $telephone = !empty($data['telephone']) ? $data['telephone'] : $infoEntreprise['telephoneEntreprise'];
+                $adresse = !empty($data['adresse']) ? $data['adresse'] : $infoEntreprise['adresseEntreprise'];
+                $codePostal = !empty($data['codePostal']) ? $data['codePostal'] : $infoEntreprise['codePostalEntreprise'];
+                $ville = !empty($data['ville']) ? $data['ville'] : $infoEntreprise['villeEntreprise'];
+            
+                $success = modifierInformationsEntreprise($telephone, $adresse, $codePostal, $ville);
+                echo json_encode(['success' => $success]);
+                exit();
+            } else {
+                $titre = "Erreur";
+                require "./vues/vueHeader.php";
+                require "./vues/vueErreur.php";
+            }
+            break;
    }
    
    require "./vues/vueFooter.php";

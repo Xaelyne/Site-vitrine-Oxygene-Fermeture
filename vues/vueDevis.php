@@ -31,23 +31,23 @@
                         <span class="text-danger" id="messageErreurSujetFormulaireDevis"></span>
                         <span class="text-danger" id="messageErreurMessageFormulaireDevis"></span>
                     </div>
-                    <div class="mb-3 col-md-6">
+                    <div class="mb-3 col-xl-6">
                         <label for="nomFormulaireDevis" class="form-label text-white">Votre nom <span class="text-danger">(Obligatoire)</span></label>
                         <input type="text" class="form-control" id="nomFormulaireDevis" name="nomFormulaireDevis" required="required">
                     </div>
-                    <div class="mb-3 col-md-6">
+                    <div class="mb-3 col-xl-6">
                         <label for="telephoneFormulaireDevis" class="form-label text-white">Votre numéro de téléphone <span class="text-danger">(Obligatoire)</span></label>
                         <input type="tel" class="form-control" id="telephoneFormulaireDevis" name="telephoneFormulaireDevis" required="required">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-md-12">
+                    <div class="mb-3 col-xl-12">
                         <label for="emailFormulaireDevis" class="form-label text-white">Votre adresse email <span class="text-danger">(Obligatoire)</span></label>
                         <input type="email" class="form-control" id="emailFormulaireDevis" name="emailFormulaireDevis" required="required">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-md-12">
+                    <div class="mb-3 col-xl-12">
                         <label for="choixFormulaireDevis" class="form-label text-white">Choisissez le service dont vous avez besoin<span class="text-danger">(Obligatoire)</span></label>
                         <select class="form-select" name="choixFormulaireDevis" id="choixFormulaireDevis" required="required">
                         <option disabled selected="choisirUnService" value="">Choisissez votre service</option>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-md-12">
+                    <div class="mb-3 col-xl-12">
                         <label for="sujetFormulaireDevis" class="form-label text-white">Sujet de votre message <span class="text-danger">(Obligatoire)</span></label>
                         <input type="text" class="form-control" id="sujetFormulaireDevis" name="sujetFormulaireDevis" required="required">
                     </div>
@@ -72,13 +72,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-md-12 form-check mx-3">
+                    <div class="mb-3 col-xl-12 form-check mx-3">
                         <input type="checkbox" class="form-check-input" id="checkboxFormulaireDevis" required="required">
                         <label class="form-check-label text-white" for="checkboxFormulaireDevis">J’accepte la politique de confidentialité</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 d-flex justify-content-center">
+                    <div class="col-xl-12 d-flex justify-content-center">
                         <button type="submit" class="btn bouton" name="envoyer" id="boutonSubmitFormulaireDevis">Envoyer</button>
                     </div>
                 </div>

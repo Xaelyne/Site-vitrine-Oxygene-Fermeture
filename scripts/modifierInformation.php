@@ -10,10 +10,10 @@
     const regexVille = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]+$/;
 
     // Valeurs des champs
-    const telephone = document.getElementById('telephone').value.trim();
-    const adresse = document.getElementById('adresse').value.trim();
-    const codePostal = document.getElementById('codePostal').value.trim();
-    const ville = document.getElementById('ville').value.trim();
+    let telephone = document.getElementById('telephone').value.trim();
+    let adresse = document.getElementById('adresse').value.trim();
+    let codePostal = document.getElementById('codePostal').value.trim();
+    let ville = document.getElementById('ville').value.trim();
 
     // Spans d'erreur
     const erreurTelephone = document.getElementById('messageErreurTelInfosEntreprise');
@@ -36,7 +36,8 @@
         estValide = false;
     } else if (telephone) {
         // Ajouter les points tous les deux chiffres
-        document.getElementById('telephone').value = telephone.replace(/(\d{2})(?=\d)/g, '$1.');
+        telephone = telephone.replace(/(\d{2})(?=\d)/g, '$1.');
+        document.getElementById('telephone').value = telephone;
     }
 
     // Valider l'adresse
@@ -45,7 +46,8 @@
         estValide = false;
     } else if (adresse) {
         // Formater l'adresse
-        document.getElementById('adresse').value = capitalizeAddress(adresse);
+        adresse = capitalizeAddress(adresse);
+        document.getElementById('adresse').value = adresse;
     }
 
     // Valider le code postal
@@ -60,7 +62,8 @@
         estValide = false;
     } else if (ville) {
         // Formater la ville
-        document.getElementById('ville').value = capitalizeFirstLetter(ville);
+        ville = capitalizeFirstLetter(ville);
+        document.getElementById('ville').value = ville;
     }
 
     if (estValide) {

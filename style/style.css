@@ -449,3 +449,24 @@ footer {
     position: relative;
     width: 100%;
 }
+@media screen and (max-width: 1428px) { 
+    
+    .divFormulaireContact {
+        background-color: var(--bleu);
+        border-radius: 10px;
+        width: 100%;
+    }
+
+}
+@media screen and (max-width: 480px) { 
+    .contenu {
+        background-color: rgb(255, 255, 255);
+        width: 100%;
+    }
+    .divFormulaireContact {
+        background-color: var(--bleu);
+        border-radius: 10px;
+        width: 100%;
+    }
+
+}

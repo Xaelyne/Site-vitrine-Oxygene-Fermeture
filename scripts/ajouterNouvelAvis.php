@@ -63,6 +63,21 @@
                 nomInput.value = capitalizeFirstLetter(nomInput.value);
                 commentaireInput.value = capitalizeFirstLetter(commentaireInput.value);
 
+                // Regex patterns
+                const regexNom = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/; // Nom: lettres, espaces, accents, apostrophes, et tirets
+                const regexCommentaire = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s'-]+$/; // Commentaire: lettres, chiffres, espaces, accents, apostrophes, et tirets
+
+                // Validate fields
+                if (!regexNom.test(nomInput.value)) {
+                    Swal.showValidationMessage('Nom invalide. Il peut contenir des lettres, espaces, accents, apostrophes, et tirets.');
+                    return false;
+                }
+                
+                if (!regexCommentaire.test(commentaireInput.value)) {
+                    Swal.showValidationMessage('Commentaire invalide. Il peut contenir des lettres, chiffres, espaces, accents, apostrophes, et tirets.');
+                    return false;
+                }
+
                 if (form.checkValidity()) {
                     const formData = new FormData(form);
                     return fetch('index.php?action=ajouterAvis', {

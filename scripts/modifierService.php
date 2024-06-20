@@ -182,17 +182,17 @@
                                             .filter(detail => detail.trim() !== ""); // Filtrer les détails vides
 
                         // Expressions régulières pour valider les champs
-                        const regexService = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]+$/;
-                        const regexDetail = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s-]+$/;
+                        const regexService = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/;
+                        const regexDetail = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s'-]+$/;
 
                         // Validation des champs
                         if (!regexService.test(nomService)) {
-                            Swal.showValidationMessage('Le nom du service ne doit contenir que des lettres, des espaces et des tirets');
+                            Swal.showValidationMessage('Le nom du service ne doit contenir que des lettres, des espaces, des tirets et des apostrophes');
                             return false;
                         }
 
                         if (details.some(detail => !regexDetail.test(detail))) {
-                            Swal.showValidationMessage('Les détails ne doivent contenir que des lettres, des chiffres, des espaces et des tirets');
+                            Swal.showValidationMessage('Les détails ne doivent contenir que des lettres, des chiffres, des espaces, des tirets et des apostrophes');
                             return false;
                         }
 

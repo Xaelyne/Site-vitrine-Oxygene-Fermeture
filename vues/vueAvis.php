@@ -33,7 +33,10 @@
                         <?php if (isset($_SESSION['idUtilisateur'])) { ?>
                             <div class="overlay"></div>
                             <div class="btn-supprimer-container">
-                            <button class="btn-modifier" onclick="modifierAvis(<?= $avi['identifiantAvis'] ?>, '<?= htmlspecialchars($avi['prenomClientAvis']) ?>', <?= $avi['etoileAvis'] ?>, '<?= htmlspecialchars($avi['commentaireAvis']) ?>')">Modifier</button>
+                                <button class="btn-modifier" 
+                                    onclick='modifierAvis(<?= $avi['identifiantAvis'] ?>, "<?= addslashes(htmlspecialchars($avi['prenomClientAvis'])) ?>", <?= $avi['etoileAvis'] ?>, "<?= addslashes(nl2br(htmlspecialchars($avi['commentaireAvis']))) ?>")'>
+                                    Modifier
+                                </button>
                                 <button class="btn-supprimer" onclick="supprimerAvis(<?= $avi['identifiantAvis']; ?>)">Supprimer</button>
                             </div>
                         <?php } ?>
@@ -80,17 +83,17 @@
                             <span class="text-danger" id="messageErreurNomAvis"></span>
                             <span class="text-danger" id="messageErreurCommentaireAvis"></span>
                         </div>
-                        <div class="mb-3 col-md-6">
+                        <div class="mb-3 col-xl-6">
                             <label for="nomFormulaireAvis" class="form-label text-white">Votre prénom</label>
                             <input type="text" class="form-control" id="nomFormulaireAvis" name="nomFormulaireAvis" placeholder="Votre prénom" required="required">
                         </div>
-                        <div class="mb-3 col-md-12">
+                        <div class="mb-3 col-xl-12">
                             <label for="emailFormulaireAvis" class="form-label text-white">Votre adresse email</label>
                             <input type="email" class="form-control" id="emailFormulaireAvis" name="emailFormulaireAvis" placeholder="Votre adresse email" required="required">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mb-3 col-md-12">
+                        <div class="mb-3 col-xl-12">
                             <label class="form-label text-white">Votre note</label>
                             <div id="rating" class="d-flex">
                                 <img src="images/etoileVide.png" class="star" data-value="1" style="width: 24px; cursor: pointer;">
@@ -103,20 +106,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mb-3 col-md-12">
+                        <div class="mb-3 col-xl-12">
                             <label for="commentaireFormulaireAvis" class="form-label text-white">Votre commentaire</label>
                             <textarea class="form-control commentaireFormulaireAvis" id="commentaireFormulaireAvis" name="commentaireFormulaireAvis" rows="4" placeholder="Votre commentaire" required="required" maxlength="300"></textarea>
                             <span class="text-white counter" ></span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mb-3 col-md-12 form-check mx-3">
+                        <div class="mb-3 col-xl-12 form-check mx-3">
                             <input type="checkbox" class="form-check-input" id="checkboxFormulaireAvis" required="required">
                             <label class="form-check-label text-white" for="checkboxFormulaireAvis">J’accepte la politique de confidentialité</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 d-flex justify-content-center">
+                        <div class="col-xl-12 d-flex justify-content-center">
                             <button type="submit" class="btn bouton" name="envoyer" id="boutonSubmitFormulaireAvis">Envoyer</button>
                         </div>
                     </div>
