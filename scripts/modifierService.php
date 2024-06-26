@@ -183,7 +183,7 @@
 
                         // Expressions régulières pour valider les champs
                         const regexService = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/;
-                        const regexDetail = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s'-]+$/;
+                        const regexDetail = /^[^=]+$/;
 
                         // Validation des champs
                         if (!regexService.test(nomService)) {

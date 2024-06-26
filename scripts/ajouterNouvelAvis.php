@@ -48,8 +48,7 @@
                     </div>
                 </form>
             `,
-            showCancelButton: true,
-            confirmButtonText: 'Envoyer',
+            confirmButtonText: 'Ajouter',
             customClass: {
                 confirmButton: 'popup-btn',
             },

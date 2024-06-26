@@ -125,7 +125,7 @@
             Par téléphone :
         </p>
         <p class="fs-5 texte">
-            03.44.04.31.13
+            <span><?= htmlspecialchars($infoEntreprise['telephoneEntreprise']); ?></span>
         </p>
     </div>
     <!-- Formulaire de contact -->
