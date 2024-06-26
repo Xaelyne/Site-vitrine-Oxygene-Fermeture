@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table.min.css">
     <!-- Bootstrap -->
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL' crossorigin='anonymous'></script>
-    <!-- LightBox Photo -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrape table -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table.min.js"></script>
@@ -48,60 +47,62 @@
                     <li class="navbar-brand">
                         <a class="nav-link text-center text-white fs-6" aria-current="page" href="index.php">Accueil</a>
                     </li>
-                <li class="navbar-brand dropdown">
-                    <a class="nav-link dropdown-toggle text-center text-white fs-6" href="index.php?action=listeServices" role="button" aria-expanded="false">
-                    Nos services
+                    <li class="navbar-brand dropdown">
+                        <a class="nav-link dropdown-toggle text-center text-white fs-6" href="index.php?action=listeServices" role="button" aria-expanded="false">
+                        Nos services
+                        </a>
+                        <ul class="dropdown-menu">
+                            <?php foreach ($services as $serviceItem) { ?>
+                                <li><a class="dropdown-item" href="index.php?action=detailService&id=<?= htmlspecialchars($serviceItem['id']); ?>"><?= htmlspecialchars($serviceItem['nom']); ?></a></li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <li class="navbar-brand dropdown">
+                        <a class="nav-link dropdown-toggle text-center text-white fs-6" href="index.php?action=toutesNosRealisations" role="button" aria-expanded="false">
+                        Nos réalisations
+                        </a>
+                        <ul class="dropdown-menu">
+                            <?php foreach ($services as $serviceItem) { ?>
+                                <li><a class="dropdown-item" href="index.php?action=realisationService&id=<?= htmlspecialchars($serviceItem['id']); ?>"><?= htmlspecialchars($serviceItem['nom']); ?></a></li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <li class="navbar-brand">
+                        <a class="nav-link active text-center text-white fs-6" aria-current="page" href="index.php?action=nousContacter">Nous contacter</a>
+                    </li>
+                    <li class="navbar-brand text-center mt-1">
+                        <a href="index.php?action=devis" class="btn bouton" role="button" aria-pressed="true">Votre devis gratuit en ligne</a>
+                    </li>
+                    <li class="navbar-brand text-center mt-1">
+                        <a href="index.php?action=avis" class="btn bouton" role="button" aria-pressed="true">Avis clients</a>
+                    </li>
+                    <a class="navbar-brand text-center mt-1" title="Retrouver notre facebook en cliquant ici" href="https://www.facebook.com/Oxygenefermeture60/?locale=fr_FR" target="_blank">
+                        <img src="./images/Facebook.png" alt="Facebook">
                     </a>
-                    <ul class="dropdown-menu">
-                         <?php foreach ($services as $serviceItem) { ?>
-                            <li><a class="dropdown-item" href="index.php?action=detailService&id=<?= htmlspecialchars($serviceItem['id']); ?>"><?= htmlspecialchars($serviceItem['nom']); ?></a></li>
-                        <?php } ?>
-                    </ul>
-                </li>
-                <li class="navbar-brand dropdown">
-                    <a class="nav-link dropdown-toggle text-center text-white fs-6" href="index.php?action=toutesNosRealisations" role="button" aria-expanded="false">
-                    Nos réalisations
+                    <a class="navbar-brand text-center mt-1" title="Vous pouvez nous envoyez un mail directement en cliquant ici" href="mailto:mulett90hh@gmail.com">
+                        <img src="./images/Mail.png" alt="Mail">
                     </a>
-                    <ul class="dropdown-menu">
-                        <?php foreach ($services as $serviceItem) { ?>
-                            <li><a class="dropdown-item" href="index.php?action=realisationService&id=<?= htmlspecialchars($serviceItem['id']); ?>"><?= htmlspecialchars($serviceItem['nom']); ?></a></li>
+                    <a class="navbar-brand text-white text-center mt-1">
+                        <img src="./images/Telephone.png" alt="Téléphone"class="d-inline-block align-text-top ">
+                        <span><?= htmlspecialchars($infoEntreprise['telephoneEntreprise']); ?></span>
+                    </a>
+                    <li>
+                        <?php if (isset($_SESSION['idUtilisateur'])) { ?>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <a href="index.php?action=gestion">
+                                        <img src="./images/PanneauUtilisateur2.png" alt="Gestion des utilisateurs" style="width: 3rem;">
+                                </a>
+                                <form action="index.php" method="POST">
+                                    <input type="hidden" name="action" value="deconnexion">
+                                    <button type="submit" class="btn boutonDeconnexion petitBoutonDeconnexion d-flex align-items-center">
+                                        <img src="./images/Deconnexion.png" alt="Déconnexion" class="me-2">
+                                    </button>
+                                </form>
+                            </div>
                         <?php } ?>
-                    </ul>
-                </li>
-                <li class="navbar-brand">
-                    <a class="nav-link active text-center text-white fs-6" aria-current="page" href="index.php?action=nousContacter">Nous contacter</a>
-                </li>
-                <li class="navbar-brand text-center mt-1">
-                    <a href="index.php?action=devis" class="btn bouton" role="button" aria-pressed="true">Votre devis gratuit en ligne</a>
-                </li>
-                <li class="navbar-brand text-center mt-1">
-                    <a href="index.php?action=avis" class="btn bouton" role="button" aria-pressed="true">Avis clients</a>
-                </li>
-                <a class="navbar-brand text-center mt-1" title="Retrouver notre facebook en cliquant ici" href="https://www.facebook.com/Oxygenefermeture60/?locale=fr_FR" target="_blank">
-                    <img src="./images/Facebook.png" alt="Facebook">
-                </a>
-                <a class="navbar-brand text-center mt-1" title="Vous pouvez nous envoyez un mail directement en cliquant ici" href="mailto:mulett90hh@gmail.com">
-                    <img src="./images/Mail.png" alt="Mail">
-                </a>
-                <a class="navbar-brand text-white text-center mt-1">
-                    <img src="./images/Telephone.png" alt="Téléphone"class="d-inline-block align-text-top ">
-                    <span><?= htmlspecialchars($infoEntreprise['telephoneEntreprise']); ?></span>
-                </a>
+                    </li>
                 </ul>
             </div>
-<?php if (isset($_SESSION['idUtilisateur'])) { ?>
-            <div class="d-flex align-items-center">
-                <a href="index.php?action=gestion">
-                        <img src="./images/PanneauUtilisateur2.png" alt="Gestion des utilisateurs" style="width: 3rem;">
-                </a>
-                <form action="index.php" method="POST">
-                    <input type="hidden" name="action" value="deconnexion">
-                    <button type="submit" class="btn boutonDeconnexion petitBoutonDeconnexion d-flex align-items-center">
-                        <img src="./images/Deconnexion.png" alt="Déconnexion" class="me-2">
-                    </button>
-                </form>
-            </div>
-<?php } ?>
         </div>
     </nav>
 <?php } ?>

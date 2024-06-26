@@ -121,7 +121,7 @@
                                     .filter(detail => detail.trim() !== "");
 
                 const regexService = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/; 
-                const regexDetail = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s'-]+$/;
+                const regexDetail = /^[^=]+$/;
 
                 if (!regexService.test(nomService)) {
                     Swal.showValidationMessage('Le nom du service ne doit contenir que des lettres, des espaces, des tirets et des apostrophes');
@@ -227,6 +227,6 @@
     }
 
     function majPremiereLettre(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 </script>
