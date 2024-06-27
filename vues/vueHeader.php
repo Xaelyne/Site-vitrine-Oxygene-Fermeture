@@ -29,7 +29,7 @@
 <?php if ($action === "connexion") { ?>
     <nav class="navbar navbar-expand-xxl maNav">
         <div class="container-fluid my-3">
-          <a class="navbar-brand text-white fw-bold" href="index.php">Oxygene Fermeture</a>
+          <a class="navbar-brand text-white fw-bold" href="index.php">Oxygene fermeture</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" data-bs-theme="dark">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -38,7 +38,7 @@
 <?php } else { ?>
     <nav class="navbar navbar-expand-xxl maNav">
         <div class="container-fluid my-3">
-          <a class="navbar-brand text-white fw-bold" href="index.php">Oxygene Fermeture</a>
+          <a class="navbar-brand text-white fw-bold" href="index.php">Oxygene fermeture</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" data-bs-theme="dark">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -81,7 +81,7 @@ function regexSujetFormulaireDevis(e){
 //Regex Message
 
 function regexMessageFormulaireDevis(e){
-    var regex = /^(?=.{4,500}$)[a-zA-Z0-9À-ÿ\s\-']+$/;
+    var regex = /^(?=.{4,500}$)[^<>=]+$/;
     var messageForm = document.getElementById("messageFormulaireDevis").value;
     var message = document.getElementById("messageErreurMessageFormulaireDevis")
 
@@ -89,7 +89,7 @@ function regexMessageFormulaireDevis(e){
         message.innerHTML = "Votre message doit contenir au moins 4 caractères.";
         e.preventDefault(); // Empêche l'envoi du formulaire
     } else if (!regex.test(messageForm)) {
-        message.innerHTML = "Veuillez entrer un message valide. <br> Il ne doit pas contenir de caractère spéciaux";
+        message.innerHTML = "Veuillez entrer un message valide. <br> Il ne doit pas contenir de caractère spéciaux tel que <, > ou =";
         e.preventDefault(); // Empêche l'envoi du formulaire
     } else {
         message.innerHTML = ""; // Réinitialise le message d'erreur

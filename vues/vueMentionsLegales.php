@@ -6,12 +6,11 @@
             <h2 class="titreSection my-5">Informations Générales</h2>
             <p><strong>Nom de l'entreprise :</strong> Oxygene fermeture</p>
             <p><strong>Forme juridique :</strong> Société à responsabilité limitée (SARL)</p>
-            <p><strong>Adresse du siège social :</strong> [Votre adresse complète]</p>
+            <p><strong>Adresse du siège social :</strong> 24 rue du Maréchal Boufflers 60112 CRILLON</p>
             <p><strong>Téléphone :</strong> 03.44.04.31.13</p>
             <p><strong>Adresse e-mail :</strong> oxygenefermeture60@orange.fr</p>
             <p><strong>Site web :</strong> Bientôt disponible</p>
-            <p><strong>Numéro d'immatriculation au RCS :</strong> [Numéro de registre du commerce et des sociétés]</p>
-            <p><strong>Numéro de TVA intracommunautaire :</strong> [Numéro de TVA]</p>
+            <p><strong>Numéro d'immatriculation de siret :</strong> 512 728 866 000 17</p>
         </section>
 
         <section>
