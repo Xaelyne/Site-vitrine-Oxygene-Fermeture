@@ -48,7 +48,7 @@
         
                 if ($id <= 0) {
                     $titre = "Connexion";
-                    $erreur = "Pseudo ou mot de passe incorrect";
+                    $erreur = "Email ou mot de passe incorrect";
                     require "./vues/vueHeader.php";
                     require "./vues/vueConnexion.php";
                 } else {
