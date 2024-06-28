@@ -1,7 +1,7 @@
 <?php if(!isset($_SESSION['idUtilisateur'])) {?>
-
 <div class="container d-flex justify-content-center flex-column align-items-center">
     <div>
+        <!-- Formulaire de connexion -->
         <div class="container formulaireConnexion d-flex justify-content-center my-5">
             <form method="POST" action="index.php" class="container-fluid p-5 formConnexion">
                 <input type="hidden" name="action" value="connexionMAJ">
@@ -24,17 +24,13 @@
             </form>
         </div>
     </div>
-<?php } else {
-?>
-    
-    <h1  class="text-center text-white py-5 my-5">Vous êtes déjà connecté</h4>
-
-
-<!-- Bouton permettant de revenir à l'accueil  -->
-
-    <div class="text-center">
-        <a href="index.php"><button class="btn bouton">Retour à l'accueil</button></a>
+<?php } else { ?>
+    <div class="container d-flex justify-content-center flex-column align-items-center">
+        <h1 class="text-center text-white py-5 my-5">Vous êtes déjà connecté</h1>
+        <!-- Bouton permettant de revenir à l'accueil  -->
+        <div class="text-center">
+            <a href="index.php"><button class="btn bouton">Retour à l'accueil</button></a>
+        </div>
     </div>
-
 <?php } ?>   
 </div>
