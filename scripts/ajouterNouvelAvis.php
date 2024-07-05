@@ -56,17 +56,19 @@
                 const form = document.getElementById('formAjouterAvis');
                 const noteValue = document.getElementById('ajoutNoteFormulaireAvis').value;
                 
-                // Force the first letter of name and comment to be uppercase
+              
                 const nomInput = document.getElementById('ajoutNomFormulaireAvis');
                 const commentaireInput = document.getElementById('ajoutCommentaireFormulaireAvis');
                 nomInput.value = capitalizeFirstLetter(nomInput.value);
                 commentaireInput.value = capitalizeFirstLetter(commentaireInput.value);
 
-                // Regex patterns
+                if (!nomInput.value || !commentaireInput.value || !noteValue) {
+                    Swal.showValidationMessage('Tous les champs sont requis');
+                    return false;
+                }
                 const regexNom = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/; // Nom: lettres, espaces, accents, apostrophes, et tirets
                 const regexCommentaire = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s'-]+$/; // Commentaire: lettres, chiffres, espaces, accents, apostrophes, et tirets
 
-                // Validate fields
                 if (!regexNom.test(nomInput.value)) {
                     Swal.showValidationMessage('Nom invalide. Il peut contenir des lettres, espaces, accents, apostrophes, et tirets.');
                     return false;

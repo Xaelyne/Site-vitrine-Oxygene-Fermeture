@@ -122,6 +122,11 @@
 
                 const regexService = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/; 
                 const regexDetail = /^[^=]+$/;
+                
+                if (!nomService || !imageService || details.length === 0) {
+                    Swal.showValidationMessage('Tous les champs sont requis');
+                    return false;
+                }
 
                 if (!regexService.test(nomService)) {
                     Swal.showValidationMessage('Le nom du service ne doit contenir que des lettres, des espaces, des tirets et des apostrophes');
@@ -133,10 +138,7 @@
                     return false;
                 }
 
-                if (!nomService || !imageService || details.length === 0) {
-                    Swal.showValidationMessage('Tous les champs sont requis');
-                    return false;
-                }
+                
 
                 const nomServiceFormatted = majPremiereLettre(nomService);
                 const detailsFormatted = details.map(detail => majPremiereLettre(detail));
@@ -218,8 +220,9 @@
         const validFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
         if (file && !validFileTypes.includes(file.type)) {
-            fileNameDisplay.textContent = 'Type de fichier non valide. Veuillez choisir un fichier PNG, JPEG ou JPG.';
-            input.value = ''; // Clear the input
+            Swal.showValidationMessage('Type de fichier non valide. Veuillez choisir un fichier PNG, JPEG ou JPG.');
+            input.value = '';
+            fileNameDisplay.textContent = 'Aucun fichier choisi';
             return;
         }
 

@@ -14,33 +14,22 @@
     }
 
     function getUtilisateurs() : array{
-
         $connexion = getConnexion();
-
         $sql ="SELECT * 
                FROM utilisateurs";
-
         $resultat = $connexion -> query($sql);
-
         return $resultat->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function getUtilisateur($id){
-
         $connexion = getConnexion();
-
         $sql ="SELECT *
                FROM utilisateurs
-               WHERE identifiantUtilisateur = :id";
-               
+               WHERE identifiantUtilisateur = :id";    
         $requete = $connexion->prepare($sql);
-
         $requete->bindParam(':id',$id);
-
         $requete->execute();
-
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
-
         return $resultat;
     }
 
@@ -253,16 +242,11 @@
         return $requete->execute();
     }
     function supprimerPartenaire($id) {
-        try {
             $connexion = getConnexion();
             $sql = "DELETE FROM partenaires WHERE identifiantPartenaire = :id";
             $requete = $connexion->prepare($sql);
             $requete->bindParam(':id', $id, PDO::PARAM_INT);
             return $requete->execute();
-        } catch (PDOException $e) {
-            error_log("Erreur lors de la suppression du partenaire: " . $e->getMessage());
-            return false;
-        }
     }
     function modifierPartenaire($id, $nom, $image, $lien) {
         $connexion = getConnexion();

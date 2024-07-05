@@ -29,12 +29,14 @@
                                 ?>
                             </div>
                         </div>
-                        <p><?= nl2br(htmlspecialchars($avi['commentaireAvis'])); ?></p>
+                        <div>
+                            <p><?= (htmlspecialchars($avi['commentaireAvis'])); ?></p>  
+                        </div>
                         <?php if (isset($_SESSION['idUtilisateur'])) { ?>
                             <div class="overlay"></div>
                             <div class="btn-supprimer-container">
                                 <button class="btn-modifier" 
-                                    onclick='modifierAvis(<?= $avi['identifiantAvis'] ?>, "<?= addslashes(htmlspecialchars($avi['prenomClientAvis'])) ?>", <?= $avi['etoileAvis'] ?>, "<?= addslashes(nl2br(htmlspecialchars($avi['commentaireAvis']))) ?>")'>
+                                    onclick='modifierAvis(<?= $avi['identifiantAvis'] ?>, "<?= (htmlspecialchars($avi['prenomClientAvis'])) ?>", <?= $avi['etoileAvis'] ?>, "<?= (htmlspecialchars($avi['commentaireAvis'])) ?>")'>
                                     Modifier
                                 </button>
                                 <button class="btn-supprimer" onclick="supprimerAvis(<?= $avi['identifiantAvis']; ?>)">Supprimer</button>

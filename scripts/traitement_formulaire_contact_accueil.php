@@ -1,5 +1,5 @@
 <?php
-// Inclure la bibliothèque PHPMailer
+// Bibliothèque PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -15,8 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sujet = $_POST['sujetFormulaireContactAccueil'];
     $message = $_POST['messageFormulaireContactAccueil'];
 
-    // Charger les variables d'environnement depuis le fichier env.ini pour sécuriser les données
-    $iniFilePath = dirname(__DIR__) . '/env.ini';  // Mise à jour du chemin pour pointer vers le répertoire parent
+    // Récuperer les variables depuis le fichier env.ini pour sécuriser les données
+    $iniFilePath = dirname(__DIR__) . '/env.ini'; 
     if (file_exists($iniFilePath)) {
         $config = parse_ini_file($iniFilePath);
         if ($config === false) {
@@ -34,18 +34,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Instancier PHPMailer
+    // PHPMailer
     $mail = new PHPMailer(true);
 
     try {
         // Paramètres du serveur SMTP
         $mail->isSMTP();
-        $mail->Host = $config['SMTP_HOST']; // Adresse du serveur SMTP // smtp.orange.fr
+        $mail->Host = $config['SMTP_HOST']; // Adresse du serveur SMTP // Exemple  smtp.orange.fr
         $mail->SMTPAuth = true;
         $mail->Username = $config['SMTP_USERNAME']; // adresse e-mail SMTP
         $mail->Password = $config['SMTP_PASSWORD']; //  mot de passe SMTP
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = $config['SMTP_PORT']; // Port SMTP // Port orange 465
+        $mail->Port = $config['SMTP_PORT']; // Port SMTP // Exemple Port orange 465
 
         // Destinataire
         $mail->setFrom($email,$nom); // Votre adresse e-mail et nom recupéré dans le formulaire
@@ -54,11 +54,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Contenu du message
         $mail->isHTML(true); // Paramétrer le format du message en HTML
         $mail->Subject = $sujet;
-        $mail->Body = "<h2>Cet email provient du formulaire de contact</h2<br><br> <h3>Informations du client :</h3><br> Nom: $nom <br> Téléphone: $telephone <br> Email: $email <br><br> Sujet: $sujet <br> Message: $message";
+        $mail->Body = "<h2>Cet email provient du formulaire de contact</h2<br><br> <h3>Informations du client :</h3><br> 
+        Nom: $nom <br> 
+        Téléphone: $telephone <br> 
+        Email: $email <br><br> 
+        Sujet: $sujet <br> 
+        Message: $message";
 
         // Envoyer l'e-mail
         $mail->send();
     } catch (Exception $e) {
     }
 }
-?>

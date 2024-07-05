@@ -21,9 +21,9 @@
 <!-- Cartes liste de services -->
     <div class="d-flex row row-cols-1 row-cols-md- g-4 d-flex justify-content-center align-items-center my-5">
         <?php foreach ($services as $service) { ?>
-            <!-- Carte pour chaque service -->
+            <!-- Carte pour chaque service si l'utilisateur est connecter la carte change de classe -->
             <div class="card grandeCarte <?= isset($_SESSION['idUtilisateur']) ? 'grandeCarteAccueil' : '' ?> mb-5 text-white text-center mx-3" style="width: 10rem; height: 15rem;">
-                <!-- Conteneur pour le bouton supprimer -->
+                <!-- Bouton modifier et supprimer si l'utilisateur est connecter -->
                 <?php if (isset($_SESSION['idUtilisateur'])): ?>
                     <div class="btn-supprimer-container">
                         <button class="btn-modifier boutonInverser" onclick="modifierService(event, <?= htmlspecialchars($service['id']); ?>)">Modifier</button>
@@ -36,9 +36,9 @@
                 <?php endif; ?>
                         <!-- Image en haut de la carte -->
                         <img src="<?= htmlspecialchars($service['image']); ?>" class="card-img-top" alt="Service" style="width: 128px; height: 128px; object-fit: cover;">
-                        <!-- Corps de la carte contenant le texte -->
+                        <!-- Partie de la carte contenant le nom -->
                         <div class="card-body">
-                            <!-- Texte du service -->
+                            <!-- Nom du service -->
                             <p class="card-text"><?= htmlspecialchars($service['nom']); ?></p>
                         </div>
                 <?php if (!isset($_SESSION['idUtilisateur'])): ?>
@@ -51,7 +51,7 @@
             <div class="card grandeCarteInverser mb-5 text-center mx-3" style="width: 10rem; height: 15rem;">
                 <!-- Lien pour ajouter un nouveau service -->
                 <a href="#" class="lienCarteInverser" onclick="ajouterService()">
-                    <!-- Image d'un signe plus pour ajouter un service -->
+                    <!-- Image d'un signe + pour ajouter un service -->
                     <img src="./images/plus.png" class="card-img-top" alt="Ajouter Service">
                     <!-- Corps de la carte contenant le texte -->
                     <div class="card-body">
@@ -119,7 +119,7 @@
             Par email :
         </p>
         <p class="fs-5 texte">
-            OxygeneFermeture60@orange.fr
+            Oxygenefermeture60@orange.fr
         </p>
         <p class="fs-5 texte">
             Par téléphone :

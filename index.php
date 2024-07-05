@@ -26,7 +26,7 @@
            require "./scripts/ajouterNouveauServices.php";
            require "./scripts/supprimerService.php";
            require "./scripts/modifierService.php";
-           require "./scripts/ajouterPatenaires.php";
+           require "./scripts/ajouterPartenaires.php";
            require "./scripts/supprimerPartenaire.php";
            require "./scripts/modifierPartenaires.php";
            require "./scripts/ajouterNouvelAvis.php";
@@ -520,7 +520,7 @@
             $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
             $limit = 10;
             $toutesRealisations = getRealisations($offset, $limit);
-            $totalRealisations = getNombreTotalRealisations(); // Ajoutez cette fonction dans le modèle pour obtenir le nombre total de réalisations
+            $totalRealisations = getNombreTotalRealisations();
             $titre = "Toutes nos réalisations";
             require "./vues/vueHeader.php";
             require "./vues/vueToutesNosRealisations.php";

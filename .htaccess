@@ -17,3 +17,4 @@
 <FilesMatch "\.(png|jpg|gif|css|js|ttf|woff|woff2)$">
     Require all granted
 </FilesMatch>
+
