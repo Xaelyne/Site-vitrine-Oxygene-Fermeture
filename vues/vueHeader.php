@@ -79,7 +79,7 @@
                     <a class="navbar-brand text-center mt-1" title="Retrouver notre facebook en cliquant ici" href="https://www.facebook.com/Oxygenefermeture60/?locale=fr_FR" target="_blank">
                         <img src="./images/Facebook.png" alt="Facebook">
                     </a>
-                    <a class="navbar-brand text-center mt-1" title="Vous pouvez nous envoyez un mail directement en cliquant ici" href="mailto:mulett90hh@gmail.com">
+                    <a class="navbar-brand text-center mt-1" title="Vous pouvez nous envoyez un mail directement en cliquant ici" href="mailto:oxygenefermeture60@orange.fr">
                         <img src="./images/Mail.png" alt="Mail">
                     </a>
                     <a class="navbar-brand text-white text-center mt-1">

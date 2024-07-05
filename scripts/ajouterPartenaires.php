@@ -68,10 +68,10 @@
                         <input type="text" id="nomPartenaire" class="swal2-input" placeholder="Nom du partenaire" oninput="validerInputPartenaire(this)" required>
                     </div>
                     <div class="form-group custom-file-input-wrapper">
-                        <label for="imagePartenaire" class="custom-file-label swal2-styled popup-btn">Choisir un fichier</label>
+                        <label for="imagePartenaire" class="custom-file-label swal2-styled popup-btn">Choisir une image</label>
                         <input type="file" id="imagePartenaire" class="custom-file-input" placeholder="Image du partenaire" onchange="mettreAJourNomFichierPartenaireAjouter(this)" required>
                     </div>
-                    <div id="fileNameDisplayPartenaire">Aucun fichier choisi</div>
+                    <div id="fileNameDisplayPartenaire">Aucune image choisie</div>
                     <div class="form-group">
                         <input type="text" id="lienPartenaire" class="swal2-input" placeholder="Lien du partenaire" required>
                     </div>
@@ -90,6 +90,11 @@
                 const regexNom = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]+$/; // Regex pour le nom du partenaire (lettres, espaces et tirets uniquement)
                 const validFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
+                if (!nomPartenaire || !imagePartenaire || !lienPartenaire) {
+                    Swal.showValidationMessage('Tous les champs sont requis');
+                    return false;
+                }
+
                 if (!regexNom.test(nomPartenaire)) {
                     Swal.showValidationMessage('Le nom du partenaire ne doit contenir que des lettres, des espaces et des tirets');
                     return false;
@@ -100,10 +105,7 @@
                     return false;
                 }
 
-                if (!nomPartenaire || !imagePartenaire || !lienPartenaire) {
-                    Swal.showValidationMessage('Tous les champs sont requis');
-                    return false;
-                }
+                
 
                 return { nomPartenaire, imagePartenaire, lienPartenaire };
             }
@@ -167,8 +169,8 @@
 
         if (file && !validFileTypes.includes(file.type)) {
             Swal.showValidationMessage('Type de fichier non valide. Veuillez choisir un fichier PNG, JPEG ou JPG.');
-            input.value = ''; // Clear the input
-            fileNameDisplay.textContent = 'Aucun fichier choisi'; // Reset the display text
+            input.value = '';
+            fileNameDisplay.textContent = 'Aucun fichier choisi';
             return;
         }
 

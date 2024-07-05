@@ -89,7 +89,7 @@
                             </div>
                             <div class="form-group custom-file-input-wrapper">
                                 <!-- Champ pour choisir un fichier d'image -->
-                                <label for="imagePartenaire" class="custom-file-label swal2-styled popup-btn">Choisir un fichier</label>
+                                <label for="imagePartenaire" class="custom-file-label swal2-styled popup-btn">Choisir une image</label>
                                 <input type="file" id="imagePartenaire" class="custom-file-input" placeholder="Image du partenaire" onchange="mettreAJourNomFichierPartenaireModifier(this)">
                             </div>
                             <div id="fileNameDisplayPartenaireModifier">${partenaire.image.split('/').pop()}</div>

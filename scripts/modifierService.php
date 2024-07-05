@@ -153,7 +153,7 @@
                                 <input type="text" id="nomService" class="swal2-input" placeholder="Nom du service" value="${service.nom}" oninput="validerInputService(this)">
                             </div>
                             <div class="form-group custom-file-input-wrapper">
-                                <label for="imageService" class="custom-file-label swal2-styled popup-btn">Choisir un fichier</label>
+                                <label for="imageService" class="custom-file-label swal2-styled popup-btn">Choisir une image</label>
                                 <input type="file" id="imageService" class="custom-file-input" placeholder="Image du service" onchange="mettreAJourNomFichierServiceModifier(this)">
                             </div>
                             <div id="fileNameDisplayServiceModifier">${service.image.split('/').pop()}</div>

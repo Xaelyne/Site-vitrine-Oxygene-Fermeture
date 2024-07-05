@@ -83,7 +83,7 @@
                                 </select>
                             </div>
                             <div class="form-group custom-file-input-wrapper">
-                                <label for="imageRealisation" class="custom-file-label swal2-styled popup-btn">Choisir un fichier</label>
+                                <label for="imageRealisation" class="custom-file-label swal2-styled popup-btn">Choisir une image</label>
                                 <input type="file" id="imageRealisation" class="custom-file-input" placeholder="Image de la réalisation" onchange="mettreAJourNomFichierRealisation(this)">
                             </div>
                             <div id="fileNameDisplayRealisation">${realisation.imageRealisation}</div>

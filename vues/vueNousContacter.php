@@ -16,7 +16,7 @@
             Par email :
         </p>
         <p class="fs-5 texte">
-            OxygeneFermeture60@orange.fr
+            Oxygenefermeture60@orange.fr
         </p>
         <p class="fs-5 texte">
             Par téléphone :

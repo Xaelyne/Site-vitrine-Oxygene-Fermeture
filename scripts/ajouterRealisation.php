@@ -77,10 +77,10 @@
                         </select>
                     </div>
                     <div class="form-group custom-file-input-wrapper">
-                        <label for="imageRealisation" class="custom-file-label swal2-styled popup-btn">Choisir un fichier</label>
+                        <label for="imageRealisation" class="custom-file-label swal2-styled popup-btn">Choisir une image</label>
                         <input type="file" id="imageRealisation" class="custom-file-input" placeholder="Image de la réalisation" onchange="mettreAJourNomFichierRealisation(this)" required>
                     </div>
-                    <div id="fileNameDisplayRealisation">Aucun fichier choisi</div>
+                    <div id="fileNameDisplayRealisation">Aucune image choisie</div>
                 </form>
             `,
             confirmButtonText: 'Ajouter',
@@ -95,7 +95,12 @@
                 // Expressions régulières pour valider les champs
                 const regexNom = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]+$/; // Regex pour le nom de la réalisation (lettres, espaces et tirets uniquement)
                 const validFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-
+                
+                if (!nomRealisation || !serviceId || !imageRealisation) {
+                    Swal.showValidationMessage('Tous les champs sont requis');
+                    return false;
+                }
+                
                 if (!regexNom.test(nomRealisation)) {
                     Swal.showValidationMessage('Le nom de la réalisation ne doit contenir que des lettres, des espaces et des tirets');
                     return false;
@@ -106,10 +111,7 @@
                     return false;
                 }
 
-                if (!nomRealisation || !serviceId || !imageRealisation) {
-                    Swal.showValidationMessage('Tous les champs sont requis');
-                    return false;
-                }
+                
 
                 return { nomRealisation, serviceId, imageRealisation };
             }
