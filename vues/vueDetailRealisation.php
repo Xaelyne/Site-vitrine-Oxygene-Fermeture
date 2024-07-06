@@ -13,7 +13,8 @@
             </div>
         <?php } ?>
     </div>
-    <?php if ($offset + count($realisations) < $totalRealisations) { ?>
+    <?php if (count($realisations) >= 10) { ?>
         <button id="voirPlusBtn" class="btn boutonInverser mb-5" onclick="voirPlusParService(<?= $service['id'] ?>)">Voir plus</button>
     <?php } ?>
 </div>
+
