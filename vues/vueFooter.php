@@ -2,7 +2,7 @@
  
  <!-- Footer -->
  <?php
-if ($action === "connexion") {
+if ($action === "connexion" || $action === "connexionMAJ") {
 ?>
 
 <footer>
@@ -69,6 +69,8 @@ if ($action === "connexion") {
     <script src="./scripts/regexFormulaireDevis.js"></script>
 <?php } else if ($action === "accueil") { ?>
     <script src="./scripts/regexFormulaireContactAccueil.js"></script>
+<?php } else if ($action === "avis"){ ?>
+    <script src ="./scripts/regexFormulaireAvis.js"></script>
 <?php } ?>
 
     <script src="./scripts/switch.js"></script>

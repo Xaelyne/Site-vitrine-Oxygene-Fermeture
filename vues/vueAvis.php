@@ -83,6 +83,7 @@
                         </div>
                         <div class="mb-5 text-center">
                             <span class="text-danger" id="messageErreurNomAvis"></span>
+                            <span class="text-danger" id="messageErreurEmailAvis"></span>
                             <span class="text-danger" id="messageErreurCommentaireAvis"></span>
                         </div>
                         <div class="mb-3 col-xl-6">
