@@ -51,9 +51,9 @@
                         <label for="choixFormulaireDevis" class="form-label text-white">Choisissez le service dont vous avez besoin<span class="text-danger">(Obligatoire)</span></label>
                         <select class="form-select" name="choixFormulaireDevis" id="choixFormulaireDevis" required="required">
                         <option disabled selected="choisirUnService" value="">Choisissez votre service</option>
-                        <option value="Nom service 1">Nom service 1</option>
-                        <option value="Nom service 2">Nom service 2</option>
-                        <option value="Nom service 3">Nom service 3</option>
+                        <?php foreach ($services as $serviceItem) { ?>
+                        <option value="<?php echo $serviceItem['nom']; ?>"><?php echo $serviceItem['nom']; ?></option>
+                        <?php } ?>
                         </select>
                     </div>
                 </div>

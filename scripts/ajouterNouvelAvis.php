@@ -67,7 +67,7 @@
                     return false;
                 }
                 const regexNom = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/; // Nom: lettres, espaces, accents, apostrophes, et tirets
-                const regexCommentaire = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s'-]+$/; // Commentaire: lettres, chiffres, espaces, accents, apostrophes, et tirets
+                const regexCommentaire = /^(?=.{4,300}$)[^<>=]+$/; // Commentaire: lettres, chiffres, espaces, accents, apostrophes, et tirets
 
                 if (!regexNom.test(nomInput.value)) {
                     Swal.showValidationMessage('Nom invalide. Il peut contenir des lettres, espaces, accents, apostrophes, et tirets.');
@@ -75,7 +75,7 @@
                 }
                 
                 if (!regexCommentaire.test(commentaireInput.value)) {
-                    Swal.showValidationMessage('Commentaire invalide. Il peut contenir des lettres, chiffres, espaces, accents, apostrophes, et tirets.');
+                    Swal.showValidationMessage('Commentaire invalide. Il ne peut pas contenir de < > et / ou =');
                     return false;
                 }
 

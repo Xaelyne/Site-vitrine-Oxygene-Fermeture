@@ -95,10 +95,10 @@
                         <input type="text" id="nomService" class="swal2-input" placeholder="Nom du service">
                     </div>
                     <div class="form-group custom-file-input-wrapper">
-                        <label for="imageService" class="custom-file-label swal2-styled popup-btn">Choisir un fichier</label>
+                        <label for="imageService" class="custom-file-label swal2-styled popup-btn">Choisir une image</label>
                         <input type="file" id="imageService" class="custom-file-input" placeholder="Image du service" onchange="mettreAJourNomFichierServiceAjouter(this)">
                     </div>
-                    <div id="fileNameDisplayService">Aucun fichier choisi</div>
+                    <div id="fileNameDisplayService">Aucune image choisie</div>
                     <div id="detailsContainer" class="form-group">
                         <input type="text" name="details[]" class="swal2-input detail-input" placeholder="Détail 1">
                     </div>
@@ -216,13 +216,13 @@
     function mettreAJourNomFichierServiceAjouter(input) {
         const fileNameDisplay = document.getElementById('fileNameDisplayService');
         const file = input.files[0];
-        const fileName = file ? file.name : 'Aucun fichier choisi';
+        const fileName = file ? file.name : 'Aucune image choisie';
         const validFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
         if (file && !validFileTypes.includes(file.type)) {
             Swal.showValidationMessage('Type de fichier non valide. Veuillez choisir un fichier PNG, JPEG ou JPG.');
             input.value = '';
-            fileNameDisplay.textContent = 'Aucun fichier choisi';
+            fileNameDisplay.textContent = 'Aucune image choisie';
             return;
         }
 

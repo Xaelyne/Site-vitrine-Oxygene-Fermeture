@@ -26,7 +26,7 @@
 </head>
 <body>
 
-<?php if ($action === "connexion") { ?>
+<?php if ($action === "connexion" || $action === "connexionMAJ") { ?>
     <nav class="navbar navbar-expand-xxl maNav">
         <div class="container-fluid my-3">
           <a class="navbar-brand text-white fw-bold" href="index.php">Oxygene fermeture</a>
